@@ -1,0 +1,8 @@
+node_modules/
+.env
+.env.*
+!.env.example
+# private planning: judge briefs describe the builder's other, unreleased products
+hackathon/private/
+# Kane run output (videos, screenshots) can be large; keep only chosen evidence
+kane-runs/
