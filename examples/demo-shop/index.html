@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hearth &amp; Kiln</title>
+<!-- Direction:
+  Audience: shoppers buying a gift or an everyday piece from a small ceramics studio that ships to six
+  markets; on camera, developers and judges who must believe this is a real small store in under a second.
+  Feel: calm, tactile, quiet, the way a studio shop with a few good pieces feels. Assumption: desktop first,
+  works down to phone width.
+  Look: "studio shelf": porcelain-grey ground, white cards, the pieces themselves (inline SVG, glazed colours)
+  carry the colour. Echoes small maker shops (single-column checkout, one filled button per view).
+  Accent: a dark celadon / oxide green (#245c4f). Glaze greens are the studio's own vocabulary, it is
+  distinct from the terracotta and oat tones of the pieces so actions never blend into products, and it
+  reaches 7.6:1 with white text. Danger stays a fixed red, never the accent.
+  Type: no web fonts (none allowed); per-script system faces chosen for each language: Segoe UI / system-ui
+  for Latin and Arabic (Segoe UI carries a well-drawn Arabic), Yu Gothic UI / Hiragino Sans for Japanese,
+  Microsoft YaHei UI / PingFang SC for Chinese. The brand wordmark alone uses an old-style serif from the
+  system (Palatino / Iowan) to read as a maker's mark rather than a SaaS logo.
+  Sizes: desktop viewing at arm's length; body 1rem/1.5 (1.7 for Arabic and CJK), measure capped at 60ch,
+  steps 0.875 / 1 / 1.125 / 1.375 / 2 / 2.5rem; 4px spacing set (4 8 12 16 24 32 48 64).
+-->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip-link" href="#main" data-skip data-i18n="nav.skip">Skip to content</a>
+<header class="site-header">
+  <div class="container header-inner">
+    <a class="brand" href="#/" id="brand-link">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><path d="M7 9h18l-2 15a4 4 0 0 1-4 3.5h-6A4 4 0 0 1 9 24z" fill="currentColor"/><ellipse cx="16" cy="9" rx="9" ry="2.6" fill="#9fc2b2"/></svg>
+      <span>Hearth &amp; Kiln</span>
+    </a>
+    <nav class="main-nav" aria-label="Main">
+      <a href="#/" id="nav-shop" data-i18n="nav.shop">Shop</a>
+      <a href="#/cart" id="cart-link"><span data-i18n="nav.cart">Cart</span> <span class="cart-count" id="cart-count">0</span></a>
+    </nav>
+    <label class="lang-switch">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+      <span class="visually-hidden" data-i18n="nav.language">Language</span>
+      <select id="lang-select">
+        <option value="en">English</option>
+        <option value="de">Deutsch</option>
+        <option value="ar">العربية</option>
+        <option value="ja">日本語</option>
+        <option value="id">Bahasa Indonesia</option>
+        <option value="zh">中文（简体）</option>
+      </select>
+    </label>
+  </div>
+</header>
+
+<main id="main" tabindex="-1"></main>
+
+<footer class="site-footer">
+  <div class="container"><span>© 2026 Hearth &amp; Kiln</span> <span data-i18n="footer.demo">Demo store. No real orders are placed.</span></div>
+</footer>
+
+<button type="button" class="help-pill" id="help-chat" aria-expanded="false" aria-controls="help-panel">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.5 4v-4h0A1.5 1.5 0 0 1 4 14.5z" fill="currentColor"/></svg>
+  <span data-i18n="help.pill">Help / chat</span>
+</button>
+<div class="help-panel" id="help-panel" role="dialog" aria-labelledby="help-title" hidden>
+  <h2 id="help-title" data-i18n="help.title">Talk to the studio</h2>
+  <p data-i18n="help.body">We reply within a few hours, Monday to Saturday.</p>
+  <p class="help-contact">hello@hearthandkiln.example</p>
+  <button type="button" class="btn btn-secondary" id="help-close" data-i18n="help.close">Close</button>
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

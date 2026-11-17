@@ -6,3 +6,7 @@ node_modules/
 hackathon/private/
 # Kane run output (videos, screenshots) can be large; keep only chosen evidence
 kane-runs/
+
+# locale-check output (results, screenshots, report)
+.locale-check/
+/locale-check-report.html

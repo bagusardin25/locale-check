@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "title": "Hearth & Kiln · Handmade stoneware",
+    "dir": "ltr"
+  },
+  "format": {
+    "number_locale": "en-US",
+    "currency": "USD",
+    "date_format": "MM/DD/YYYY"
+  },
+  "nav": {
+    "shop": "Shop",
+    "cart": "Cart",
+    "language": "Language",
+    "skip": "Skip to content"
+  },
+  "footer": {
+    "demo": "Demo store. No real orders are placed."
+  },
+  "home": {
+    "eyebrow": "Small-batch stoneware",
+    "title": "Everyday pieces, thrown and glazed by hand.",
+    "lead": "Every piece is made in our studio and fired twice. No two glazes come out quite the same."
+  },
+  "products": {
+    "mug": {
+      "name": "Speckled mug",
+      "short": "Oat glaze, 350 ml",
+      "description": "A sturdy, well-balanced mug in an oat glaze with fine iron speckles. The wide handle fits three fingers.",
+      "details": ["Holds 350 ml", "Dishwasher and microwave safe", "Wheel-thrown stoneware"]
+    },
+    "dripper": {
+      "name": "Celadon pour-over",
+      "short": "Celadon glaze, 1–2 cups",
+      "description": "A pour-over dripper for size 2 paper filters, with ribs inside for an even flow. Glazed in a pale celadon green.",
+      "details": ["Fits size 2 filters", "Brews 1–2 cups", "Dishwasher safe"]
+    },
+    "bowl": {
+      "name": "Iron-red serving bowl",
+      "short": "Iron-red glaze, 22 cm",
+      "description": "A wide, shallow bowl for salads, pasta or fruit. The glaze breaks to a dark brown at the rim.",
+      "details": ["22 cm across", "Dishwasher safe", "Not for oven use"]
+    }
+  },
+  "product": {
+    "add_to_cart": "Add to cart",
+    "added": "Added to your cart.",
+    "view_cart": "View cart",
+    "back": "Back to shop",
+    "details": "Details",
+    "in_stock": "In stock, ships in 1–2 business days"
+  },
+  "cart": {
+    "title": "Your cart",
+    "empty_title": "Your cart is empty",
+    "empty_body": "Browse our pieces and add something you like.",
+    "browse": "Browse the shop",
+    "quantity": "Quantity",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "remove": "Remove",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "checkout": "Checkout",
+    "summary": "Order summary"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "step_of": "Step {n} of 3",
+    "steps": {
+      "shipping": "Shipping",
+      "delivery": "Delivery",
+      "review": "Review & pay"
+    },
+    "back_to_cart": "Back to cart",
+    "back": "Back",
+    "shipping_title": "Where should we send it?",
+    "full_name": "Full name",
+    "street": "Street address",
+    "city": "City",
+    "postal_code": "Postal code",
+    "phone": "Phone number",
+    "phone_hint": "Only for the courier.",
+    "continue": "Continue",
+    "delivery_title": "When would you like it?",
+    "delivery_date": "Preferred delivery date",
+    "delivery_hint": "Format {format}, for example {example}. The earliest delivery is 2 days from today.",
+    "delivery_note": "We deliver Monday to Saturday. The courier will text you on the morning of delivery.",
+    "continue_to_payment": "Continue to payment",
+    "review_title": "Review your order",
+    "ship_to": "Ship to",
+    "deliver_on": "Delivery date",
+    "edit": "Edit",
+    "payment_title": "Payment",
+    "cod": "Cash on delivery",
+    "cod_hint": "Pay the courier in cash or by card.",
+    "bank": "Bank transfer",
+    "bank_hint": "We email our bank details after you order.",
+    "total_label": "Total",
+    "legal": "By placing your order you agree to our Terms of Sale and Privacy Policy.",
+    "place_order": "Place order"
+  },
+  "errors": {
+    "name_required": "Enter your full name.",
+    "street_required": "Enter your street address.",
+    "city_required": "Enter your city.",
+    "postal_required": "Enter your postal code.",
+    "postal_invalid": "This postal code doesn't look right. Use letters, numbers and spaces only.",
+    "phone_required": "Enter your phone number.",
+    "phone_invalid": "Enter a phone number with at least 6 digits.",
+    "date_required": "Enter a delivery date.",
+    "date_invalid": "Enter the date as {format}, for example {example}.",
+    "date_too_soon": "Choose a date at least 2 days from today."
+  },
+  "confirmation": {
+    "title": "Thank you, your order is placed.",
+    "order_number": "Order number",
+    "body": "We'll pack it carefully and deliver it on {date}.",
+    "payment": "Payment: {method}",
+    "continue": "Continue shopping"
+  },
+  "help": {
+    "pill": "Help / chat",
+    "title": "Talk to the studio",
+    "body": "We reply within a few hours, Monday to Saturday.",
+    "close": "Close"
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "title": "Hearth & Kiln · Handgemachtes Steinzeug",
+    "dir": "ltr"
+  },
+  "format": {
+    "number_locale": "de-DE",
+    "currency": "EUR",
+    "date_format": "DD.MM.YYYY"
+  },
+  "nav": {
+    "shop": "Shop",
+    "cart": "Warenkorb",
+    "language": "Sprache",
+    "skip": "Zum Inhalt springen"
+  },
+  "footer": {
+    "demo": "Demo-Shop. Es werden keine echten Bestellungen ausgeführt."
+  },
+  "home": {
+    "eyebrow": "Steinzeug in kleinen Serien",
+    "title": "Stücke für jeden Tag, von Hand gedreht und glasiert.",
+    "lead": "Jedes Stück entsteht in unserer Werkstatt und wird zweimal gebrannt. Keine Glasur fällt genau gleich aus."
+  },
+  "products": {
+    "mug": {
+      "name": "Gesprenkelte Tasse",
+      "short": "Haferglasur, 350 ml",
+      "description": "Eine kräftige, gut ausbalancierte Tasse mit Haferglasur und feinen Eisensprenkeln. Der breite Henkel bietet Platz für drei Finger.",
+      "details": ["Fassungsvermögen 350 ml", "Spülmaschinen- und mikrowellengeeignet", "Auf der Scheibe gedrehtes Steinzeug"]
+    },
+    "dripper": {
+      "name": "Handfilter Seladon",
+      "short": "Seladonglasur, für 1–2 Tassen",
+      "description": "Ein Kaffeehandfilter für Papierfilter der Größe 2, mit Rillen innen für einen gleichmäßigen Durchfluss. Glasiert in einem hellen Seladongrün.",
+      "details": ["Für Filtertüten Größe 2", "Für 1–2 Tassen", "Spülmaschinengeeignet"]
+    },
+    "bowl": {
+      "name": "Servierschale Eisenrot",
+      "short": "Eisenrote Glasur, 22 cm",
+      "description": "Eine weite, flache Schale für Salat, Pasta oder Obst. Am Rand bricht die Glasur ins Dunkelbraune.",
+      "details": ["Durchmesser 22 cm", "Spülmaschinengeeignet", "Nicht backofenfest"]
+    }
+  },
+  "product": {
+    "add_to_cart": "In den Warenkorb",
+    "added": "Zum Warenkorb hinzugefügt.",
+    "view_cart": "Warenkorb ansehen",
+    "back": "Zurück zum Shop",
+    "details": "Details",
+    "in_stock": "Auf Lager, Versand in 1–2 Werktagen"
+  },
+  "cart": {
+    "title": "Ihr Warenkorb",
+    "empty_title": "Ihr Warenkorb ist leer",
+    "empty_body": "Stöbern Sie in unseren Stücken und legen Sie etwas in den Warenkorb.",
+    "browse": "Zum Shop",
+    "quantity": "Menge",
+    "decrease": "Menge verringern",
+    "increase": "Menge erhöhen",
+    "remove": "Entfernen",
+    "subtotal": "Zwischensumme",
+    "shipping": "Versand",
+    "total": "Gesamt",
+    "checkout": "Zur Kasse",
+    "summary": "Bestellübersicht"
+  },
+  "checkout": {
+    "title": "Kasse",
+    "step_of": "Schritt {n} von 3",
+    "steps": {
+      "shipping": "Lieferadresse",
+      "delivery": "Lieferung",
+      "review": "Prüfen & bezahlen"
+    },
+    "back_to_cart": "Zurück zum Warenkorb",
+    "back": "Zurück",
+    "shipping_title": "Wohin dürfen wir liefern?",
+    "full_name": "Vor- und Nachname",
+    "street": "Straße und Hausnummer",
+    "city": "Ort",
+    "postal_code": "Postleitzahl",
+    "phone": "Telefonnummer",
+    "phone_hint": "Nur für den Zusteller.",
+    "continue": "Weiter",
+    "delivery_title": "Wann soll Ihre Bestellung ankommen?",
+    "delivery_date": "Wunschliefertermin",
+    "delivery_hint": "Format {format}, zum Beispiel {example}. Frühestens in 2 Tagen lieferbar.",
+    "delivery_note": "Wir liefern von Montag bis Samstag. Am Liefertag erhalten Sie morgens eine SMS vom Zusteller.",
+    "continue_to_payment": "Weiter zur Zahlung",
+    "review_title": "Bestellung prüfen",
+    "ship_to": "Lieferadresse",
+    "deliver_on": "Liefertermin",
+    "edit": "Ändern",
+    "payment_title": "Zahlungsart",
+    "cod": "Nachnahme",
+    "cod_hint": "Sie bezahlen bar oder mit Karte direkt beim Zusteller.",
+    "bank": "Vorkasse per Überweisung",
+    "bank_hint": "Unsere Bankverbindung erhalten Sie nach der Bestellung per E-Mail.",
+    "total_label": "Gesamtbetrag",
+    "legal": "Mit Ihrer Bestellung erklären Sie sich mit unseren Allgemeinen Geschäftsbedingungen und der Datenschutzerklärung einverstanden. Informationen zu Ihrem Widerrufsrecht finden Sie in unserer Widerrufsbelehrung.",
+    "place_order": "Zahlungspflichtig bestellen"
+  },
+  "errors": {
+    "name_required": "Bitte geben Sie Ihren Vor- und Nachnamen ein.",
+    "street_required": "Bitte geben Sie Straße und Hausnummer ein.",
+    "city_required": "Bitte geben Sie Ihren Ort ein.",
+    "postal_required": "Bitte geben Sie Ihre Postleitzahl ein.",
+    "postal_invalid": "Diese Postleitzahl sieht nicht richtig aus. Bitte nur Buchstaben, Ziffern und Leerzeichen verwenden.",
+    "phone_required": "Bitte geben Sie Ihre Telefonnummer ein.",
+    "phone_invalid": "Bitte geben Sie eine Telefonnummer mit mindestens 6 Ziffern ein.",
+    "date_required": "Bitte geben Sie einen Liefertermin ein.",
+    "date_invalid": "Bitte geben Sie das Datum im Format {format} ein, zum Beispiel {example}.",
+    "date_too_soon": "Bitte wählen Sie ein Datum, das mindestens 2 Tage in der Zukunft liegt."
+  },
+  "confirmation": {
+    "title": "Vielen Dank, Ihre Bestellung ist eingegangen.",
+    "order_number": "Bestellnummer",
+    "body": "Wir verpacken alles sorgfältig und liefern am {date}.",
+    "payment": "Zahlungsart: {method}",
+    "continue": "Weiter einkaufen"
+  },
+  "help": {
+    "pill": "Hilfe / Chat",
+    "title": "Fragen an die Werkstatt",
+    "body": "Wir antworten innerhalb weniger Stunden, montags bis samstags.",
+    "close": "Schließen"
+  }
+}

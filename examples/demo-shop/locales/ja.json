@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "title": "Hearth & Kiln · 手づくりの炻器",
+    "dir": "ltr"
+  },
+  "format": {
+    "number_locale": "ja-JP",
+    "currency": "JPY",
+    "date_format": "YYYY/MM/DD"
+  },
+  "nav": {
+    "shop": "ショップ",
+    "cart": "カート",
+    "language": "言語",
+    "skip": "本文へ移動"
+  },
+  "footer": {
+    "demo": "デモストアです。実際の注文は行われません。"
+  },
+  "home": {
+    "eyebrow": "少量生産の炻器",
+    "title": "毎日使いたい器を、ひとつずつ手づくりで。",
+    "lead": "すべての器は工房でろくろ挽きし、二度焼きしています。釉薬の表情はひとつとして同じものがありません。"
+  },
+  "products": {
+    "mug": {
+      "name": "そばかすマグ",
+      "short": "オートミール釉・350ml",
+      "description": "鉄粉の斑点が浮かぶオートミール色の釉薬をかけた、どっしりと安定感のあるマグです。持ち手は指が3本入るゆったりした幅です。",
+      "details": ["容量 350ml", "食洗機・電子レンジ対応", "ろくろ挽きの炻器"]
+    },
+    "dripper": {
+      "name": "青磁ドリッパー",
+      "short": "青磁釉・1〜2杯用",
+      "description": "2号サイズのペーパーフィルターに対応したドリッパーです。内側のリブがお湯をむらなく落とします。淡い青磁色の釉薬で仕上げました。",
+      "details": ["2号フィルター対応", "1〜2杯用", "食洗機対応"]
+    },
+    "bowl": {
+      "name": "鉄赤の盛り鉢",
+      "short": "鉄赤釉・直径22cm",
+      "description": "サラダやパスタ、果物に使いやすい浅めの鉢です。縁に向かって釉薬が濃い茶色に変化します。",
+      "details": ["直径 22cm", "食洗機対応", "オーブン不可"]
+    }
+  },
+  "product": {
+    "add_to_cart": "カートに入れる",
+    "added": "カートに追加しました。",
+    "view_cart": "カートを見る",
+    "back": "ショップに戻る",
+    "details": "仕様",
+    "in_stock": "在庫あり・1〜2営業日以内に発送"
+  },
+  "cart": {
+    "title": "カート",
+    "empty_title": "カートに商品が入っていません",
+    "empty_body": "気になる器をカートに入れてください。",
+    "browse": "ショップを見る",
+    "quantity": "数量",
+    "decrease": "数量を減らす",
+    "increase": "数量を増やす",
+    "remove": "削除",
+    "subtotal": "小計",
+    "shipping": "送料",
+    "total": "合計",
+    "checkout": "レジに進む",
+    "summary": "ご注文内容"
+  },
+  "checkout": {
+    "title": "ご購入手続き",
+    "step_of": "ステップ {n}/3",
+    "steps": {
+      "shipping": "お届け先",
+      "delivery": "お届け日",
+      "review": "確認・お支払い"
+    },
+    "back_to_cart": "カートに戻る",
+    "back": "戻る",
+    "shipping_title": "お届け先を入力してください",
+    "full_name": "氏名",
+    "street": "番地・建物名",
+    "city": "市区町村",
+    "postal_code": "郵便番号",
+    "phone": "電話番号",
+    "phone_hint": "配送業者からの連絡にのみ使用します。",
+    "continue": "次へ進む",
+    "delivery_title": "お届け希望日を指定してください",
+    "delivery_date": "お届け希望日",
+    "delivery_hint": "{format} の形式で入力してください（例：{example}）。最短で2日後のお届けとなります。",
+    "delivery_note": "月曜日から土曜日までお届けします。お届け当日の朝に配送業者からSMSでご連絡します。",
+    "continue_to_payment": "お支払いへ進む",
+    "review_title": "ご注文内容の確認",
+    "ship_to": "お届け先",
+    "deliver_on": "お届け希望日",
+    "edit": "変更",
+    "payment_title": "お支払い方法",
+    "cod": "代金引換",
+    "cod_hint": "お受け取り時に現金・カード払い",
+    "bank": "銀行振込",
+    "bank_hint": "振込先はご注文後にメールで送ります",
+    "total_label": "お支払い合計",
+    "legal": "ご注文の確定により、利用規約およびプライバシーポリシーに同意したものとみなされます。",
+    "place_order": "注文を確定する"
+  },
+  "errors": {
+    "name_required": "氏名を入力してください。",
+    "street_required": "番地・建物名を入力してください。",
+    "city_required": "市区町村を入力してください。",
+    "postal_required": "郵便番号を入力してください。",
+    "postal_invalid": "郵便番号が正しくないようです。英数字とスペースのみで入力してください。",
+    "phone_required": "電話番号を入力してください。",
+    "phone_invalid": "6桁以上の電話番号を入力してください。",
+    "date_required": "お届け希望日を入力してください。",
+    "date_invalid": "日付は {format} の形式で入力してください（例：{example}）。",
+    "date_too_soon": "本日から2日以上先の日付を指定してください。"
+  },
+  "confirmation": {
+    "title": "ご注文ありがとうございます。",
+    "order_number": "注文番号",
+    "body": "丁寧に梱包し、{date}にお届けします。",
+    "payment": "お支払い方法：{method}",
+    "continue": "買い物を続ける"
+  },
+  "help": {
+    "pill": "ヘルプ / チャット",
+    "title": "工房へのお問い合わせ",
+    "body": "月曜日から土曜日まで、数時間以内にご返信します。",
+    "close": "閉じる"
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "title": "Hearth & Kiln · Stoneware buatan tangan",
+    "dir": "ltr"
+  },
+  "format": {
+    "number_locale": "id-ID",
+    "currency": "IDR",
+    "fraction_digits": 0,
+    "date_format": "DD-MM-YYYY"
+  },
+  "nav": {
+    "shop": "Toko",
+    "cart": "Keranjang",
+    "language": "Bahasa",
+    "skip": "Langsung ke konten"
+  },
+  "footer": {
+    "demo": "Toko demo. Tidak ada pesanan sungguhan."
+  },
+  "home": {
+    "eyebrow": "Stoneware produksi terbatas",
+    "title": "Perabot sehari-hari, dibentuk dan diglasir dengan tangan.",
+    "lead": "Setiap barang dibuat di studio kami dan dibakar dua kali. Tak ada dua glasir yang benar-benar sama."
+  },
+  "products": {
+    "mug": {
+      "name": "Mug Bintik",
+      "short": "Glasir oat, 350 ml",
+      "description": "Mug yang kokoh dan seimbang dengan glasir warna oat dan bintik besi halus. Pegangannya lebar, muat tiga jari.",
+      "details": ["Isi 350 ml", "Aman untuk mesin cuci piring dan microwave", "Stoneware yang dibentuk di meja putar"]
+    },
+    "dripper": {
+      "name": "Dripper Seladon",
+      "short": "Glasir seladon, 1–2 cangkir",
+      "description": "Dripper kopi untuk filter kertas ukuran 2, dengan rusuk di bagian dalam agar air mengalir merata. Diglasir hijau seladon yang lembut.",
+      "details": ["Untuk filter ukuran 2", "Untuk 1–2 cangkir", "Aman untuk mesin cuci piring"]
+    },
+    "bowl": {
+      "name": "Mangkuk Saji Merah Besi",
+      "short": "Glasir merah besi, 22 cm",
+      "description": "Mangkuk lebar dan dangkal untuk salad, pasta, atau buah. Glasirnya berubah menjadi cokelat tua di bagian tepi.",
+      "details": ["Diameter 22 cm", "Aman untuk mesin cuci piring", "Tidak untuk oven"]
+    }
+  },
+  "product": {
+    "add_to_cart": "Tambah ke keranjang",
+    "added": "Sudah ditambahkan ke keranjang.",
+    "view_cart": "Lihat keranjang",
+    "back": "Kembali ke toko",
+    "details": "Detail",
+    "in_stock": "Tersedia, dikirim dalam 1–2 hari kerja"
+  },
+  "cart": {
+    "title": "Keranjang Anda",
+    "empty_title": "Keranjang Anda kosong",
+    "empty_body": "Lihat koleksi kami dan tambahkan yang Anda suka.",
+    "browse": "Jelajahi toko",
+    "quantity": "Jumlah",
+    "decrease": "Kurangi jumlah",
+    "increase": "Tambah jumlah",
+    "remove": "Hapus",
+    "subtotal": "Subtotal",
+    "shipping": "Ongkos kirim",
+    "total": "Total",
+    "checkout": "Checkout",
+    "summary": "Ringkasan pesanan"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "step_of": "Langkah {n} dari 3",
+    "steps": {
+      "shipping": "Alamat",
+      "delivery": "Pengiriman",
+      "review": "Tinjau & bayar"
+    },
+    "back_to_cart": "Kembali ke keranjang",
+    "back": "Kembali",
+    "shipping_title": "Ke mana pesanan dikirim?",
+    "full_name": "Nama lengkap",
+    "street": "Alamat jalan",
+    "city": "Kota",
+    "postal_code": "Kode pos",
+    "phone": "Nomor telepon",
+    "phone_hint": "Hanya untuk kurir.",
+    "continue": "Lanjutkan",
+    "delivery_title": "Kapan pesanan ingin diterima?",
+    "delivery_date": "Tanggal pengiriman",
+    "delivery_hint": "Format {format}, misalnya {example}. Paling cepat 2 hari dari hari ini.",
+    "delivery_note": "Kami mengirim Senin sampai Sabtu. Kurir akan mengirim SMS pada pagi hari pengiriman.",
+    "review_title": "Tinjau pesanan Anda",
+    "ship_to": "Dikirim ke",
+    "deliver_on": "Tanggal pengiriman",
+    "edit": "Ubah",
+    "payment_title": "Pembayaran",
+    "cod": "Bayar di tempat (COD)",
+    "cod_hint": "Bayar tunai atau kartu ke kurir.",
+    "bank": "Transfer bank",
+    "bank_hint": "Rekening kami dikirim via email.",
+    "total_label": "Total",
+    "legal": "Dengan memesan, Anda setuju dengan Syarat Penjualan dan Kebijakan Privasi kami.",
+    "place_order": "Buat pesanan"
+  },
+  "errors": {
+    "name_required": "Masukkan nama lengkap Anda.",
+    "street_required": "Masukkan alamat jalan Anda.",
+    "city_required": "Masukkan kota Anda.",
+    "postal_required": "Masukkan kode pos Anda.",
+    "postal_invalid": "Kode pos ini sepertinya tidak benar. Gunakan huruf, angka, dan spasi saja.",
+    "phone_required": "Masukkan nomor telepon Anda.",
+    "phone_invalid": "Masukkan nomor telepon minimal 6 digit.",
+    "date_required": "Masukkan tanggal pengiriman.",
+    "date_invalid": "Masukkan tanggal dengan format {format}, misalnya {example}.",
+    "date_too_soon": "Pilih tanggal paling cepat 2 hari dari hari ini."
+  },
+  "confirmation": {
+    "title": "Terima kasih, pesanan Anda sudah kami terima.",
+    "order_number": "Nomor pesanan",
+    "body": "Kami akan mengemasnya dengan rapi dan mengirimkannya pada {date}.",
+    "payment": "Pembayaran: {method}",
+    "continue": "Lanjut belanja"
+  },
+  "help": {
+    "pill": "Bantuan / chat",
+    "title": "Hubungi studio",
+    "body": "Kami membalas dalam beberapa jam, Senin sampai Sabtu.",
+    "close": "Tutup"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "app": "Language test pages",
+  "url": "http://127.0.0.1:8765/lab/kane-language-test/{locale}.html",
+  "locales": [
+    "ar",
+    "ja",
+    "de-clipped"
+  ],
+  "objective": "If the page has a form, fill it with realistic test data (any name, any city or prefecture). Press the main order or pay button and verify that a success or thank-you message appears.",
+  "checks": [
+    "The order or pay button must be fully visible on screen and not cut off by its container or covered by another element before you click it; if it is, the test fails."
+  ],
+  "outDir": "../../kane-runs/smoke",
+  "report": "../../kane-runs/smoke/report.html",
+  "concurrency": 3,
+  "source": [
+    "."
+  ]
+}

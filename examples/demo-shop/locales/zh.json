@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "title": "Hearth & Kiln · 手作炻器",
+    "dir": "ltr"
+  },
+  "format": {
+    "number_locale": "zh-CN",
+    "currency": "CNY",
+    "date_format": "YYYY-MM-DD"
+  },
+  "nav": {
+    "shop": "商店",
+    "cart": "购物车",
+    "language": "语言",
+    "skip": "跳到正文"
+  },
+  "footer": {
+    "demo": "演示商店，不会产生真实订单。"
+  },
+  "home": {
+    "eyebrow": "小批量手作炻器",
+    "title": "日常用的器物，一件件手工拉坯、上釉。",
+    "lead": "每件作品都在我们的工作室制作，经过两次烧制，釉色没有两件完全相同。"
+  },
+  "products": {
+    "mug": {
+      "name": "斑点马克杯",
+      "short": "燕麦釉 · 350 毫升",
+      "description": "厚实稳重的马克杯，燕麦色釉面上散落着细小的铁斑。宽把手可容纳三根手指。",
+      "details": ["容量 350 毫升", "可用洗碗机和微波炉", "手工拉坯炻器"]
+    },
+    "dripper": {
+      "name": "青瓷手冲滤杯",
+      "short": "青瓷釉 · 1–2 杯",
+      "description": "适用 2 号滤纸的手冲滤杯，内壁导流槽让水流均匀落下。施以淡雅的青瓷釉。",
+      "details": ["适用 2 号滤纸", "可冲 1–2 杯", "可用洗碗机"]
+    },
+    "bowl": {
+      "name": "铁红釉餐碗",
+      "short": "铁红釉 · 直径 22 厘米",
+      "description": "适合盛沙拉、意面或水果的浅口大碗，釉色在碗沿处渐变为深褐色。",
+      "details": ["直径 22 厘米", "可用洗碗机", "不可放入烤箱"]
+    }
+  },
+  "product": {
+    "add_to_cart": "加入购物车",
+    "added": "已加入购物车。",
+    "view_cart": "查看购物车",
+    "back": "返回商店",
+    "details": "规格",
+    "in_stock": "现货，1–2 个工作日内发货"
+  },
+  "cart": {
+    "title": "购物车",
+    "empty_title": "购物车是空的",
+    "empty_body": "去看看我们的器物，挑一件喜欢的吧。",
+    "browse": "去逛逛",
+    "quantity": "数量",
+    "decrease": "减少数量",
+    "increase": "增加数量",
+    "remove": "删除",
+    "subtotal": "小计",
+    "shipping": "运费",
+    "total": "合计",
+    "checkout": "去结算",
+    "summary": "订单摘要"
+  },
+  "checkout": {
+    "title": "结算",
+    "step_of": "第 {n} 步，共 3 步",
+    "steps": {
+      "shipping": "收货地址",
+      "delivery": "配送",
+      "review": "确认并付款"
+    },
+    "back_to_cart": "返回购物车",
+    "back": "返回",
+    "shipping_title": "寄到哪里？",
+    "full_name": "姓名",
+    "street": "详细地址",
+    "city": "城市",
+    "postal_code": "邮政编码",
+    "phone": "手机号码",
+    "phone_hint": "仅供快递员联系使用。",
+    "continue": "继续",
+    "delivery_title": "希望什么时候送达？",
+    "delivery_date": "期望送达日期",
+    "delivery_hint": "格式为 {format}，例如 {example}。最早可在 2 天后送达。",
+    "delivery_note": "我们周一至周六配送，快递员会在送达当天上午短信通知您。",
+    "continue_to_payment": "继续付款",
+    "review_title": "确认订单",
+    "ship_to": "收货地址",
+    "deliver_on": "送达日期",
+    "edit": "修改",
+    "payment_title": "付款方式",
+    "cod": "货到付款",
+    "cod_hint": "收货时向快递员支付现金或刷卡。",
+    "bank": "银行转账",
+    "bank_hint": "下单后我们会通过邮件发送收款账户。",
+    "total_label": "应付总额",
+    "legal": "提交订单即表示您同意我们的销售条款和隐私政策。",
+    "place_order": "提交订单"
+  },
+  "errors": {
+    "name_required": "请输入姓名。",
+    "street_required": "请输入详细地址。",
+    "city_required": "请输入城市。",
+    "postal_required": "请输入邮政编码。",
+    "postal_invalid": "邮政编码格式似乎不正确，请只使用字母、数字和空格。",
+    "phone_required": "请输入手机号码。",
+    "phone_invalid": "请输入至少 6 位数字的电话号码。",
+    "date_required": "请输入送达日期。",
+    "date_invalid": "请按 {format} 格式输入日期，例如 {example}。",
+    "date_too_soon": "请选择至少 2 天后的日期。"
+  },
+  "confirmation": {
+    "title": "谢谢！您的订单已提交。",
+    "order_number": "订单号",
+    "body": "我们会仔细包装，并于 {date}送达。",
+    "payment": "付款方式：{method}",
+    "continue": "继续购物"
+  },
+  "help": {
+    "pill": "帮助 / 在线客服",
+    "title": "联系工作室",
+    "body": "周一至周六，我们会在几小时内回复。",
+    "close": "关闭"
+  }
+}

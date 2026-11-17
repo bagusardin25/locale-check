@@ -1,0 +1,15 @@
+{
+  "name": "locale-check",
+  "version": "0.1.0",
+  "description": "Run one Kane CLI objective in every language of your web app, get a red/green grid, and let Claude Code fix the red ones while Kane re-checks them.",
+  "type": "module",
+  "bin": { "locale-check": "bin/locale-check.mjs" },
+  "files": ["bin", "src", "skill", "README.md", "LICENSE"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "demo:serve": "python -m http.server 8765 --bind 127.0.0.1",
+    "test": "node --test test/"
+  },
+  "keywords": ["i18n", "l10n", "localization", "rtl", "testing", "kane-cli", "claude-code"],
+  "license": "MIT"
+}
