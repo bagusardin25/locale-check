@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="de">
+<head><meta charset="utf-8"><title>Kasse</title>
+<style>body{font-family:system-ui,sans-serif;margin:40px}
+.card{width:300px;height:162px;overflow:hidden;border:1px solid #ccc;padding:16px;border-radius:8px}
+.note{font-size:15px;line-height:1.45}
+button{padding:10px 18px;font-size:16px;background:#0a5;color:#fff;border:0;border-radius:6px}
+#msg{margin-top:20px;font-weight:bold;color:#0a6}</style></head>
+<body><h1>Kasse</h1>
+<div class="card">
+<p class="note">Mit Ihrer Bestellung erklären Sie sich mit unseren Allgemeinen Geschäftsbedingungen und der Datenschutzerklärung einverstanden. Die Lieferung erfolgt innerhalb von drei bis fünf Werktagen.</p>
+<button id="pay" onclick="document.getElementById('msg').hidden=false">Zahlungspflichtig bestellen</button>
+</div>
+<p id="msg" hidden>Vielen Dank für Ihre Bestellung!</p>
+</body></html>

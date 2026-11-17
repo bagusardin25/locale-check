@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><title>متجر تجريبي</title>
+<style>body{font-family:system-ui,sans-serif;max-width:480px;margin:40px auto;padding:0 16px}label{display:block;margin:12px 0 4px}input,select{width:100%;padding:8px;font-size:16px}button{margin-top:16px;padding:10px 18px;font-size:16px;margin-inline-end:8px}#msg{margin-top:20px;font-weight:bold;color:#0a6}</style></head>
+<body>
+<h1>إتمام الطلب</h1>
+<form id="f">
+  <label for="name">الاسم الكامل</label>
+  <input id="name" required>
+  <label for="city">المدينة</label>
+  <select id="city"><option value="">اختر مدينة</option><option>الرياض</option><option>القاهرة</option><option>دبي</option></select>
+  <label for="date">تاريخ التسليم</label>
+  <input id="date" placeholder="يوم/شهر/سنة">
+  <div>
+    <button type="button" id="cancel">إلغاء</button>
+    <button type="submit" id="pay">ادفع الآن</button>
+  </div>
+</form>
+<p id="msg" hidden></p>
+<script>
+document.getElementById('f').addEventListener('submit', e => {
+  e.preventDefault();
+  const n = document.getElementById('name').value.trim();
+  const c = document.getElementById('city').value;
+  const m = document.getElementById('msg');
+  if (!n || !c) { m.style.color='#c00'; m.textContent = 'يرجى ملء جميع الحقول'; m.hidden=false; return; }
+  m.style.color='#0a6'; m.textContent = 'شكرًا ' + n + '، تم تأكيد طلبك إلى ' + c; m.hidden = false;
+});
+document.getElementById('cancel').onclick = () => { const m=document.getElementById('msg'); m.style.color='#c00'; m.textContent='تم إلغاء الطلب'; m.hidden=false; };
+</script>
+</body></html>

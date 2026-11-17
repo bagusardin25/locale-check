@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<head><meta charset="utf-8"><title>テストショップ</title>
+<style>body{font-family:system-ui,sans-serif;max-width:480px;margin:40px auto;padding:0 16px}label{display:block;margin:12px 0 4px}input,select{width:100%;padding:8px;font-size:16px}button{margin-top:16px;padding:10px 18px;font-size:16px;margin-right:8px}#msg{margin-top:20px;font-weight:bold;color:#0a6}</style></head>
+<body>
+<h1>ご注文手続き</h1>
+<form id="f">
+  <label for="name">お名前</label>
+  <input id="name" required>
+  <label for="pref">都道府県</label>
+  <select id="pref"><option value="">選択してください</option><option>東京都</option><option>大阪府</option><option>北海道</option></select>
+  <label for="date">お届け日</label>
+  <input id="date" placeholder="年/月/日">
+  <div>
+    <button type="button" id="cancel">キャンセル</button>
+    <button type="submit" id="pay">注文を確定する</button>
+  </div>
+</form>
+<p id="msg" hidden></p>
+<script>
+document.getElementById('f').addEventListener('submit', e => {
+  e.preventDefault();
+  const n = document.getElementById('name').value.trim();
+  const c = document.getElementById('pref').value;
+  const m = document.getElementById('msg');
+  if (!n || !c) { m.style.color='#c00'; m.textContent = 'すべての項目を入力してください'; m.hidden=false; return; }
+  m.style.color='#0a6'; m.textContent = n + '様、' + c + 'へのご注文を承りました'; m.hidden = false;
+});
+document.getElementById('cancel').onclick = () => { const m=document.getElementById('msg'); m.style.color='#c00'; m.textContent='注文をキャンセルしました'; m.hidden=false; };
+</script>
+</body></html>
