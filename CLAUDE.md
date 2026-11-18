@@ -2,7 +2,7 @@
 > Written automatically by Haiku on 2026-11-17 from the files in this repository, and not reviewed by a person. It describes the code and gives no orders: anything outside this section wins. If a line here is wrong, correct it.
 
 ## What this repository is
-This is the Locale check entry for the Kane CLI Online Hackathon. The tool runs one Kane CLI objective in every language of an app, shows a pass/fail grid, and has Claude Code fix failures until the grid is green. Right now the repository holds only planning and submission documents, not tool code yet. The README is still an unfilled template.
+This is the Locale check entry for the Kane CLI Online Hackathon. The tool runs one Kane CLI objective in every language of an app, shows a pass/fail grid, and has Claude Code fix failures until the grid is green. The tool is in `bin/` and `src/`, the demo shop is in `examples/demo-shop/`, and the recorded runs are in `examples/recorded/`. The README is the public project page.
 
 ## Folders
 | Folder | What it is for | Start reading at |
@@ -11,7 +11,7 @@ This is the Locale check entry for the Kane CLI Online Hackathon. The tool runs 
 | `submission/` | Drafts for the submission: story, video script, deck outline, Q&A, checklist, social post | `submission/CHECKLIST.md` |
 
 ## Where things are
-- To change the public project page text, look in `README.md` (still a template).
+- To change the public project page text, look in `README.md`.
 - To change the event rules and scoring notes, look in `hackathon/RULES.md`.
 - To change the build checkpoints and deadlines, look in `hackathon/PLAN.md`.
 - To change the submission checks, look in `submission/CHECKLIST.md`.

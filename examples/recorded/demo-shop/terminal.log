@@ -277,3 +277,68 @@ Round 2: 4 locales (de, ar, ja, id), 3 at a time
   ✓ pass  zh     placed an order on the demo shop
 
 6/6 locales pass. Report: <project>\locale-check-report.html
+
+# 2026-11-19 00:50 +0800: Claude's recorded fix re-applied, en and zh re-checked on the fixed code
+$ locale-check run --only en,zh
+Round 3: 2 locales (en, zh), 2 at a time
+[en] start  http://127.0.0.1:8765/examples/demo-shop/?lang=en
+[zh] start  http://127.0.0.1:8765/examples/demo-shop/?lang=zh
+[en] · navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=en
+[zh] · navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=zh
+[en] · analyze: any verification fails
+[zh] · click: Clicking the leftmost product link in the main product grid
+[en] · click: Clicking Speckled mug Oat glaze link in the first product card
+[zh] · click: 点击加入购物车按钮
+[en] · click: Clicking Add to cart for the speckled mug
+[zh] · click: Clicking on 购物车 1 to open the cart
+[en] · click: Clicking View cart to open the cart
+[zh] · click: Clicking the checkout button 去结算
+[en] · click: Clicking the Checkout button in the Order summary card
+[zh] · wait: queued plan (5 steps): type "姓名"; type "详细地址"; type "城市"; type "邮政编码"; type "手机号
+[zh] · type: Type "王丽" into "姓名"
+[zh] · type: Type "静安区南京西路123号" into "详细地址"
+[zh] · type: Type "上海市" into "城市"
+[zh] · type: Type "200040" into "邮政编码"
+[zh] · type: Type "13800138000" into "手机号码"
+[en] · wait: queued plan (5 steps): type "Full name"; type "Street address"; type "City"; typ
+[en] · type: Type "Amelia Carter" into "Full name"
+[en] · type: Type "18 Queen Street" into "Street address"
+[en] · type: Type "London" into "City"
+[en] · type: Type "SW1A 1AA" into "Postal code"
+[en] · type: Type "+44 20 7946 0958" into "Phone number"
+[zh] · analyze: No other element overlaps this step's Continue button.
+[zh] · assert: This step's Continue button is fully visible and no other element overlaps it.
+[en] · analyze: no other element overlaps this step's Continue button
+[en] · assert: this step's Continue button is fully visible and no other element overlaps it
+[zh] · click: Clicking the Shipping Continue button Continue
+[zh] · type: Typing the delivery date 2026-11-25
+[en] · click: Clicking Continue on the Shipping step
+[en] · type: Entering the preferred delivery date 11/25/2026
+[zh] · analyze: No other element overlaps this step's Continue button.
+[zh] · assert: This step's Continue button is fully visible, no other element overlaps it, and 
+[zh] · click: Clicking the Delivery step Continue button to proceed with payment
+[en] · analyze: no other element overlaps this step's Continue button
+[en] · assert: this step's Continue button is fully visible, no other element overlaps it, and 
+[zh] · analyze: No other element overlaps the Place order button.
+[zh] · assert: The Place order button is fully visible, not cut off by its card, and no other e
+[en] · click: Clicking the Delivery step Continue button to proceed to payment
+[zh] · click: Clicking the Place order button in the order summary card
+[en] · analyze: no other element overlaps the Place order button
+[en] · assert: the Place order button is fully visible, not cut off by its card, and no other e
+[zh] · analyze: Any verification fails.
+[zh] · assert: The order confirmation with an order number appears.
+[en] · click: Clicking the Place order button in the payment card section
+[zh] · wait: Waiting after confirmed order submission
+[en] · analyze: the order confirmation with an order number appears
+[en] · assert: the order confirmation with an order number appears
+[zh] PASS  placed an order on the demo shop
+[en] PASS  placed an order on the demo shop
+
+  ✓ pass  en     placed an order on the demo shop
+  ✓ pass  de     placed an order on the German-language demo shop
+  ✓ pass  ar     placed an order on the demo shop
+  ✓ pass  ja     placed an order on the demo shop
+  ✓ pass  id     placed an order on the demo shop
+  ✓ pass  zh     placed an order on the demo shop
+
+6/6 locales pass. Report: <project>\locale-check-report.html

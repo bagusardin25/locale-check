@@ -175,13 +175,28 @@
       ]
     },
     "en": {
+      "history": [
+        {
+          "round": 1,
+          "status": "passed",
+          "oneLiner": "placed an order on the demo shop",
+          "bugTitle": null,
+          "rootCause": null,
+          "suggestion": null,
+          "screenshot": "runs/2026-11-18T00-07-48-472/en.jpg",
+          "ndjson": "runs/2026-11-18T00-07-48-472/en.ndjson",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7NZPCXHJC7412K6888TB3S8/dashboard/share/US_AYCJ8E8AWEVLVAFENUF5PXAX6XZGY1MMS9MC0NW5Q3M6LFWZ4TH4MIBXIFKBWW9T?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 57.7,
+          "duration": 179
+        }
+      ],
       "locale": "en",
       "language": "English",
       "nativeLanguage": "English",
       "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=en",
       "status": "passed",
       "oneLiner": "placed an order on the demo shop",
-      "summary": "Completed checkout by adding a product to the cart and proceeding to checkout.\nEntered realistic shipping details for a customer in an English-speaking country and continued.\nEntered a delivery date about one week ahead in the format requested, then continued to review.\nKept the default payment method and placed the order.\nThe order was confirmed with order number HK-471562.",
+      "summary": "Completed the requested checkout flow by adding a product to the cart and proceeding to checkout.\nEntered realistic shipping details for a customer in an English-speaking country, then continued through shipping.\nEntered a delivery date in the format shown on the page and continued to the review step.\nKept the default payment method and placed the order after confirming the checkout buttons were fully visible and unobstructed.\nThe order was successfully placed, and the confirmation page displayed order number HK-445565.",
       "reason": "Objective completed",
       "reasonCode": "success.complete",
       "bugTitle": null,
@@ -191,9 +206,9 @@
       "category": null,
       "confirmedBug": null,
       "family": null,
-      "credits": 57.7,
-      "duration": 179,
-      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7NZPCXHJC7412K6888TB3S8/dashboard/share/US_AYCJ8E8AWEVLVAFENUF5PXAX6XZGY1MMS9MC0NW5Q3M6LFWZ4TH4MIBXIFKBWW9T?type=summary&agentView=true&fqdn=summary-page",
+      "credits": 58.6,
+      "duration": 212.5,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7QS3493JEX4NVF02R0SR8VM/dashboard/share/US_LAI1IMUYVVOFC88UZDERNPMPAYCP4CF52TUXE2FL86DXGDHH8DGQDSSF6PTWU823?type=summary&agentView=true&fqdn=summary-page",
       "steps": [
         {
           "step": 2,
@@ -203,27 +218,27 @@
         {
           "step": 3,
           "status": "done",
-          "remark": "analyze: Any verification fails."
+          "remark": "analyze: any verification fails"
         },
         {
           "step": 5,
           "status": "done",
-          "remark": "click: Clicking the Speckled mug Oat glaze product link"
+          "remark": "click: Clicking Speckled mug Oat glaze link in the first product card"
         },
         {
           "step": 6,
           "status": "done",
-          "remark": "click: Clicking Add to cart button"
+          "remark": "click: Clicking Add to cart for the speckled mug"
         },
         {
           "step": 7,
           "status": "done",
-          "remark": "click: Clicking Cart 1 in the header navigation"
+          "remark": "click: Clicking View cart to open the cart"
         },
         {
           "step": 8,
           "status": "done",
-          "remark": "click: Clicking the Checkout button in the order summary"
+          "remark": "click: Clicking the Checkout button in the Order summary card"
         },
         {
           "step": 9,
@@ -233,37 +248,37 @@
         {
           "step": 10,
           "status": "done",
-          "remark": "type: Type \"Alex Morgan\" into \"Full name\""
+          "remark": "type: Type \"Amelia Carter\" into \"Full name\""
         },
         {
           "step": 11,
           "status": "done",
-          "remark": "type: Type \"123 Maple Street\" into \"Street address\""
+          "remark": "type: Type \"18 Queen Street\" into \"Street address\""
         },
         {
           "step": 12,
           "status": "done",
-          "remark": "type: Type \"Toronto\" into \"City\""
+          "remark": "type: Type \"London\" into \"City\""
         },
         {
           "step": 13,
           "status": "done",
-          "remark": "type: Type \"M5V 2T6\" into \"Postal code\""
+          "remark": "type: Type \"SW1A 1AA\" into \"Postal code\""
         },
         {
           "step": 14,
           "status": "done",
-          "remark": "type: Type \"+1 416 555 0142\" into \"Phone number\""
+          "remark": "type: Type \"+44 20 7946 0958\" into \"Phone number\""
         },
         {
           "step": 15,
           "status": "done",
-          "remark": "analyze: No other element overlaps the Shipping step's Continue button."
+          "remark": "analyze: no other element overlaps this step's Continue button"
         },
         {
           "step": 16,
           "status": "done",
-          "remark": "assert: This step's Continue button is fully visible and no other element overlaps it."
+          "remark": "assert: this step's Continue button is fully visible and no other element overlaps it"
         },
         {
           "step": 17,
@@ -273,55 +288,55 @@
         {
           "step": 18,
           "status": "done",
-          "remark": "type: Typing 11/25/2026 into preferred delivery date field"
+          "remark": "type: Entering the preferred delivery date 11/25/2026"
         },
         {
           "step": 19,
           "status": "done",
-          "remark": "analyze: ANALYZE(textual_visual, \"No other element overlaps the Delivery step's Continue "
+          "remark": "analyze: no other element overlaps this step's Continue button"
         },
         {
           "step": 20,
           "status": "done",
-          "remark": "assert: This step's Continue button is fully visible, no other element overlaps it, and "
+          "remark": "assert: this step's Continue button is fully visible, no other element overlaps it, and "
         },
         {
           "step": 21,
           "status": "done",
-          "remark": "click: Clicking Continue to payment on the Delivery step"
+          "remark": "click: Clicking the Delivery step Continue button to proceed to payment"
         },
         {
           "step": 22,
           "status": "done",
-          "remark": "analyze: No other element overlaps the Place order button."
+          "remark": "analyze: no other element overlaps the Place order button"
         },
         {
           "step": 23,
           "status": "done",
-          "remark": "assert: The Place order button is fully visible, not cut off by its card, and no other e"
+          "remark": "assert: the Place order button is fully visible, not cut off by its card, and no other e"
         },
         {
           "step": 24,
           "status": "done",
-          "remark": "click: Clicking the Place order button"
+          "remark": "click: Clicking the Place order button in the payment card section"
         },
         {
           "step": 25,
           "status": "done",
-          "remark": "analyze: The order confirmation with an order number appears."
+          "remark": "analyze: the order confirmation with an order number appears"
         },
         {
           "step": 26,
           "status": "done",
-          "remark": "assert: The order confirmation with an order number appears."
+          "remark": "assert: the order confirmation with an order number appears"
         }
       ],
       "earlierAttempts": [],
-      "wallSeconds": 238,
-      "ndjson": "runs/2026-11-18T00-07-48-472/en.ndjson",
-      "screenshot": "runs/2026-11-18T00-07-48-472/en.jpg",
-      "runAt": "2026-11-18T00:11:46.229Z",
-      "round": 1
+      "wallSeconds": 272,
+      "ndjson": "runs/2026-11-18T16-50-53-807/en.ndjson",
+      "screenshot": "runs/2026-11-18T16-50-53-807/en.jpg",
+      "runAt": "2026-11-18T16:55:25.423Z",
+      "round": 3
     },
     "de": {
       "locale": "de",
@@ -836,13 +851,28 @@
       ]
     },
     "zh": {
+      "history": [
+        {
+          "round": 1,
+          "status": "passed",
+          "oneLiner": "placed an order on the demo shop",
+          "bugTitle": null,
+          "rootCause": null,
+          "suggestion": null,
+          "screenshot": "runs/2026-11-18T00-07-48-472/zh.jpg",
+          "ndjson": "runs/2026-11-18T00-07-48-472/zh.attempt2.ndjson",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P0360RQGA26X7Q5MG5H6XV/dashboard/share/US_QVDPOTVFCZ630273ES6C3GAXDA0N0YRTUG4UPWOKH7GPWG4OXTWRNI7NUCHJJV5X?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 70.4,
+          "duration": 168.3
+        }
+      ],
       "locale": "zh",
       "language": "Chinese",
       "nativeLanguage": "中文",
       "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=zh",
       "status": "passed",
       "oneLiner": "placed an order on the demo shop",
-      "summary": "Completed the requested checkout in the Chinese-language demo shop by adding a product to the cart and proceeding to checkout.\nEntered realistic test shipping details for a customer in a Chinese-speaking region, then continued through shipping and delivery with a delivery date about one week ahead in the displayed format.\nKept the default payment method, placed the order, and received the confirmation with order number HK-891953.",
+      "summary": "Added a product to the cart and proceeded to checkout on the Chinese-language shop.\nEntered realistic shipping details for a customer in a Chinese-speaking country, then continued through shipping.\nEntered a delivery date about one week ahead using the page’s required format and continued through delivery.\nKept the default payment method, reviewed the order, and placed it.\nThe order was successfully submitted and a confirmation with order number HK-720502 was shown.",
       "reason": "Objective completed",
       "reasonCode": "success.complete",
       "bugTitle": null,
@@ -852,9 +882,9 @@
       "category": null,
       "confirmedBug": null,
       "family": null,
-      "credits": 70.4,
-      "duration": 168.3,
-      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P0360RQGA26X7Q5MG5H6XV/dashboard/share/US_QVDPOTVFCZ630273ES6C3GAXDA0N0YRTUG4UPWOKH7GPWG4OXTWRNI7NUCHJJV5X?type=summary&agentView=true&fqdn=summary-page",
+      "credits": 55.3,
+      "duration": 183.5,
+      "testUrl": null,
       "steps": [
         {
           "step": 2,
@@ -864,22 +894,22 @@
         {
           "step": 3,
           "status": "done",
-          "remark": "click: Clicking the leftmost product link to open the product page"
+          "remark": "click: Clicking the leftmost product link in the main product grid"
         },
         {
           "step": 4,
           "status": "done",
-          "remark": "click: Clicking 加入购物车 to add it to the cart"
+          "remark": "click: 点击加入购物车按钮"
         },
         {
           "step": 5,
           "status": "done",
-          "remark": "click: Clicking View Cart link to open the cart"
+          "remark": "click: Clicking on 购物车 1 to open the cart"
         },
         {
           "step": 6,
           "status": "done",
-          "remark": "click: Clicking the checkout button in the order summary section"
+          "remark": "click: Clicking the checkout button 去结算"
         },
         {
           "step": 7,
@@ -889,12 +919,12 @@
         {
           "step": 8,
           "status": "done",
-          "remark": "type: Type \"王小明\" into \"姓名\""
+          "remark": "type: Type \"王丽\" into \"姓名\""
         },
         {
           "step": 9,
           "status": "done",
-          "remark": "type: Type \"静安区南京西路 123 号 8 楼 801 室\" into \"详细地址\""
+          "remark": "type: Type \"静安区南京西路123号\" into \"详细地址\""
         },
         {
           "step": 10,
@@ -924,17 +954,17 @@
         {
           "step": 15,
           "status": "done",
-          "remark": "click: Clicking the Shipping step Continue button继续"
+          "remark": "click: Clicking the Shipping Continue button  Continue"
         },
         {
           "step": 16,
           "status": "done",
-          "remark": "type: Entering delivery date in YYYY-MM-DD format"
+          "remark": "type: Typing the delivery date 2026-11-25"
         },
         {
           "step": 17,
           "status": "done",
-          "remark": "analyze: ANALYZE(textual_visual, \"This step's Continue button label is written in Chinese"
+          "remark": "analyze: No other element overlaps this step's Continue button."
         },
         {
           "step": 18,
@@ -944,7 +974,7 @@
         {
           "step": 19,
           "status": "done",
-          "remark": "click: Clicking the Delivery step Continue button"
+          "remark": "click: Clicking the Delivery step Continue button to proceed with payment"
         },
         {
           "step": 20,
@@ -959,7 +989,7 @@
         {
           "step": 22,
           "status": "done",
-          "remark": "click: Clicking the Place order button"
+          "remark": "click: Clicking the Place order button in the order summary card"
         },
         {
           "step": 23,
@@ -974,23 +1004,15 @@
         {
           "step": 26,
           "status": "done",
-          "remark": "wait: Waiting after confirming the order confirmation and order number"
+          "remark": "wait: Waiting after confirmed order submission"
         }
       ],
-      "earlierAttempts": [
-        {
-          "status": "inconclusive",
-          "note": "The run stopped on the storefront before any product was added or any checkout verification was performed.",
-          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7NZZ9BS3FAWM3V8NEBQ91WQ/dashboard/share/US_X21KOQL9KPS085RPSNQ3Y5W4PC9IEL0170U035KE9RFK9O938CKE9MZ5C5IS8080?type=summary&agentView=true&fqdn=summary-page",
-          "credits": 19,
-          "ndjson": "runs/2026-11-18T00-07-48-472/zh.ndjson"
-        }
-      ],
-      "wallSeconds": 349,
-      "ndjson": "runs/2026-11-18T00-07-48-472/zh.attempt2.ndjson",
-      "screenshot": "runs/2026-11-18T00-07-48-472/zh.jpg",
-      "runAt": "2026-11-18T00:18:07.287Z",
-      "round": 1
+      "earlierAttempts": [],
+      "wallSeconds": 261,
+      "ndjson": "runs/2026-11-18T16-50-53-807/zh.ndjson",
+      "screenshot": "runs/2026-11-18T16-50-53-807/zh.jpg",
+      "runAt": "2026-11-18T16:55:14.772Z",
+      "round": 3
     }
   },
   "rounds": [
@@ -1051,6 +1073,20 @@
         "id": "passed"
       },
       "credits": 216.2
+    },
+    {
+      "round": 3,
+      "startedAt": "2026-11-18T16:50:53.816Z",
+      "finishedAt": "2026-11-18T16:55:25.610Z",
+      "ran": [
+        "en",
+        "zh"
+      ],
+      "statuses": {
+        "en": "passed",
+        "zh": "passed"
+      },
+      "credits": 113.9
     }
   ],
   "order": [
@@ -1061,6 +1097,6 @@
     "id",
     "zh"
   ],
-  "updatedAt": "2026-11-18T00:27:04.649Z",
-  "recorded": "Recorded run, 2026-11-18 08:07–08:27 +0800, Kane CLI 0.10.4: round 1 found the four planted bugs, Claude Code fixed them, round 2 re-checked those four. Every verdict, screenshot and replay link is from that real run; nothing here re-runs."
+  "updatedAt": "2026-11-18T16:55:25.611Z",
+  "recorded": "Recorded run, 2026-11-18 08:07–08:27 +0800, Kane CLI 0.10.4: round 1 found the four planted bugs, Claude Code fixed them, round 2 re-checked those four. Round 3 (2026-11-19 00:50–00:55 +0800) re-checked en and zh on the fixed code, since Claude's edits touched shared files. Every verdict, screenshot and replay link is from those real runs; nothing here re-runs."
 }

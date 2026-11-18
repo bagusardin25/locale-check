@@ -2,7 +2,7 @@
 
 **One plain-English test, every language your app ships. Kane CLI finds what breaks in German, Arabic or Japanese; Claude Code fixes it; Kane re-checks until the grid is green.**
 
-![The Locale check report for the demo shop: round 1 had 4 of 6 languages failing, Claude Code fixed 4 files, round 2 passed all 6](docs/report-hero.png)
+![The Locale check report for the demo shop: round 1 had 4 of 6 languages failing, Claude Code fixed 4 files, Kane re-checked them in round 2 and the other two in round 3, and all 6 pass](docs/report-hero.png)
 
 Built for the **Kane CLI Online Hackathon** (TestMu AI, Nov 2026) · **Video:** _TODO_ · **Live page:** [freddy-tama.github.io/locale-check](https://freddy-tama.github.io/locale-check/) · **Recorded report (no account needed):** [open it in the browser](https://freddy-tama.github.io/locale-check/examples/recorded/demo-shop/report.html)
 
@@ -25,7 +25,7 @@ locale-check.json ──► Kane CLI × locale (en de ar ja id zh) ──► res
 
 ## Try it
 
-**In 30 seconds, no account:** open [the recorded report](https://freddy-tama.github.io/locale-check/examples/recorded/demo-shop/report.html) (the same file is [`examples/recorded/demo-shop/report.html`](examples/recorded/demo-shop/report.html) in the repo). It is a real recorded run on the demo shop (round 1 red, Claude's fix, round 2 green), with links to Kane's replays.
+**In 30 seconds, no account:** open [the recorded report](https://freddy-tama.github.io/locale-check/examples/recorded/demo-shop/report.html) (the same file is [`examples/recorded/demo-shop/report.html`](examples/recorded/demo-shop/report.html) in the repo). It is a real recorded run on the demo shop (round 1 red, Claude's fix, round 2 green, and a round 3 that re-checked en and zh on the fixed code), with links to Kane's replays. You can also [try the demo shop itself](https://freddy-tama.github.io/locale-check/examples/demo-shop/?lang=de), bugs included (switch the language in its menu).
 
 **Run it yourself** (needs Node 18+, Python for the static server, and a Kane CLI login with credits):
 
@@ -57,7 +57,7 @@ locale-check install-skill   # Claude Code skill: "check the locales" → run, f
 | ar | Help pill uses `left:` instead of a logical property; in RTL it covers Continue | "Shipping Continue button is absent from the checkout form" | `inset-inline-start` instead of `left` |
 | ja | Date parser reads every `a/b/c` as US MM/DD/YYYY | "Delivery date rejects its own displayed YYYY/MM/DD example" | parse by the locale's own date pattern |
 | id | One missing translation key | "Delivery continue button displays untranslated localization key" | add the missing key |
-| en, zh | none | pass | |
+| en, zh | none | pass | none needed. Because Claude's edits touched shared files, Kane re-checked both on the fixed code in round 3: pass |
 
 Kane reports symptoms, not always causes: for Arabic it saw that Continue was not usable ("absent"), not *why*. Claude found the help pill and its physical `left:` in the code. That split is the point of the loop. Claude's whole diff is in [`examples/recorded/demo-shop/claude-fix.diff`](examples/recorded/demo-shop/claude-fix.diff).
 
@@ -90,6 +90,17 @@ Then a second round. We wrote **v2** ([`locale-check.generic-v2.json`](locale-ch
 
 **Blind bugs: one of two caught.** Layout, text and validation bugs are where Kane is strong. It took ¥2,000 shipping on a ¥198 mug as plausible because the total adds up; a check like that needs to be concrete ("shipping costs less than the item"), and writing it after the fact would be tuning, so we stopped at v2. Recorded: [`examples/recorded/blind-test-v2/`](examples/recorded/blind-test-v2/).
 
+## The agent builds, Kane rejects, the agent fixes: adding Hebrew
+
+The loop also runs the other way round: the agent builds something first, and Kane decides whether it's done. We gave Claude Code one task with `locale-check loop --task`: add Hebrew to the demo shop as a translation-only change.
+
+1. **Build:** Claude wrote `locales/he.json` and registered Hebrew in `i18n.js`, `index.html` and `products.js`. It ran nothing itself, and its note said "Kane's pass is the first check".
+2. **Kane rejected it:** Hebrew and Arabic both failed at shipping. Kane's titles were "Shipping Continue button missing after completed address form" (he) and "Shipping checkout omits Continue button" (ar). A help pill anchored with physical `left:` sat on top of Continue in right-to-left layouts. That was the Arabic planted bug, which a translation-only change carried into Hebrew.
+3. **Claude fixed it from Kane's evidence:** it read Kane's screenshot and root cause, and in 33 seconds changed one file (`styles.css`) to `inset-inline-start`.
+4. **Kane passed both** on the re-run.
+
+The run took 16 minutes (18 Nov, 09:24–09:40 +0800) and cost 192.6 Kane credits across both rounds. Recorded: [`examples/recorded/hebrew-build-loop/`](examples/recorded/hebrew-build-loop/), with the terminal log and the agent's full diff ([`agent-changes.diff`](examples/recorded/hebrew-build-loop/agent-changes.diff)).
+
 ## A real bug in a real app
 
 Planted bugs prove the loop; they don't prove the tool finds anything on its own. So we went looking in real multilingual open-source apps. A research agent shortlisted eight; on Open Library we noticed by hand that the Arabic page has no `dir` attribute. Then we gave Kane a generic check that names no element and no attribute (interface in the right language, no raw keys, layout direction right for the language) and ran it in five languages.
@@ -116,7 +127,7 @@ One more honest detail: our first Open Library run also searched for a book in e
 
 ## Honest limits
 
-- Kane needs a TestMu AI login and credits. The 5-step checkout cost about 45–60 credits and 1.5–3.5 minutes per locale; a 6-locale round is about 280 credits and 7 minutes. For the recorded loop, Kane's runs reported 510.5 credits in total; the account balance dropped by 589 over the same 19 minutes.
+- Kane needs a TestMu AI login and credits. The 5-step checkout cost about 45–60 credits and 1.5–3.5 minutes per locale; a 6-locale round is about 280 credits and 7–10 minutes at three at a time (the recorded round 1 took 10 min 19 s). For the recorded loop, Kane's runs reported 510.5 credits in total; the account balance dropped by 589 over the same 19 minutes.
 - Kane's verdicts are AI judgements. Three of the first twelve shop runs failed for Kane's own reasons (it checked a button before reaching it, or clicked before checking); Kane labelled all three as its own misstep, which is why locale-check retries those instead of reporting them as bugs.
 - Local Kane runs record step screenshots and an online replay, not a video file.
 - Wording matters: positive checks placed at the step where they apply ("Verify that the Continue button is fully visible and no other element overlaps it, then click it") worked; global or negative wording produced false failures.
@@ -129,7 +140,7 @@ One more honest detail: our first Open Library run also searched for a book in e
 | `src/` | Kane runner, results, report, agent loop, zip reader for Kane evidence packs |
 | `skill/locale-check/` | Claude Code skill |
 | `examples/demo-shop/` | Six-language demo store with planted bugs |
-| `examples/recorded/` | A recorded run for judges without a Kane account |
+| `examples/recorded/` | Four recorded runs for judges without a Kane account: the demo-shop loop, blind tests v1 and v2, and the Hebrew build loop |
 | `lab/kane-language-test/` | The first-hour test: Arabic, Japanese and a clipped German button |
 | `hackathon/` | Plan, rules, log of every cycle with evidence |
 

@@ -457,7 +457,7 @@ pre .c{color:var(--ink-2)}
               <li><span class="lang"><span lang="ja">日本語</span> <code>ja</code></span><span>A date typed in the page's own YYYY/MM/DD format is rejected.</span></li>
               <li><span class="lang"><span lang="id">Indonesia</span> <code>id</code></span><span>A button shows a raw translation key.</span></li>
             </ul>
-            <p>Claude Code changed 4 files in 54 seconds from Kane's evidence. Kane re-ran the four red languages, and all six now pass.</p>
+            <p>Claude Code changed 4 files in 54 seconds from Kane's evidence. Kane re-ran the four red languages, then re-checked English and Chinese on the fixed code. All six pass.</p>
           </div>
         </li>
 
@@ -486,8 +486,8 @@ pre .c{color:var(--ink-2)}
               <li><span class="st plain">1 caught, 1 missed</span></li>
             </ul>
             <div class="run-links">
-              <a href="examples/recorded/blind-test-v1/report.html">Round 1 report</a>
-              <a href="examples/recorded/blind-test-v2/report.html">Round 2 report</a>
+              <a href="examples/recorded/blind-test-v1/report.html">Objective v1 report</a>
+              <a href="examples/recorded/blind-test-v2/report.html">Objective v2 report</a>
             </div>
           </div>
           <div class="run-body">
@@ -509,7 +509,7 @@ pre .c{color:var(--ink-2)}
             <p>“Arabic homepage retains left-to-right layout.”</p>
             <cite>Kane, on openlibrary.org (Internet Archive)</cite>
           </blockquote>
-          <p style="margin-top:var(--s5)">The page sets <code>lang="ar"</code> but never <code>dir="rtl"</code>, so the Arabic text sits in a left-to-right page.</p>
+          <p style="margin-top:var(--s5)">The page sets <code>lang="ar"</code> but never <code>dir="rtl"</code>, so the Arabic text sits in a left-to-right page. We spotted the missing attribute by hand first; Kane's check named no element or attribute and confirmed what an Arabic reader sees.</p>
           <p>The issue is drafted and not filed yet.</p>
         </div>
         <figure>

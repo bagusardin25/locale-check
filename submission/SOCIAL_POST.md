@@ -8,7 +8,7 @@ Your app ships in 6 languages. Who checks the Arabic one?
 
 Locale check runs one plain-English Kane CLI test in every language; Claude Code fixes what breaks, Kane re-checks.
 
-It found Open Library's Arabic UI served left-to-right.
+Kane confirmed Open Library's Arabic UI runs left-to-right.
 
 github.com/freddy-tama/locale-check
 #KaneCLIHackDay
@@ -23,7 +23,7 @@ For the Kane CLI hackathon I built Locale check:
 - Kane CLI runs it in a real browser in every language your app ships, three at a time, and a one-file report shows red or green per language with Kane's screenshot, its root cause and a replay.
 - The failures Kane confirms as app bugs go to Claude Code with Kane's evidence. Claude fixes the code, and Kane re-runs only the red languages.
 
-On a six-language demo shop it caught four locale bugs and Claude fixed them in one round. On a live open-source site, Open Library, it found that the Arabic interface is served left-to-right: the page never sets dir="rtl".
+On a six-language demo shop it caught four locale bugs and Claude fixed them in one round. On a live open-source site, Open Library, I had spotted by hand that the Arabic page never sets dir="rtl"; a generic Kane check that names no element confirmed what users see: the Arabic interface is served left-to-right.
 
 What I learned: write checks positively and put them at the step where they apply. And trust Kane's own triage. It labels its own missteps, so a flaky run never reaches the agent as a "bug".
 

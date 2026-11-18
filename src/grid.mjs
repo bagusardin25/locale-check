@@ -126,7 +126,10 @@ function loopSection(order, rounds, counts, total, credits) {
   const firstPass = Object.values(first.statuses || {}).filter((s) => s === 'passed').length;
   const fixes = rounds.filter((r) => r.fix);
   const agents = [...new Set(fixes.map((r) => agentName(r.fix.agent)))];
-  const wall = secondsBetween(first.startedAt, rounds[rounds.length - 1].finishedAt);
+  // Time spent running (rounds, agent fixes and builds), not wall clock: a later re-check round
+  // must not count the hours in between.
+  const wall = rounds.reduce((s, r) => s + (secondsBetween(r.startedAt, r.finishedAt) || 0)
+    + (r.fix?.seconds || 0) + (r.build?.seconds || 0), 0);
   const story = `Round 1: ${firstPass} of ${(first.ran || []).length} passed. Now: ${counts.passed} of ${total}`
     + (fixes.length ? `, after ${fixes.length} fix${fixes.length > 1 ? 'es' : ''} by ${agents.map(esc).join(' and ')}` : '') + '.';
   const totals = [`${rounds.length} round${rounds.length > 1 ? 's' : ''}`, fmtDur(wall), `${fmtNum(credits)} Kane credits`].filter(Boolean).join(' · ');
@@ -459,7 +462,7 @@ h1 .score{font-size:var(--t-5);font-weight:700;line-height:1.04;letter-spacing:-
 .dot .i{width:1.15em;height:1.15em;stroke-width:2.8}
 .dot.t-idle{background:transparent;border:1.5px dashed var(--idle);color:var(--idle-ink)}
 .dot.t-idle .i{stroke-width:2}
-.chips{list-style:none;margin:var(--s6) 0 0;padding:0;display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr))}
+.chips{list-style:none;margin:var(--s6) 0 0;padding:0;display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(min(100%,10.5rem),1fr))}
 .chip{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:var(--s3);align-items:center;height:100%;padding:var(--s3) var(--s4);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--tone);border-radius:var(--r-m);color:var(--ink);text-decoration:none}
 .chip .dot{grid-row:span 2;font-size:var(--t-1)}
 .chip-name{font-size:var(--t-1);font-weight:600;line-height:1.25;overflow-wrap:break-word}
