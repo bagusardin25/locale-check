@@ -21,3 +21,8 @@ This is the Locale check entry for the Kane CLI Online Hackathon. The tool runs 
 - `.gitignore` excludes `hackathon/private/`. Its comment says the judge briefs there describe the builder's other, unreleased products, so keep that folder out of any public push: `.gitignore`.
 - `.gitignore` excludes `.env` and `.env.*` but keeps `.env.example`, so keys stay out of commits: `.gitignore`.
 <!-- auto-map:end -->
+
+## Traps (by hand)
+- Never run two Kane browsers without the launch lock in `src/runner.mjs`: kane-cli picks a free CDP port (9222–9230) before its Chrome binds it, so simultaneous runs drive one browser.
+- On this PC, backslashes in Bash heredocs get halved before they reach the file (`'\n'` in JS becomes a real newline). Write JS or JSON that contains escapes with the Write/Edit tools, not `cat <<EOF` or inline Python.
+- `examples/demo-shop/` holds six deliberate bugs (`docs/planted-bugs.md`, `docs/blind-bug*.md`). After any fix loop, save the diff and `git restore examples/demo-shop` so the demo stays broken.
