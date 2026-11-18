@@ -4,40 +4,59 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1b1e22" media="(prefers-color-scheme: dark)">
 <title>Locale check: one Kane test, every language</title>
 <meta name="description" content="Locale check runs one plain-English Kane CLI objective in every language your web app ships. Claude Code fixes the bugs Kane confirms, and Kane re-runs only the red languages until they pass.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://freddy-tama.github.io/locale-check/">
+<meta property="og:title" content="Locale check: one Kane test, every language">
+<meta property="og:description" content="One Kane CLI objective in every language of a web app. Claude Code fixes what Kane confirms; Kane re-runs the red languages until they pass.">
+<meta property="og:image" content="https://freddy-tama.github.io/locale-check/docs/report-hero.png">
+<meta property="og:image:width" content="1600">
+<meta property="og:image:height" content="1000">
+<meta property="og:image:alt" content="The Locale check report for the demo shop: 6 of 6 languages pass after one Claude Code fix.">
+<meta name="twitter:card" content="summary_large_image">
 <!-- Direction:
   Audience: three TestMu AI engineers judging the Kane CLI hackathon, who know Kane well and give
   the page seconds on a laptop; then developers who arrive from the repo, often on a phone.
   They must get "what is this" and "what do I click" from the first screen. Feel: precise, calm,
   honest; a test-run summary rather than a sales page. Assumption: judges open it at 1280-1920 px.
-  Look: "the run summary as the hero". The real report (a cropped screenshot, light and dark) is
-  the first-screen visual, as tool sites such as Linear and Vercel put product UI in the hero;
-  hierarchy comes from a few cool greys, hairlines and space, no shadows or gradients. It must read
-  as the same product as the report (examples/recorded/demo-shop/report.html), so it keeps the
-  report's rule that a hue always means something: green = passes, red = fails, magenta = the
-  coding agent, each with an icon and a word. No brand accent; links are ink and underlined.
-  The one filled button is near-black ink (white on dark), because any hue here would read as a
-  status, and six of eight studied product sites fill their call to action with a neutral.
+  Look: "the run summary as the hero". The hero visual is the report's own loop panel, redrawn in
+  HTML from examples/recorded/demo-shop/results.json (as Linear, Stripe and Vercel draw product UI
+  in HTML, so it stays sharp, readable on a phone and honest to the data); it plays the recorded
+  loop once. Hierarchy comes from a few cool greys, hairlines and space, no shadows or gradients.
+  It must read as the same product as the report (examples/recorded/demo-shop/report.html), so it
+  keeps the report's rule that a hue always means something: green = passes, red = fails,
+  magenta = the coding agent, each with an icon and a word. No brand accent; links are ink and
+  underlined. The one filled button is near-black ink (white on dark), because any hue here would
+  read as a status, and six of eight studied product sites fill their call to action with a neutral.
   Ground: cool near-white with white panels, as in the report, because Kane's screenshots (Open
   Library's beige) are warm and must stand apart; dark theme remaps roles to a tinted near-black.
   Type: the platform UI face with per-script fallbacks (Segoe UI, SF, Noto; Arabic, Japanese and
   Chinese system faces), because the page must work offline with no font requests and the native
   language names (Deutsch, العربية, 日本語, 中文) are the visual feature; the report uses the same
   stack, so the two read as one product. Not Source Sans, Fira or Public Sans: each would need a
-  font file and none covers Arabic and CJK. Mono only for commands, locale codes and CSS.
+  font file and none covers Arabic and CJK. Mono only for commands, locale codes and file names.
   Sizes: read on a laptop at arm's length and on phones; body 16-17 px at line height 1.55,
   prose capped at 64ch; fluid scale 360-1440 px, ratio 1.2 to 1.333 (scale.mjs), used as two
   bands: a UI band (14, 16-17, 19-23 px) and display steps (23-30, 33-54 px).
+  Motion: one story beat, the loop in the hero, because the product's whole claim is a sequence
+  (red, fix, re-check, green) that a still image flattens. It plays once when the panel is in view
+  (about 5 s, then still), can be skipped mid-way and replayed, and shows the end state with
+  JavaScript off. Productive, Carbon-style: the expressive entrance curve for things arriving,
+  durations by area (70 ms press, 120 ms hover, 240 ms a cell or chip, 400 ms the fix box), a small
+  overshoot on cell scale only, never on colour or opacity. Reduced motion replaces every move with
+  the same steps as crossfades. Elsewhere only feedback: a 1 px press, a tile arrow that nudges.
 -->
 <style>
 :root{
   color-scheme:light dark;
   --bg:#f3f5f8; --surface:#fff; --surface-2:#eef1f5; --line:#dde1e7; --line-strong:#7a8089;
   --ink:#16191d; --ink-2:#4a5059;
-  --cta:#16191d; --cta-hover:#353a41; --on-cta:#fff;
-  --pass:#2f9a7a; --pass-ink:#0d6a50; --pass-tint:#e6f5ef;
-  --fail:#c8302a; --fail-ink:#a3221b; --fail-tint:#fdecea;
+  --cta:#16191d; --cta-hover:#353a41; --cta-press:#000; --on-cta:#fff;
+  --pass:#2f9a7a; --pass-ink:#0d6a50; --pass-tint:#e6f5ef; --on-pass:#fff;
+  --fail:#c8302a; --fail-ink:#a3221b; --fail-tint:#fdecea; --on-fail:#fff;
   --agent:#a62f86; --agent-ink:#8a1f6c; --agent-tint:#fbeef7;
   --focus:#16191d;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,"Geeza Pro","Noto Sans Arabic","Hiragino Sans","Yu Gothic UI","PingFang SC","Microsoft YaHei UI","Noto Sans CJK JP",sans-serif;
@@ -52,19 +71,23 @@
   --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
   --r:10px; --r-s:6px;
   --max:76rem; --gutter:clamp(16px,4vw,48px);
+  /* motion: IBM Carbon's expressive curves; durations grow with the area that changes */
+  --d-press:70ms; --d-hover:120ms; --d-state:240ms; --d-enter:400ms;
+  --ease-enter:cubic-bezier(0,0,.3,1); --ease-std:cubic-bezier(.4,.14,.3,1);
+  --ease-settle:cubic-bezier(.2,.9,.3,1.25); /* transform only: a small overshoot as a cell lands */
 }
 @media (prefers-color-scheme:dark){:root{
   --bg:#121417; --surface:#1b1e22; --surface-2:#22262b; --line:#2e3339; --line-strong:#6b727c;
   --ink:#eceff3; --ink-2:#c0c6ce;
-  --cta:#eceff3; --cta-hover:#cfd5dc; --on-cta:#121417;
-  --pass:#5cc29f; --pass-ink:#7fd8b8; --pass-tint:#14271f;
-  --fail:#e5574a; --fail-ink:#ff9d90; --fail-tint:#2d1715;
+  --cta:#eceff3; --cta-hover:#cfd5dc; --cta-press:#b4bcc5; --on-cta:#121417;
+  --pass:#5cc29f; --pass-ink:#7fd8b8; --pass-tint:#14271f; --on-pass:#0f1412;
+  --fail:#e5574a; --fail-ink:#ff9d90; --fail-tint:#2d1715; --on-fail:#140d0c;
   --agent:#e07cc6; --agent-ink:#f2a6dc; --agent-tint:#2a1724;
   --focus:#eceff3;
 }}
 
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:var(--t-body);line-height:1.55}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit;text-decoration-thickness:1px;text-underline-offset:0.18em}
@@ -74,21 +97,23 @@ code,pre,kbd{font-family:var(--mono);font-size:0.9em}
 p{margin:0}
 h1,h2,h3{margin:0;font-weight:700;text-wrap:balance}
 strong,b{font-weight:600}
+.sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
 .skip{position:absolute;left:var(--s4);top:-100px;padding:var(--s3) var(--s4);background:var(--cta);color:var(--on-cta);border-radius:var(--r-s);z-index:10}
 .skip:focus{top:var(--s3)}
 
 .wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
 
-/* header */
-.top{border-bottom:1px solid var(--line);background:var(--surface)}
+/* header: stays on screen, so the source link and the in-page links are always in reach */
+.top{position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line);background:var(--surface)}
 .top .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);min-height:60px}
-.mark{display:inline-flex;align-items:center;gap:var(--s2);font-weight:700;text-decoration:none;min-height:44px}
+.mark{display:inline-flex;align-items:center;gap:var(--s2);font-weight:600;text-decoration:none;min-height:44px}
 .mark svg{width:20px;height:20px;flex:none}
 .nav{display:flex;gap:var(--s1);margin:0;padding:0;list-style:none}
 .nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--s3);font-size:var(--t-small);color:var(--ink-2);text-decoration:none;border-radius:var(--r-s)}
 .nav a:hover{color:var(--ink);text-decoration:underline}
 @media (max-width:47.99rem){.nav .in-page{display:none}}
+#main,.section{scroll-margin-top:68px}
 
 /* hero */
 .hero{padding:var(--s7) 0 var(--s8)}
@@ -98,19 +123,98 @@ strong,b{font-weight:600}
 h1{font-size:var(--t-4);line-height:1.08;letter-spacing:-0.02em;max-width:14ch}
 .lead{font-size:var(--t-1);line-height:1.45;color:var(--ink-2);margin-top:var(--s5);max-width:34em}
 .actions{display:flex;gap:var(--s3);margin-top:var(--s6)}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:48px;padding:0 var(--s5);border-radius:var(--r-s);font-weight:600;text-decoration:none;border:1px solid transparent}
+.hero-text{container-type:inline-size}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:48px;padding:0 var(--s5);border-radius:var(--r-s);font-weight:600;text-decoration:none;white-space:nowrap;border:1px solid transparent}
 .btn-primary{background:var(--cta);color:var(--on-cta);border-color:var(--cta)}
 .btn-primary:hover{background:var(--cta-hover);border-color:var(--cta-hover)}
+.btn-primary:active{background:var(--cta-press);border-color:var(--cta-press)}
 .btn-quiet{color:var(--ink);border-color:var(--line-strong);background:transparent}
 .btn-quiet:hover{background:var(--surface-2);text-decoration:none}
+.btn-quiet:active{background:var(--line)}
 .btn svg{width:18px;height:18px;flex:none}
-@media (max-width:29.99rem){.actions{flex-direction:column}.btn{width:100%}}
+/* the two buttons sit side by side only where both fit on one line (about 28rem); otherwise both stack */
+@container (max-width:28rem){.actions{flex-direction:column}.btn{width:100%}}
 .note{color:var(--ink-2);margin-top:var(--s4);max-width:46ch}
 
-.shot{margin:0}
-.shot a{display:block;border-radius:var(--r);border:1px solid var(--line);overflow:hidden;background:var(--surface)}
-.shot a:focus-visible{outline-offset:4px;border-radius:var(--r)}
-.shot figcaption{font-size:var(--t-small);color:var(--ink-2);margin-top:var(--s3)}
+/* the loop: the recorded run, drawn from examples/recorded/demo-shop/results.json */
+.loop{margin:0}
+.loop-panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:var(--s3) clamp(16px,2.2vw,32px) var(--s4)}
+.loop-top{display:flex;align-items:center;justify-content:space-between;gap:var(--s3);min-height:44px}
+.loop-kicker{font-size:var(--t-small);color:var(--ink-2)}
+.loop-btn{display:inline-flex;align-items:center;gap:var(--s2);min-height:44px;margin-inline-end:calc(-1 * var(--s3));padding:0 var(--s3);border:0;border-radius:var(--r-s);background:transparent;color:var(--ink);font:inherit;font-size:var(--t-small);font-weight:600;cursor:pointer;white-space:nowrap}
+.loop-btn[hidden]{display:none}
+.loop-btn:hover{background:var(--surface-2)}
+.loop-btn:active{background:var(--line)}
+.loop-btn svg{width:16px;height:16px;flex:none}
+.loop-state{margin-top:var(--s2)}
+.st.big{font-size:var(--t-body);padding:var(--s1) var(--s4) var(--s1) var(--s1)}
+.st.big svg{width:22px;height:22px}
+.loop-say{margin-top:var(--s2);color:var(--ink-2);line-height:1.45;min-height:calc(3 * 1.45em);text-wrap:pretty}
+@media (min-width:30rem){.loop-say{min-height:calc(2 * 1.45em)}}
+
+.matrix{--c:clamp(1.75rem,1.4rem + 1.2vw,2.5rem);width:100%;margin-top:var(--s4);border-collapse:collapse;font-variant-numeric:tabular-nums}
+.matrix th,.matrix td{padding:var(--s2) var(--s1);text-align:center;vertical-align:middle}
+.matrix thead th{padding-block:0 var(--s2);border-bottom:1px solid var(--line);font:400 var(--t-small)/1.3 var(--mono);color:var(--ink-2)}
+.matrix tbody th{text-align:start;font-weight:400;font-size:var(--t-small);line-height:1.4;color:var(--ink-2);padding-inline-end:var(--s3);white-space:nowrap}
+.matrix .rn{display:block;font-size:var(--t-body);font-weight:600;line-height:1.35;color:var(--ink)}
+.matrix .rs{display:block}
+.matrix tr.r2{border-top:1px solid var(--line)}
+.matrix tr.fixrow td{padding:var(--s1) 0 var(--s3);text-align:start}
+/* 320-384 px: smaller cells, tighter gaps and wrapping row labels, so the table never scrolls sideways */
+@media (max-width:24rem){
+  .loop-panel{padding-inline:var(--s3)}
+  .matrix{--c:1.5rem}
+  .matrix th,.matrix td{padding-inline:2px}
+  .matrix tbody th{white-space:normal;padding-inline-end:var(--s2)}
+}
+
+.cell{display:inline-grid;grid-template:minmax(0,1fr) / minmax(0,1fr);place-items:center;width:var(--c);height:var(--c);vertical-align:middle}
+.cell::before,.cell .face,.cell::after{grid-area:1 / 1}
+.cell .face{display:grid;place-items:center;width:100%;height:100%;border-radius:var(--r-s);background:var(--tone);color:var(--on)}
+.cell .face svg{display:block;width:calc(var(--c) * .62);height:calc(var(--c) * .62)}
+.cell.pass{--tone:var(--pass);--on:var(--on-pass)}
+.cell.fail{--tone:var(--fail);--on:var(--on-fail)}
+.cell.none .face{background:transparent;box-shadow:inset 0 0 0 1px var(--line-strong);color:var(--ink-2)}
+/* waiting and running faces: drawn only while the loop plays */
+.cell::before{content:"";width:100%;height:100%;border:1.5px dashed var(--line-strong);border-radius:var(--r-s);opacity:0}
+.cell::after{content:"";width:24%;height:24%;border-radius:50%;background:var(--ink-2);opacity:0}
+.i{fill:none;stroke:currentColor;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}
+
+.fixbox{margin-inline-start:var(--s2);padding:var(--s3) var(--s4);background:var(--agent-tint);border-inline-start:4px solid var(--agent);border-radius:0 var(--r-s) var(--r-s) 0}
+.fix-head{display:flex;align-items:flex-start;gap:var(--s2);line-height:1.45}
+.fix-head svg{width:1.15em;height:1.15em;margin-top:.2em;flex:none;color:var(--agent-ink);stroke-width:2.2}
+.fix-head b{color:var(--agent-ink)}
+.fix-head code{font-size:var(--t-small);padding:0 var(--s1);border-radius:var(--r-s);background:var(--surface)}
+.fix-sub{margin-top:var(--s1);font-size:var(--t-small);color:var(--ink-2)}
+.fix-sub b{color:var(--ink)}
+.files{display:flex;flex-wrap:wrap;gap:var(--s2);margin:var(--s2) 0 0;padding:0;list-style:none}
+.files code{display:inline-block;padding:var(--s1) var(--s2);line-height:1.3;font-size:var(--t-small);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-s)}
+.loop-foot{margin-top:var(--s2);padding-top:var(--s3);border-top:1px solid var(--line);font-size:var(--t-small);color:var(--ink-2);font-variant-numeric:tabular-nums}
+.loop figcaption{font-size:var(--t-small);color:var(--ink-2);margin-top:var(--s3)}
+
+/* playback: the end state above is the default; script adds .is-playing and steps .on through */
+.loop.is-playing [data-at]:not(.on):not(.cell):not(.fixbox){opacity:0}
+/* the fix waits as an empty dashed slot, as the cells do, so the gap reads as "next" rather than blank */
+.loop.is-playing .fixbox:not(.on){background:transparent;border-inline-start-style:dashed;border-inline-start-color:var(--line-strong);box-shadow:inset 0 0 0 1px var(--line)}
+.loop.is-playing .fixbox:not(.on) > *{opacity:0}
+.loop.is-playing .cell[data-at]:not(.on) .face{opacity:0}
+.loop.is-playing .cell[data-at]:not(.on)::before{opacity:1}
+.loop.is-playing .cell[data-at]:not(.on)::after{opacity:.3}
+.loop[data-p="1"] .r1 .cell:not(.on)::after,
+.loop[data-p="4"] .r2 .cell:not(.on)::after{animation:running 900ms var(--ease-std) calc(var(--i, 0) * 90ms) infinite}
+@keyframes running{0%,100%{opacity:.25}50%{opacity:1}}
+.loop [data-at],.fixbox > *,.cell .face,.cell::before,.cell::after{transition:opacity var(--d-state) var(--ease-enter);transition-delay:calc(var(--i, 0) * 70ms)}
+.loop .fixbox{transition:background-color var(--d-state),border-color var(--d-state),box-shadow var(--d-state)}
+.loop-pill{transition:background-color var(--d-state),border-color var(--d-state),color var(--d-state)}
+.loop.no-t *,.loop.no-t *::before,.loop.no-t *::after{transition:none !important}
+@media (prefers-reduced-motion:no-preference){
+  /* cells land with a small overshoot (scale only); the fix arrives from the round above it */
+  .cell .face{transition-property:opacity,transform;transition-duration:var(--d-state);transition-timing-function:var(--ease-enter),var(--ease-settle)}
+  .loop.is-playing .cell[data-at]:not(.on) .face{transform:scale(.55)}
+  .fixbox > *,.loop .files li{transition-property:opacity,transform;transition-duration:var(--d-state),var(--d-enter)}
+  .loop.is-playing .fixbox:not(.on) > *{transform:translateY(-6px)}
+  .loop.is-playing .files li:not(.on){transform:translateY(-4px)}
+}
 
 /* sections */
 .section{padding:var(--s8) 0;border-top:1px solid var(--line)}
@@ -129,6 +233,7 @@ h3{font-size:var(--t-1);line-height:1.3}
 .st.fail{color:var(--fail-ink);background:var(--fail-tint);border-color:var(--fail)}
 .st.agent{color:var(--agent-ink);background:var(--agent-tint);border-color:var(--agent)}
 .st.plain{color:var(--ink);background:var(--surface-2);border-color:var(--line-strong);padding-left:var(--s3)}
+.st.big.plain{padding-left:var(--s1)}
 
 /* recorded runs */
 .runs{list-style:none;margin:var(--s7) 0 0;padding:0}
@@ -162,11 +267,14 @@ h3{font-size:var(--t-1);line-height:1.3}
 .wild figcaption{font-size:var(--t-small);color:var(--ink-2);margin-top:var(--s3)}
 
 /* demo shop */
-.langs{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:var(--s3);margin:var(--s6) 0 0;padding:0;list-style:none}
-.langs a{display:flex;flex-direction:column;justify-content:center;min-height:64px;padding:var(--s3) var(--s4);background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r);text-decoration:none}
+.langs{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:var(--s3);margin:var(--s6) 0 0;padding:0;list-style:none}
+.langs a{display:grid;grid-template-columns:minmax(0,1fr) auto;column-gap:var(--s2);align-content:center;min-height:64px;padding:var(--s3) var(--s4);background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r);text-decoration:none}
+.langs a::after{content:"\2192";grid-column:2;grid-row:1 / span 2;align-self:center;color:var(--ink-2)}
 .langs a:hover{border-color:var(--ink);background:var(--surface-2)}
-.langs .name{font-size:var(--t-1);font-weight:700;line-height:1.25;align-self:flex-start;unicode-bidi:isolate}
-.langs code{font-size:var(--t-small);color:var(--ink-2)}
+.langs a:hover::after{color:var(--ink)}
+.langs a:active{background:var(--line)}
+.langs .name{grid-column:1;font-size:var(--t-1);font-weight:700;line-height:1.25;justify-self:start;unicode-bidi:isolate}
+.langs code{grid-column:1;font-size:var(--t-small);color:var(--ink-2)}
 
 /* how it works */
 .steps{list-style:none;margin:var(--s7) 0 0;padding:0;counter-reset:step}
@@ -194,8 +302,19 @@ pre .c{color:var(--ink-2)}
 .foot a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink)}
 .foot li:not(:has(a)){display:inline-flex;align-items:center;min-height:44px}
 
-@media (forced-colors:active){.st,.btn,.langs a{border:1px solid CanvasText}.btn-primary{border-width:2px}}
-@media (prefers-reduced-motion:no-preference){a,.btn{transition:background-color .12s,border-color .12s,color .12s}}
+@media (forced-colors:active){.st,.btn,.langs a,.cell .face{border:1px solid CanvasText}.btn-primary{border-width:2px}}
+/* feedback only: colour by default; movement (a 1 px press, the tile arrow) only when motion is welcome */
+@media (prefers-reduced-motion:no-preference){
+  html{scroll-behavior:smooth}
+  a,.btn,.loop-btn{transition:background-color var(--d-hover),border-color var(--d-hover),color var(--d-hover),transform var(--d-press) var(--ease-enter)}
+  .btn:active,.loop-btn:active{transform:translateY(1px)}
+  .langs a::after{transition:transform var(--d-hover) var(--ease-enter),color var(--d-hover)}
+  .langs a:hover::after,.langs a:focus-visible::after{transform:translateX(3px)}
+}
+@media (prefers-reduced-motion:reduce){
+  a,.btn,.loop-btn{transition:background-color var(--d-hover),border-color var(--d-hover),color var(--d-hover)}
+}
+@media print{.top{position:static}.loop-btn{display:none}}
 </style>
 </head>
 <body>
@@ -203,6 +322,13 @@ pre .c{color:var(--ink-2)}
   <symbol id="i-pass" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M4.5 8.2l2.3 2.3 4.7-4.9" fill="none" stroke="var(--bg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-fail" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M5.3 5.3l5.4 5.4M10.7 5.3l-5.4 5.4" fill="none" stroke="var(--bg)" stroke-width="1.8" stroke-linecap="round"/></symbol>
   <symbol id="i-agent" viewBox="0 0 16 16"><path d="M10.6 2.6l2.8 2.8-7.6 7.6-3.4.6.6-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-run" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-dasharray="3.2 2.3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5.5 12.5l4.2 4.2L18.5 7.8"/></symbol>
+  <symbol id="i-cross" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></symbol>
+  <symbol id="i-dash" viewBox="0 0 24 24"><path d="M9 12h6" stroke-width="2"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4.5 19.5l1-4.2L15.8 5a1.8 1.8 0 0 1 2.6 0l.6.6a1.8 1.8 0 0 1 0 2.6L8.7 18.5z"/><path d="M13.8 7l3.2 3.2"/></symbol>
+  <symbol id="i-replay" viewBox="0 0 24 24"><path d="M5.5 12a6.5 6.5 0 1 0 2-4.7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5.5 4.5v3.8h3.8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-skip" viewBox="0 0 24 24"><path d="M6 6.5l7 5.5-7 5.5zM17 6.5v11" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-globe" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="8"/><path d="M2 10h16M10 2c2.4 2.3 3.4 5 3.4 8s-1 5.7-3.4 8c-2.4-2.3-3.4-5-3.4-8s1-5.7 3.4-8z"/></g></symbol>
 </svg>
 
@@ -225,7 +351,7 @@ pre .c{color:var(--ink-2)}
 <main id="main">
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
-      <div>
+      <div class="hero-text">
         <p class="eyebrow">Kane CLI Online Hackathon entry · TestMu AI · November 2026</p>
         <h1 id="hero-title">One Kane test. Every language your app ships.</h1>
         <p class="lead">Locale check runs one plain-English Kane CLI objective in every language of your web app, in a real Chrome. Claude Code fixes the bugs Kane confirms, and Kane re-runs only the red languages until they pass.</p>
@@ -238,15 +364,67 @@ pre .c{color:var(--ink-2)}
         </div>
         <p class="note">Recorded runs are static pages with Kane's real verdicts, screenshots and replays. Nothing on them calls Kane, and you need no account.</p>
       </div>
-      <figure class="shot">
-        <a href="examples/recorded/demo-shop/report.html">
-          <picture>
-            <source srcset="docs/report-loop-dark.webp" media="(prefers-color-scheme: dark)">
-            <img src="docs/report-loop-light.webp" width="1200" height="1200" fetchpriority="high"
-                 alt="The report's panel 'The loop, round by round'. Round 1: en and zh pass; de, ar, ja and id fail. Then: claude fixed de, ar, ja and id, 4 files changed in 54 s. Round 2: de, ar, ja and id pass.">
-          </picture>
-        </a>
-        <figcaption>The report from the recorded run: four languages red in round 1, Claude Code's fix, all four green in round 2.</figcaption>
+
+      <figure class="loop" id="loop" aria-labelledby="loop-cap">
+        <div class="loop-panel">
+          <div class="loop-top">
+            <p class="loop-kicker">Recorded run · demo shop</p>
+            <button type="button" class="loop-btn" hidden><svg aria-hidden="true"><use href="#i-replay"/></svg><span>Replay</span></button>
+          </div>
+          <p class="loop-state"><span class="st big pass loop-pill"><svg aria-hidden="true"><use href="#i-pass"/></svg><span class="pill-text">6 of 6 pass</span></span></p>
+          <p class="loop-say">2 of 6 passed in round 1. After one Claude Code fix, all 6 pass.</p>
+
+          <table class="matrix">
+            <caption class="sr">Kane's verdict for each language in each round, with Claude Code's fix between the rounds</caption>
+            <thead>
+              <tr>
+                <th scope="col"><span class="sr">Round</span></th>
+                <th scope="col"><span aria-hidden="true">en</span><span class="sr">English</span></th>
+                <th scope="col"><span aria-hidden="true">de</span><span class="sr">German</span></th>
+                <th scope="col"><span aria-hidden="true">ar</span><span class="sr">Arabic</span></th>
+                <th scope="col"><span aria-hidden="true">ja</span><span class="sr">Japanese</span></th>
+                <th scope="col"><span aria-hidden="true">id</span><span class="sr">Indonesian</span></th>
+                <th scope="col"><span aria-hidden="true">zh</span><span class="sr">Chinese</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="r1">
+                <th scope="row"><span class="rn">Round 1</span><span class="rs">6 languages</span><span class="rs" data-at="2">10 min 19 s</span></th>
+                <td><span class="cell pass" data-at="2" style="--i:0"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr">passes</span></span></td>
+                <td><span class="cell fail" data-at="2" style="--i:1"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-cross"/></svg></span><span class="sr">fails</span></span></td>
+                <td><span class="cell fail" data-at="2" style="--i:2"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-cross"/></svg></span><span class="sr">fails</span></span></td>
+                <td><span class="cell fail" data-at="2" style="--i:3"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-cross"/></svg></span><span class="sr">fails</span></span></td>
+                <td><span class="cell fail" data-at="2" style="--i:4"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-cross"/></svg></span><span class="sr">fails</span></span></td>
+                <td><span class="cell pass" data-at="2" style="--i:5"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr">passes</span></span></td>
+              </tr>
+              <tr class="fixrow">
+                <td colspan="7">
+                  <div class="fixbox" data-at="3">
+                    <p class="fix-head"><svg class="i" aria-hidden="true"><use href="#i-pencil"/></svg><span><b>Claude Code</b> fixed <code>de</code> <code>ar</code> <code>ja</code> <code>id</code></span></p>
+                    <p class="fix-sub"><b>4 files changed</b> in 54 s, from Kane's evidence</p>
+                    <ul class="files" aria-label="Files Claude Code changed">
+                      <li data-at="3" style="--i:2"><code>dates.js</code></li>
+                      <li data-at="3" style="--i:3"><code>app.js</code></li>
+                      <li data-at="3" style="--i:4"><code>locales/id.json</code></li>
+                      <li data-at="3" style="--i:5"><code>styles.css</code></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr class="r2">
+                <th scope="row"><span class="rn">Round 2</span><span class="rs">4 re-run</span><span class="rs" data-at="5">8 min 2 s</span></th>
+                <td><span class="cell none" data-at="4"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-dash"/></svg></span><span class="sr">not run</span></span></td>
+                <td><span class="cell pass" data-at="5" style="--i:0"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr">passes</span></span></td>
+                <td><span class="cell pass" data-at="5" style="--i:1"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr">passes</span></span></td>
+                <td><span class="cell pass" data-at="5" style="--i:2"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr">passes</span></span></td>
+                <td><span class="cell pass" data-at="5" style="--i:3"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-check"/></svg></span><span class="sr">passes</span></span></td>
+                <td><span class="cell none" data-at="4"><span class="face"><svg class="i" aria-hidden="true"><use href="#i-dash"/></svg></span><span class="sr">not run</span></span></td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="loop-foot">2 rounds · 19 min 16 s · 510.5 Kane credits</p>
+        </div>
+        <figcaption id="loop-cap">The loop as Kane CLI 0.10.4 recorded it on 18 November 2026, drawn from the run's <a href="examples/recorded/demo-shop/results.json">results.json</a>. The <a href="examples/recorded/demo-shop/report.html">report</a> has Kane's screenshots and replays.</figcaption>
       </figure>
     </div>
   </section>
@@ -402,5 +580,129 @@ locale-check install-skill   <span class="c"># optional: use it as a Claude Code
     </ul>
   </div>
 </footer>
+
+<script>
+/* Plays the recorded loop once when the panel is in view. The HTML above is the end state, so with
+   JavaScript off (or if anything here fails) the page shows the finished run. Every number shown
+   is in examples/recorded/demo-shop/results.json; only the playback is compressed (about 5 s). */
+(function () {
+  var loop = document.getElementById('loop');
+  if (!loop || !('IntersectionObserver' in window) || !document.documentElement.classList) return;
+  var btn = loop.querySelector('.loop-btn');
+  var btnIcon = btn.querySelector('use');
+  var btnText = btn.querySelector('span');
+  var pill = loop.querySelector('.loop-pill');
+  var pillIcon = pill.querySelector('use');
+  var pillText = pill.querySelector('.pill-text');
+  var say = loop.querySelector('.loop-say');
+  var parts = loop.querySelectorAll('[data-at]');
+  var end = { p: 9, tone: 'pass', icon: '#i-pass', pill: pillText.textContent, say: say.textContent };
+  var steps = [
+    { at: 0,    p: 0, tone: 'plain', icon: '#i-run',   pill: 'Running 6',          say: 'Kane runs the same checkout objective in all 6 languages, each in a real Chrome.' },
+    { at: 300,  p: 1, tone: 'plain', icon: '#i-run',   pill: 'Running 6',          say: 'Kane runs the same checkout objective in all 6 languages, each in a real Chrome.' },
+    { at: 1700, p: 2, tone: 'fail',  icon: '#i-fail',  pill: '4 of 6 fail',        say: 'de, ar, ja and id fail. Kane keeps a screenshot and a root cause for each.' },
+    { at: 2800, p: 3, tone: 'agent', icon: '#i-agent', pill: 'Claude Code fixing', say: "Claude Code reads Kane's evidence and changes 4 files in 54 s." },
+    { at: 3900, p: 4, tone: 'plain', icon: '#i-run',   pill: 'Re-running 4',       say: 'Kane re-runs only the 4 red languages. en and zh already passed.' },
+    { at: 5000, p: 5, tone: 'pass',  icon: '#i-pass',  pill: end.pill,             say: end.say }
+  ];
+  var timers = [];
+  var playing = false;
+
+  function show(p) {
+    loop.setAttribute('data-p', p);
+    for (var i = 0; i < parts.length; i++) {
+      parts[i].classList.toggle('on', Number(parts[i].getAttribute('data-at')) <= p);
+    }
+  }
+  function tell(s) {
+    pill.className = 'st big loop-pill ' + s.tone;
+    pillIcon.setAttribute('href', s.icon);
+    pillText.textContent = s.pill;
+    say.textContent = s.say;
+  }
+  function label(playingNow) {
+    btnText.textContent = playingNow ? 'Skip to result' : 'Replay';
+    btnIcon.setAttribute('href', playingNow ? '#i-skip' : '#i-replay');
+  }
+  function clear() {
+    for (var i = 0; i < timers.length; i++) clearTimeout(timers[i]);
+    timers = [];
+  }
+  function arm() {
+    loop.classList.add('no-t', 'is-playing');
+    show(0);
+    tell(steps[0]);
+    label(true);
+    void loop.offsetWidth;
+    loop.classList.remove('no-t');
+  }
+  function finish() {
+    clear();
+    show(end.p);
+    tell(end);
+    loop.classList.remove('is-playing');
+    loop.removeAttribute('data-p');
+    loop.removeAttribute('aria-busy');
+    playing = false;
+    label(false);
+  }
+  function play() {
+    clear();
+    arm();
+    playing = true;
+    loop.setAttribute('aria-busy', 'true');
+    label(true);
+    steps.forEach(function (s) {
+      timers.push(setTimeout(function () { show(s.p); tell(s); }, s.at));
+    });
+    timers.push(setTimeout(finish, steps[steps.length - 1].at + 600));
+  }
+  function playWhenVisible() {
+    if (!document.hidden) { play(); return; }
+    document.addEventListener('visibilitychange', function once() {
+      if (document.hidden) return;
+      document.removeEventListener('visibilitychange', once);
+      play();
+    });
+  }
+
+  var started = false;
+  function start() {
+    if (started) return;
+    started = true;
+    seen.disconnect();
+    near.disconnect();
+    playWhenVisible();
+  }
+  function inView() {
+    var r = loop.getBoundingClientRect();
+    return r.top < window.innerHeight && r.bottom > 0;
+  }
+
+  btn.hidden = false;
+  /* While armed or playing the button skips to the result; once finished it replays. */
+  btn.addEventListener('click', function () {
+    started = true;
+    seen.disconnect();
+    near.disconnect();
+    if (loop.classList.contains('is-playing')) finish(); else play();
+  });
+
+  /* Arm before the panel is seen (no flash of the end state), and play once it is mostly in view. */
+  var armed = inView();
+  if (armed) arm();
+  var near = new IntersectionObserver(function (es) {
+    if (es[0].isIntersecting && !armed && !started) { armed = true; arm(); near.disconnect(); }
+  }, { rootMargin: '0px 0px 40% 0px' });
+  var seen = new IntersectionObserver(function (es) {
+    if (es[0].intersectionRatio >= 0.4) start();
+  }, { threshold: [0, 0.4] });
+  near.observe(loop);
+  seen.observe(loop);
+  /* Fallback if the observer never reports (some embedded or background views): an armed panel that
+     is on screen plays anyway, so it never sits on the waiting frame. */
+  setTimeout(function () { if (armed && !started && inView()) start(); }, 2500);
+})();
+</script>
 </body>
 </html>
