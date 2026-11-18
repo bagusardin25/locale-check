@@ -3,90 +3,404 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Locale check</title>
-<meta name="description" content="One plain-English Kane CLI test in every language your web app ships. Claude Code fixes what breaks; Kane re-checks until green.">
+<meta name="color-scheme" content="light dark">
+<title>Locale check: one Kane test, every language</title>
+<meta name="description" content="Locale check runs one plain-English Kane CLI objective in every language your web app ships. Claude Code fixes the bugs Kane confirms, and Kane re-runs only the red languages until they pass.">
+<!-- Direction:
+  Audience: three TestMu AI engineers judging the Kane CLI hackathon, who know Kane well and give
+  the page seconds on a laptop; then developers who arrive from the repo, often on a phone.
+  They must get "what is this" and "what do I click" from the first screen. Feel: precise, calm,
+  honest; a test-run summary rather than a sales page. Assumption: judges open it at 1280-1920 px.
+  Look: "the run summary as the hero". The real report (a cropped screenshot, light and dark) is
+  the first-screen visual, as tool sites such as Linear and Vercel put product UI in the hero;
+  hierarchy comes from a few cool greys, hairlines and space, no shadows or gradients. It must read
+  as the same product as the report (examples/recorded/demo-shop/report.html), so it keeps the
+  report's rule that a hue always means something: green = passes, red = fails, magenta = the
+  coding agent, each with an icon and a word. No brand accent; links are ink and underlined.
+  The one filled button is near-black ink (white on dark), because any hue here would read as a
+  status, and six of eight studied product sites fill their call to action with a neutral.
+  Ground: cool near-white with white panels, as in the report, because Kane's screenshots (Open
+  Library's beige) are warm and must stand apart; dark theme remaps roles to a tinted near-black.
+  Type: the platform UI face with per-script fallbacks (Segoe UI, SF, Noto; Arabic, Japanese and
+  Chinese system faces), because the page must work offline with no font requests and the native
+  language names (Deutsch, العربية, 日本語, 中文) are the visual feature; the report uses the same
+  stack, so the two read as one product. Not Source Sans, Fira or Public Sans: each would need a
+  font file and none covers Arabic and CJK. Mono only for commands, locale codes and CSS.
+  Sizes: read on a laptop at arm's length and on phones; body 16-17 px at line height 1.55,
+  prose capped at 64ch; fluid scale 360-1440 px, ratio 1.2 to 1.333 (scale.mjs), used as two
+  bands: a UI band (14, 16-17, 19-23 px) and display steps (23-30, 33-54 px).
+-->
 <style>
-  /* Direction: a quiet index for judges. Same voice as the report: plain type, green/red only where they mean pass/fail. */
-  :root {
-    --bg: #f6f6f3; --surface: #ffffff; --ink: #1b1d1f; --ink-2: #4c5258; --line: #dcdcd6;
-    --accent: #0b6e4f; --fail: #b3261e; --agent: #8a2c7a;
-    --sans: "Segoe UI", system-ui, -apple-system, "Noto Sans", "Noto Sans Arabic", "Noto Sans JP", "Microsoft YaHei", sans-serif;
-    --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #121416; --surface: #1b1e21; --ink: #ecedee; --ink-2: #b2b8be; --line: #33383d; --accent: #4cc39a; --fail: #f2847b; --agent: #e08bd3; }
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 var(--sans); }
-  main { max-width: 980px; margin: 0 auto; padding: 48px 16px 64px; }
-  h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.01em; }
-  .lead { font-size: 1.15rem; color: var(--ink-2); max-width: 60ch; margin: 0 0 8px; }
-  .note { font-size: .9rem; color: var(--ink-2); margin: 0 0 32px; }
-  h2 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); margin: 40px 0 12px; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
-  a.card { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; color: inherit; text-decoration: none; }
-  a.card:hover, a.card:focus-visible { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
-  .card b { display: block; font-size: 1.1rem; margin-bottom: 6px; }
-  .card span { color: var(--ink-2); font-size: .95rem; }
-  .story { font-family: var(--mono); font-size: .85rem; color: var(--ink-2); display: block; margin-top: 10px; }
-  .story .r { color: var(--fail); } .story .g { color: var(--accent); } .story .a { color: var(--agent); }
-  .langs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-  .langs a { display: inline-block; min-width: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); text-decoration: none; text-align: center; }
-  .langs a:hover, .langs a:focus-visible { border-color: var(--accent); outline: none; }
-  pre { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font: .9rem/1.6 var(--mono); }
-  footer { margin-top: 48px; color: var(--ink-2); font-size: .9rem; }
-  footer a { color: var(--accent); }
+:root{
+  color-scheme:light dark;
+  --bg:#f3f5f8; --surface:#fff; --surface-2:#eef1f5; --line:#dde1e7; --line-strong:#7a8089;
+  --ink:#16191d; --ink-2:#4a5059;
+  --cta:#16191d; --cta-hover:#353a41; --on-cta:#fff;
+  --pass:#2f9a7a; --pass-ink:#0d6a50; --pass-tint:#e6f5ef;
+  --fail:#c8302a; --fail-ink:#a3221b; --fail-tint:#fdecea;
+  --agent:#a62f86; --agent-ink:#8a1f6c; --agent-tint:#fbeef7;
+  --focus:#16191d;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Helvetica Neue",Arial,"Geeza Pro","Noto Sans Arabic","Hiragino Sans","Yu Gothic UI","PingFang SC","Microsoft YaHei UI","Noto Sans CJK JP",sans-serif;
+  --mono:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,"Liberation Mono","Noto Sans Mono",monospace;
+  /* type: scale.mjs fluid --min-vw 360 --max-vw 1440 --min-base 16 --max-base 17 --min-ratio 1.2 --max-ratio 1.333 */
+  --t-small:0.875rem;
+  --t-body:clamp(1rem,0.9792rem + 0.0926vw,1.0625rem);
+  --t-1:clamp(1.2rem,1.1279rem + 0.3205vw,1.4163rem);
+  --t-2:clamp(1.44rem,1.2907rem + 0.6636vw,1.8879rem);
+  --t-4:clamp(2.0736rem,1.6466rem + 1.8979vw,3.3547rem);
+  /* space: 4 px unit */
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px; --s9:96px;
+  --r:10px; --r-s:6px;
+  --max:76rem; --gutter:clamp(16px,4vw,48px);
+}
+@media (prefers-color-scheme:dark){:root{
+  --bg:#121417; --surface:#1b1e22; --surface-2:#22262b; --line:#2e3339; --line-strong:#6b727c;
+  --ink:#eceff3; --ink-2:#c0c6ce;
+  --cta:#eceff3; --cta-hover:#cfd5dc; --on-cta:#121417;
+  --pass:#5cc29f; --pass-ink:#7fd8b8; --pass-tint:#14271f;
+  --fail:#e5574a; --fail-ink:#ff9d90; --fail-tint:#2d1715;
+  --agent:#e07cc6; --agent-ink:#f2a6dc; --agent-tint:#2a1724;
+  --focus:#eceff3;
+}}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:var(--t-body);line-height:1.55}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:0.18em}
+a:hover{text-decoration-thickness:2px}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:2px}
+code,pre,kbd{font-family:var(--mono);font-size:0.9em}
+p{margin:0}
+h1,h2,h3{margin:0;font-weight:700;text-wrap:balance}
+strong,b{font-weight:600}
+
+.skip{position:absolute;left:var(--s4);top:-100px;padding:var(--s3) var(--s4);background:var(--cta);color:var(--on-cta);border-radius:var(--r-s);z-index:10}
+.skip:focus{top:var(--s3)}
+
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+
+/* header */
+.top{border-bottom:1px solid var(--line);background:var(--surface)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--s5);min-height:60px}
+.mark{display:inline-flex;align-items:center;gap:var(--s2);font-weight:700;text-decoration:none;min-height:44px}
+.mark svg{width:20px;height:20px;flex:none}
+.nav{display:flex;gap:var(--s1);margin:0;padding:0;list-style:none}
+.nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 var(--s3);font-size:var(--t-small);color:var(--ink-2);text-decoration:none;border-radius:var(--r-s)}
+.nav a:hover{color:var(--ink);text-decoration:underline}
+@media (max-width:47.99rem){.nav .in-page{display:none}}
+
+/* hero */
+.hero{padding:var(--s7) 0 var(--s8)}
+.hero .wrap{display:grid;gap:var(--s7);align-items:center}
+@media (min-width:56rem){.hero .wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:var(--s8)}}
+.eyebrow{font-size:var(--t-small);color:var(--ink-2);margin-bottom:var(--s4)}
+h1{font-size:var(--t-4);line-height:1.08;letter-spacing:-0.02em;max-width:14ch}
+.lead{font-size:var(--t-1);line-height:1.45;color:var(--ink-2);margin-top:var(--s5);max-width:34em}
+.actions{display:flex;gap:var(--s3);margin-top:var(--s6)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);min-height:48px;padding:0 var(--s5);border-radius:var(--r-s);font-weight:600;text-decoration:none;border:1px solid transparent}
+.btn-primary{background:var(--cta);color:var(--on-cta);border-color:var(--cta)}
+.btn-primary:hover{background:var(--cta-hover);border-color:var(--cta-hover)}
+.btn-quiet{color:var(--ink);border-color:var(--line-strong);background:transparent}
+.btn-quiet:hover{background:var(--surface-2);text-decoration:none}
+.btn svg{width:18px;height:18px;flex:none}
+@media (max-width:29.99rem){.actions{flex-direction:column}.btn{width:100%}}
+.note{color:var(--ink-2);margin-top:var(--s4);max-width:46ch}
+
+.shot{margin:0}
+.shot a{display:block;border-radius:var(--r);border:1px solid var(--line);overflow:hidden;background:var(--surface)}
+.shot a:focus-visible{outline-offset:4px;border-radius:var(--r)}
+.shot figcaption{font-size:var(--t-small);color:var(--ink-2);margin-top:var(--s3)}
+
+/* sections */
+.section{padding:var(--s8) 0;border-top:1px solid var(--line)}
+@media (min-width:56rem){.section{padding:var(--s9) 0}}
+h2{font-size:var(--t-2);line-height:1.2;letter-spacing:-0.01em;max-width:30ch}
+.section-lead{color:var(--ink-2);margin-top:var(--s3);max-width:64ch}
+h3{font-size:var(--t-1);line-height:1.3}
+
+/* status chips: icon + word, never colour alone */
+.trail{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2);margin:var(--s3) 0 0;padding:0;list-style:none;font-size:var(--t-small)}
+.trail li{display:inline-flex;align-items:center;gap:var(--s2)}
+.trail li:not(:last-child)::after{content:"\2192";color:var(--ink-2)}
+.st{display:inline-flex;align-items:center;gap:var(--s2);padding:var(--s1) var(--s3) var(--s1) var(--s2);border-radius:999px;border:1px solid;font-weight:600;line-height:1.5}
+.st svg{width:16px;height:16px;flex:none}
+.st.pass{color:var(--pass-ink);background:var(--pass-tint);border-color:var(--pass)}
+.st.fail{color:var(--fail-ink);background:var(--fail-tint);border-color:var(--fail)}
+.st.agent{color:var(--agent-ink);background:var(--agent-tint);border-color:var(--agent)}
+.st.plain{color:var(--ink);background:var(--surface-2);border-color:var(--line-strong);padding-left:var(--s3)}
+
+/* recorded runs */
+.runs{list-style:none;margin:var(--s7) 0 0;padding:0}
+.run{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"title" "trail" "body" "links";row-gap:var(--s3);padding:var(--s6) 0;border-top:1px solid var(--line)}
+.run:first-child{border-top:0;padding-top:0}
+.run > div:first-child{display:contents}
+.run h3{grid-area:title}
+.run .trail{grid-area:trail;margin:0}
+.run .run-body{grid-area:body;margin-top:var(--s3)}
+.run .run-links{grid-area:links;align-self:start;margin-top:0}
+@media (min-width:56rem){.run{grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-areas:"title body" "trail body" "links body";grid-template-rows:auto auto 1fr;column-gap:var(--s8)}.run .run-body{margin-top:0}.run .run-links{margin-top:var(--s2)}}
+.run-body{max-width:64ch}
+.run-body p+p,.run-body ul+p,.run-body p+ul{margin-top:var(--s3)}
+.run-links{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s5);margin-top:var(--s4)}
+.run-links a{display:inline-flex;align-items:center;min-height:44px;font-weight:600}
+.bugs{margin:0;padding:0;list-style:none}
+.bugs li{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:var(--s3);padding:var(--s2) 0;border-top:1px solid var(--line)}
+.bugs li:last-child{border-bottom:1px solid var(--line)}
+.bugs .lang{font-weight:600}
+.bugs .lang code{display:block;font-weight:400;color:var(--ink-2);font-size:var(--t-small)}
+@media (max-width:29.99rem){.bugs li{grid-template-columns:1fr;gap:0}.bugs .lang code{display:inline;margin-inline-start:var(--s2)}}
+
+/* real app */
+.wild{display:grid;gap:var(--s6);margin-top:var(--s6);align-items:start}
+@media (min-width:56rem){.wild{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s8)}}
+.wild-text p+p{margin-top:var(--s3)}
+.quote{margin:0;padding:var(--s4) var(--s5);border-inline-start:3px solid var(--fail);background:var(--surface);border-radius:0 var(--r-s) var(--r-s) 0;font-size:var(--t-1);line-height:1.4}
+.quote cite{display:block;font-style:normal;font-size:var(--t-small);color:var(--ink-2);margin-top:var(--s2)}
+.wild figure{margin:0}
+.wild figure img{border:1px solid var(--line);border-radius:var(--r)}
+.wild figcaption{font-size:var(--t-small);color:var(--ink-2);margin-top:var(--s3)}
+
+/* demo shop */
+.langs{display:grid;grid-template-columns:repeat(auto-fit,minmax(9.5rem,1fr));gap:var(--s3);margin:var(--s6) 0 0;padding:0;list-style:none}
+.langs a{display:flex;flex-direction:column;justify-content:center;min-height:64px;padding:var(--s3) var(--s4);background:var(--surface);border:1px solid var(--line-strong);border-radius:var(--r);text-decoration:none}
+.langs a:hover{border-color:var(--ink);background:var(--surface-2)}
+.langs .name{font-size:var(--t-1);font-weight:700;line-height:1.25;align-self:flex-start;unicode-bidi:isolate}
+.langs code{font-size:var(--t-small);color:var(--ink-2)}
+
+/* how it works */
+.steps{list-style:none;margin:var(--s7) 0 0;padding:0;counter-reset:step}
+.steps li{counter-increment:step;display:grid;grid-template-columns:2.5rem minmax(0,1fr);gap:var(--s2) var(--s4);padding:var(--s5) 0;border-top:1px solid var(--line)}
+.steps li::before{content:counter(step);grid-row:span 3;font-size:var(--t-2);font-weight:700;line-height:1.1;color:var(--ink-2)}
+@media (min-width:56rem){
+  .steps li{grid-template-columns:3rem minmax(0,6fr) minmax(0,5fr);column-gap:var(--s6)}
+  .steps li::before{grid-row:span 2}
+  .steps .cmd{grid-column:3;grid-row:1 / span 2;align-self:start}
+}
+.steps p{color:var(--ink-2);max-width:60ch}
+.cmd{display:inline-block;justify-self:start;font-family:var(--mono);font-size:var(--t-small);padding:var(--s2) var(--s3);background:var(--surface);border:1px solid var(--line);border-radius:var(--r-s);overflow-wrap:anywhere}
+
+.install{display:grid;gap:var(--s5);margin-top:var(--s8)}
+@media (min-width:56rem){.install{grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s8)}}
+.install p{color:var(--ink-2);max-width:60ch}
+.install p+p{margin-top:var(--s3)}
+pre{margin:0;padding:var(--s4) var(--s5);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow-x:auto;font-size:var(--t-small);line-height:1.7}
+pre code{font-size:inherit}
+pre .c{color:var(--ink-2)}
+
+/* footer */
+.foot{border-top:1px solid var(--line);padding:var(--s6) 0 var(--s7);font-size:var(--t-small);color:var(--ink-2)}
+.foot ul{display:flex;flex-wrap:wrap;gap:var(--s1) var(--s5);margin:0;padding:0;list-style:none}
+.foot a{display:inline-flex;align-items:center;min-height:44px;color:var(--ink)}
+.foot li:not(:has(a)){display:inline-flex;align-items:center;min-height:44px}
+
+@media (forced-colors:active){.st,.btn,.langs a{border:1px solid CanvasText}.btn-primary{border-width:2px}}
+@media (prefers-reduced-motion:no-preference){a,.btn{transition:background-color .12s,border-color .12s,color .12s}}
 </style>
 </head>
 <body>
-<main>
-  <h1>Locale check</h1>
-  <p class="lead">One plain-English Kane CLI test, run in every language your web app ships. Claude Code fixes what breaks, and Kane re-checks only the red languages until everything passes.</p>
-  <p class="note">Everything below is a recorded run: real Kane verdicts, screenshots and replay links. Nothing on these pages calls Kane or needs an account.</p>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-pass" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M4.5 8.2l2.3 2.3 4.7-4.9" fill="none" stroke="var(--bg)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-fail" viewBox="0 0 16 16"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M5.3 5.3l5.4 5.4M10.7 5.3l-5.4 5.4" fill="none" stroke="var(--bg)" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-agent" viewBox="0 0 16 16"><path d="M10.6 2.6l2.8 2.8-7.6 7.6-3.4.6.6-3.4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 20 20"><g fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="8"/><path d="M2 10h16M10 2c2.4 2.3 3.4 5 3.4 8s-1 5.7-3.4 8c-2.4-2.3-3.4-5-3.4-8s1-5.7 3.4-8z"/></g></symbol>
+</svg>
 
-  <h2>See it work</h2>
-  <div class="cards">
-    <a class="card" href="examples/recorded/demo-shop/report.html">
-      <b>The loop on a six-language shop</b>
-      <span>Kane finds four locale bugs, Claude Code fixes them in one round, and Kane re-checks.</span>
-      <span class="story"><span class="r">round 1: 4 of 6 fail</span> → <span class="a">claude: 4 files</span> → <span class="g">round 2: 6/6 pass</span></span>
-    </a>
-    <a class="card" href="examples/recorded/hebrew-build-loop/report.html">
-      <b>The agent adds Hebrew; Kane rejects it</b>
-      <span>A translation-only change hides Continue in right-to-left. Kane fails it, and Claude fixes it from Kane's screenshot.</span>
-      <span class="story"><span class="a">claude builds he</span> → <span class="r">he, ar fail</span> → <span class="a">fix</span> → <span class="g">pass</span></span>
-    </a>
-    <a class="card" href="hackathon/oss/openlibrary/kane-ar-homepage.jpg">
-      <b>A real bug: Open Library in Arabic</b>
-      <span>Kane: "Arabic homepage retains left-to-right layout." The page sets <code>lang="ar"</code> but never <code>dir="rtl"</code>.</span>
-    </a>
-    <a class="card" href="examples/recorded/blind-test-v2/report.html">
-      <b>Blind tests, reported as they came out</b>
-      <span>A generic objective against bugs planted by another agent: one of two hidden bugs caught, one missed. This is round 2; round 1 is linked from the README.</span>
-    </a>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="mark" href="./" aria-label="Locale check, top of page"><svg aria-hidden="true"><use href="#i-globe"/></svg>Locale check</a>
+    <nav aria-label="On this page">
+      <ul class="nav">
+        <li class="in-page"><a href="#runs">Recorded runs</a></li>
+        <li class="in-page"><a href="#real-app">Open Library bug</a></li>
+        <li class="in-page"><a href="#how">How it works</a></li>
+        <li><a href="https://github.com/freddy-tama/locale-check">GitHub</a></li>
+      </ul>
+    </nav>
   </div>
+</header>
 
-  <h2>Try the demo shop (it has the bugs in it)</h2>
-  <ul class="langs" aria-label="Demo shop languages">
-    <li><a href="examples/demo-shop/?lang=en" hreflang="en">English</a></li>
-    <li><a href="examples/demo-shop/?lang=de" hreflang="de" lang="de">Deutsch</a></li>
-    <li><a href="examples/demo-shop/?lang=ar" hreflang="ar" lang="ar" dir="rtl">العربية</a></li>
-    <li><a href="examples/demo-shop/?lang=ja" hreflang="ja" lang="ja">日本語</a></li>
-    <li><a href="examples/demo-shop/?lang=id" hreflang="id" lang="id">Indonesia</a></li>
-    <li><a href="examples/demo-shop/?lang=zh" hreflang="zh" lang="zh">中文</a></li>
-  </ul>
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="wrap">
+      <div>
+        <p class="eyebrow">Kane CLI Online Hackathon entry · TestMu AI · November 2026</p>
+        <h1 id="hero-title">One Kane test. Every language your app ships.</h1>
+        <p class="lead">Locale check runs one plain-English Kane CLI objective in every language of your web app, in a real Chrome. Claude Code fixes the bugs Kane confirms, and Kane re-runs only the red languages until they pass.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="examples/recorded/demo-shop/report.html">Open the recorded run</a>
+          <a class="btn btn-quiet" href="https://github.com/freddy-tama/locale-check">View the source</a>
+          <!-- DEMO VIDEO SPOT: the video is not uploaded yet. When it is, make it this quiet
+               second action ("Watch the demo video", with the real link) and keep the source
+               link in the header only. Do not add a link before the video exists. -->
+        </div>
+        <p class="note">Recorded runs are static pages with Kane's real verdicts, screenshots and replays. Nothing on them calls Kane, and you need no account.</p>
+      </div>
+      <figure class="shot">
+        <a href="examples/recorded/demo-shop/report.html">
+          <picture>
+            <source srcset="docs/report-loop-dark.webp" media="(prefers-color-scheme: dark)">
+            <img src="docs/report-loop-light.webp" width="1200" height="1200" fetchpriority="high"
+                 alt="The report's panel 'The loop, round by round'. Round 1: en and zh pass; de, ar, ja and id fail. Then: claude fixed de, ar, ja and id, 4 files changed in 54 s. Round 2: de, ar, ja and id pass.">
+          </picture>
+        </a>
+        <figcaption>The report from the recorded run: four languages red in round 1, Claude Code's fix, all four green in round 2.</figcaption>
+      </figure>
+    </div>
+  </section>
 
-  <h2>Run it on your app</h2>
-  <pre>npm install -g @testmuai/kane-cli github:freddy-tama/locale-check
+  <section class="section" id="runs" aria-labelledby="runs-title">
+    <div class="wrap">
+      <h2 id="runs-title">Recorded runs: what Kane caught, and what it missed</h2>
+      <p class="section-lead">Each report is the page Locale check wrote after a real run, with Kane's screenshot, root cause and step-by-step replay for every language.</p>
+
+      <ol class="runs">
+        <li class="run">
+          <div>
+            <h3>The loop on a six-language shop</h3>
+            <ul class="trail" aria-label="Outcome">
+              <li><span class="st fail"><svg aria-hidden="true"><use href="#i-fail"/></svg>4 of 6 fail</span></li>
+              <li><span class="st agent"><svg aria-hidden="true"><use href="#i-agent"/></svg>Claude Code: 4 files, 54 s</span></li>
+              <li><span class="st pass"><svg aria-hidden="true"><use href="#i-pass"/></svg>6 of 6 pass</span></li>
+            </ul>
+            <div class="run-links"><a href="examples/recorded/demo-shop/report.html">Open the shop report</a></div>
+          </div>
+          <div class="run-body">
+            <p>Round 1 found four locale bugs:</p>
+            <ul class="bugs">
+              <li><span class="lang"><span lang="de">Deutsch</span> <code>de</code></span><span>The payment card clips the Place order button.</span></li>
+              <li><span class="lang"><span lang="ar" dir="rtl">العربية</span> <code>ar</code></span><span>In right-to-left, the Continue button is covered.</span></li>
+              <li><span class="lang"><span lang="ja">日本語</span> <code>ja</code></span><span>A date typed in the page's own YYYY/MM/DD format is rejected.</span></li>
+              <li><span class="lang"><span lang="id">Indonesia</span> <code>id</code></span><span>A button shows a raw translation key.</span></li>
+            </ul>
+            <p>Claude Code changed 4 files in 54 seconds from Kane's evidence. Kane re-ran the four red languages, and all six now pass.</p>
+          </div>
+        </li>
+
+        <li class="run">
+          <div>
+            <h3>An agent adds Hebrew, and Kane rejects it</h3>
+            <ul class="trail" aria-label="Outcome">
+              <li><span class="st agent"><svg aria-hidden="true"><use href="#i-agent"/></svg>Claude Code adds Hebrew</span></li>
+              <li><span class="st fail"><svg aria-hidden="true"><use href="#i-fail"/></svg>he, ar fail</span></li>
+              <li><span class="st agent"><svg aria-hidden="true"><use href="#i-agent"/></svg>One fix</span></li>
+              <li><span class="st pass"><svg aria-hidden="true"><use href="#i-pass"/></svg>he, ar pass</span></li>
+            </ul>
+            <div class="run-links"><a href="examples/recorded/hebrew-build-loop/report.html">Open the Hebrew report</a></div>
+          </div>
+          <div class="run-body">
+            <p>Claude Code was asked to add Hebrew as a translation-only change. Kane rejected Hebrew and Arabic: the Continue button was covered.</p>
+            <p>Claude read Kane's screenshot and switched the help pill from <code>left</code> to <code>inset-inline-start</code>. Kane re-ran both languages and passed them.</p>
+          </div>
+        </li>
+
+        <li class="run">
+          <div>
+            <h3>A blind test: one hidden bug caught, one missed</h3>
+            <ul class="trail" aria-label="Outcome">
+              <li><span class="st plain">2 hidden bugs</span></li>
+              <li><span class="st plain">1 caught, 1 missed</span></li>
+            </ul>
+            <div class="run-links">
+              <a href="examples/recorded/blind-test-v1/report.html">Round 1 report</a>
+              <a href="examples/recorded/blind-test-v2/report.html">Round 2 report</a>
+            </div>
+          </div>
+          <div class="run-body">
+            <p>A separate agent planted bugs that the objective's author was not told about, and a generic objective ran against them over two rounds.</p>
+            <p><strong>Caught:</strong> a German date hint showing raw <code>{Format}</code> placeholders.</p>
+            <p><strong>Missed:</strong> Chinese shipping of ¥2,000 on a ¥198 mug. The total still added up, so nothing on the page looked broken to the objective.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" id="real-app" aria-labelledby="real-title">
+    <div class="wrap">
+      <h2 id="real-title">A real bug in a real app: Open Library in Arabic</h2>
+      <div class="wild">
+        <div class="wild-text">
+          <blockquote class="quote">
+            <p>“Arabic homepage retains left-to-right layout.”</p>
+            <cite>Kane, on openlibrary.org (Internet Archive)</cite>
+          </blockquote>
+          <p style="margin-top:var(--s5)">The page sets <code>lang="ar"</code> but never <code>dir="rtl"</code>, so the Arabic text sits in a left-to-right page.</p>
+          <p>The issue is drafted and not filed yet.</p>
+        </div>
+        <figure>
+          <img src="hackathon/oss/openlibrary/kane-ar-homepage.jpg" width="1920" height="1080" loading="lazy" decoding="async"
+               alt="Kane's screenshot of the Open Library homepage in Arabic. The text is Arabic, but the logo sits on the left and the menu, search and shelves run left to right.">
+          <figcaption>Kane's screenshot. <a href="hackathon/oss/openlibrary/kane-ar-homepage.jpg">Open it full size (1920 × 1080)</a></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="demo-shop" aria-labelledby="shop-title">
+    <div class="wrap">
+      <h2 id="shop-title">Try the demo shop, bugs included</h2>
+      <p class="section-lead">This is the six-language shop from the recorded runs, with its bugs still in place. Pick a language and go to checkout.</p>
+      <ul class="langs" aria-label="Demo shop languages">
+        <li><a href="examples/demo-shop/?lang=en" hreflang="en"><span class="name">English</span><code>en</code></a></li>
+        <li><a href="examples/demo-shop/?lang=de" hreflang="de"><span class="name" lang="de">Deutsch</span><code>de</code></a></li>
+        <li><a href="examples/demo-shop/?lang=ar" hreflang="ar"><span class="name" lang="ar" dir="rtl">العربية</span><code>ar</code></a></li>
+        <li><a href="examples/demo-shop/?lang=ja" hreflang="ja"><span class="name" lang="ja">日本語</span><code>ja</code></a></li>
+        <li><a href="examples/demo-shop/?lang=id" hreflang="id"><span class="name" lang="id">Indonesia</span><code>id</code></a></li>
+        <li><a href="examples/demo-shop/?lang=zh" hreflang="zh"><span class="name" lang="zh">中文</span><code>zh</code></a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" id="how" aria-labelledby="how-title">
+    <div class="wrap">
+      <h2 id="how-title">How it works</h2>
+      <ol class="steps">
+        <li>
+          <h3>Describe the check once</h3>
+          <p>Give it your app's URL with a <code>{locale}</code> placeholder, your locales and one plain-English objective.</p>
+          <code class="cmd">locale-check init</code>
+        </li>
+        <li>
+          <h3>Run it in every language</h3>
+          <p>Kane CLI runs the objective once per language in a real Chrome. The report marks each language red or green, with Kane's screenshot, root cause and step-by-step replay.</p>
+          <code class="cmd">locale-check run</code>
+        </li>
+        <li>
+          <h3>Let Claude Code fix the red ones</h3>
+          <p>Failures Kane confirms as app bugs go to Claude Code with Kane's evidence. Claude edits the code, and Kane re-runs only the red languages until they pass.</p>
+          <code class="cmd">locale-check loop</code>
+        </li>
+      </ol>
+
+      <div class="install" id="install">
+        <div>
+          <h3>Run it on your app</h3>
+          <p style="margin-top:var(--s3)">You need a Kane CLI login and Kane credits. The 5&#8209;step checkout objective used about 45–60 credits and 1.5–3.5 minutes per language.</p>
+          <p>To let Claude Code drive it, install it as a skill.</p>
+        </div>
+        <pre aria-label="Install and run commands"><code>npm install -g @testmuai/kane-cli github:freddy-tama/locale-check
 kane-cli login
-locale-check init            # url with {locale}, your locales, one objective
-locale-check run             # Kane in every locale → locale-check-report.html
-locale-check loop            # Claude Code fixes the red ones, Kane re-checks
-locale-check install-skill   # or let Claude Code drive it as a skill</pre>
-
-  <footer>
-    <a href="https://github.com/freddy-tama/locale-check">Source on GitHub</a> · MIT · Built for the Kane CLI Online Hackathon (TestMu AI), November 2026 · #KaneCLIHackDay
-  </footer>
+locale-check init
+locale-check run
+locale-check loop
+locale-check install-skill   <span class="c"># optional: use it as a Claude Code skill</span></code></pre>
+      </div>
+    </div>
+  </section>
 </main>
+
+<footer class="foot">
+  <div class="wrap">
+    <ul>
+      <li><a href="https://github.com/freddy-tama/locale-check">Source on GitHub</a></li>
+      <li>MIT licence</li>
+      <li>Built for TestMu AI's Kane CLI Online Hackathon, November 2026</li>
+      <li>#KaneCLIHackDay</li>
+    </ul>
+  </div>
+</footer>
 </body>
 </html>
