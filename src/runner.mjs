@@ -1,5 +1,6 @@
 // One round: run the objective in each selected locale (a few at a time), save results, write the grid.
-import { mkdirSync } from 'node:fs';
+import { mkdirSync, rmdirSync, statSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join, relative } from 'node:path';
 import { buildObjective, fill, languageName } from './config.mjs';
 import { extractScreenshot, flushProfiles, runKane } from './kane.mjs';
@@ -33,14 +34,20 @@ export async function runRound(cfg, { only, failedOnly = false, log = console.lo
   // Launch gate: kane-cli picks the first free CDP port (9222-9230) before its Chrome binds it,
   // so two runs starting together attach to the same browser. Start the next run only after
   // the previous run's browser is up (its first step event), or after 45 s at most.
+  // The same race exists between two locale-check processes, so the gate also takes a
+  // machine-wide lock (an atomic mkdir in the temp folder) while a browser starts.
   let gate = Promise.resolve();
   const acquireLaunch = () => {
     let release;
     const mine = new Promise((r) => { release = r; });
     const prev = gate;
     gate = prev.then(() => mine);
-    const timer = setTimeout(() => release(), 45000);
-    return prev.then(() => () => { clearTimeout(timer); release(); });
+    return prev.then(async () => {
+      const unlock = await machineLock();
+      const done = () => { clearTimeout(timer); unlock(); release(); };
+      const timer = setTimeout(done, 45000);
+      return done;
+    });
   };
   const worker = async () => {
     while (queue.length) {
@@ -103,6 +110,21 @@ export async function runRound(cfg, { only, failedOnly = false, log = console.lo
   saveResults(cfg, results);
   writeReport(cfg, results);
   return { results, ran: locales };
+}
+
+const LOCK = join(tmpdir(), 'locale-check-browser-launch.lock');
+async function machineLock() {
+  for (;;) {
+    try {
+      mkdirSync(LOCK);
+      let held = true;
+      return () => { if (held) { held = false; try { rmdirSync(LOCK); } catch { /* already gone */ } } };
+    } catch {
+      // A lock older than 60 s belongs to a crashed process: take it over.
+      try { if (Date.now() - statSync(LOCK).mtimeMs > 60000) rmdirSync(LOCK); } catch { /* raced */ }
+      await new Promise((r) => setTimeout(r, 500));
+    }
+  }
 }
 
 // What we keep of an earlier verdict, so the report can show "before the fix".

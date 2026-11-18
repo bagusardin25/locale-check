@@ -1,0 +1,11 @@
+{
+  "app": "Hearth & Kiln demo shop (generic objective)",
+  "url": "http://127.0.0.1:8765/examples/demo-shop/?lang={locale}",
+  "locales": ["en", "de", "ar", "ja", "id", "zh"],
+  "source": ["examples/demo-shop"],
+  "objective": "1. Open any product, add it to the cart, open the cart and start checkout.\n2. Go through every checkout step until the order is placed. On each step, fill in realistic details for a customer in a {language}-speaking country. Where a field shows an expected format or an example, follow it exactly.\n3. On each page, before you click its main button, verify that the page is fully usable in {language}: the button is fully visible and nothing covers it, the button and the page's labels and messages are written in {language} (no code-like keys, no leftover placeholder text), and every value you typed in the format the page asked for was accepted. Then click it.\n4. Verify that an order confirmation appears.\nIf a verification fails, fail the test at that point.",
+  "outDir": ".locale-check-generic",
+  "report": ".locale-check-generic/report.html",
+  "concurrency": 3,
+  "_note": "Written and committed before a separate agent planted a fifth bug the author was not told about. It names no planted bug, element or CSS property."
+}
