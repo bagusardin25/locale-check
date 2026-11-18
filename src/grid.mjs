@@ -231,6 +231,7 @@ function tile(cfg, r, l, s, n) {
   <div class="tile-body">
     ${verdict(r, s)}
     ${retries(r.earlierAttempts)}
+    ${before(cfg, r.history)}
     ${r.summary ? `<details class="more"${s === 'passed' ? ' open' : ''}><summary>Kane's full summary</summary><div class="pre" dir="auto">${esc(String(r.summary).trim())}</div></details>` : ''}
   </div>
   <footer class="tile-meta">${meta.map((m) => `<span>${m}</span>`).join('')}${replay ? `<a class="replay" href="${esc(replay)}" target="_blank" rel="noopener noreferrer">Kane replay${icon('external')}<span class="sr"> for ${esc(n.english)}, step by step (opens in a new tab)</span></a>` : ''}</footer>
@@ -270,6 +271,25 @@ function retries(earlier) {
     return `attempt ${i + 1} ${what}${url ? ` · <a href="${esc(url)}" target="_blank" rel="noopener noreferrer">replay<span class="sr"> of attempt ${i + 1}, opens in a new tab</span></a>` : ''}`;
   });
   return `<p class="retry">${icon('retry')}<span>Kane retried: ${parts.join('; ')}.</span></p>`;
+}
+
+// Earlier rounds for this language (newest first): the red verdict from before a fix.
+function before(cfg, history) {
+  const red = (history || []).filter((h) => h.status === 'failed').slice().reverse();
+  if (!red.length) return '';
+  return red.map((h) => {
+    const p = h.screenshot ? join(cfg.outDir, h.screenshot) : null;
+    const img = p && existsSync(p)
+      ? `<img loading="lazy" src="data:image/jpeg;base64,${readFileSync(p).toString('base64')}" alt="Kane's screenshot from round ${esc(h.round)}, before the fix">`
+      : '';
+    const url = safeUrl(h.testUrl);
+    return `<details class="before" open><summary>${icon('retry')}Before the fix · round ${esc(h.round)} · ${STATUS.failed.word}</summary>
+      <p class="bug" dir="auto">${esc(h.bugTitle || h.oneLiner || '')}</p>
+      ${h.rootCause ? `<p class="note" dir="auto">${esc(h.rootCause)}</p>` : ''}
+      ${img}
+      ${url ? `<p class="note"><a href="${esc(url)}" target="_blank" rel="noopener noreferrer">Kane replay of round ${esc(h.round)}<span class="sr"> (opens in a new tab)</span></a></p>` : ''}
+    </details>`;
+  }).join('');
 }
 
 // ---------- small helpers ----------
@@ -500,6 +520,11 @@ h1 .score{font-size:var(--t-5);font-weight:700;line-height:1.04;letter-spacing:-
 .note{margin:0;color:var(--ink-2);font-size:var(--t-small)}
 .retry{display:flex;align-items:flex-start;gap:var(--s2);margin:var(--s1) 0 0;padding:var(--s2) var(--s3);border-radius:var(--r-s);background:var(--warn-tint);color:var(--ink);font-size:var(--t-small)}
 .retry .i{width:1.2em;height:1.2em;margin-top:.15em;color:var(--warn-ink)}
+.before{margin:var(--s2) 0 0;padding:var(--s2) var(--s3);border-radius:var(--r-s);background:var(--fail-tint);border:1px dashed var(--fail);font-size:var(--t-small)}
+.before summary{cursor:pointer;display:flex;align-items:center;gap:var(--s2);font-weight:600;color:var(--fail-ink)}
+.before summary .i{width:1.1em;height:1.1em}
+.before .bug{margin:var(--s2) 0 var(--s1)}
+.before img{display:block;width:100%;height:auto;margin-top:var(--s2);border-radius:var(--r-s);border:1px solid var(--line)}
 .tile-meta{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s1) var(--s4);padding:var(--s3) var(--s5);border-top:1px solid var(--line);color:var(--ink-3);font-size:var(--t-small);font-variant-numeric:tabular-nums}
 .replay{margin-inline-start:auto;display:inline-flex;align-items:center;gap:var(--s2);min-height:40px;padding:0 var(--s4);border:1.5px solid var(--ink);border-radius:999px;color:var(--ink);font-weight:600;text-decoration:none}
 .replay:hover{background:var(--ink);color:var(--surface)}

@@ -1,0 +1,1066 @@
+{
+  "tool": "locale-check",
+  "app": "Hearth & Kiln demo shop",
+  "url": "http://127.0.0.1:8765/examples/demo-shop/?lang={locale}",
+  "objective": "1. Open any product, add it to the cart, open the cart and click the checkout button.\n2. Shipping step: fill in realistic test details for a customer in a {language}-speaking country. Verify that this step's Continue button is fully visible and that no other element overlaps it, then click it.\n3. Delivery step: type a delivery date about one week from today, in exactly the format the hint on the page shows. Verify that this step's Continue button is fully visible, that no other element overlaps it, and that its label is written in {language} words rather than a code-like key with dots (such as section.some_label). Then click it.\n4. Review step: keep the default payment method. Verify that the Place order button is fully visible, not cut off by its card, and that no other element overlaps it, then click it.\n5. Verify that the order confirmation with an order number appears.\nIf any verification fails, fail the test at that step. Do not work around a hidden or covered button with the keyboard.",
+  "checks": [],
+  "locales": {
+    "ar": {
+      "locale": "ar",
+      "language": "Arabic",
+      "nativeLanguage": "العربية",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=ar",
+      "status": "passed",
+      "oneLiner": "placed an order on the demo shop",
+      "summary": "Added a product to the cart and proceeded to checkout on the Arabic-language demo shop.\nEntered realistic test shipping details for a customer in an Arabic-speaking country and continued through shipping.\nEntered a delivery date in the format requested by the page, then continued to review.\nKept the default payment method and placed the order.\nThe order was confirmed successfully with order number HK-436265.",
+      "reason": "Objective completed",
+      "reasonCode": "success.complete",
+      "bugTitle": null,
+      "rootCause": null,
+      "suggestion": null,
+      "severity": null,
+      "category": null,
+      "confirmedBug": null,
+      "family": null,
+      "credits": 56.3,
+      "duration": 206.3,
+      "testUrl": null,
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=ar"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "analyze: any verification fails"
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Clicking the first product link in the product list"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking add it to the cart"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "click: Opening the cart"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "click: إتمام الشراء يجري الضغط عليه"
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"الاسم الكامل\"; type \"عنوان الشارع\"; type \"المدينة\";"
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"سارة أحمد\" into \"الاسم الكامل\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"شارع الشيخ زايد، مبنى 25، شقة 12\" into \"عنوان الشارع\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"دبي\" into \"المدينة\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "type: Type \"00000\" into \"الرمز البريدي\""
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "type: Type \"+971501234567\" into \"رقم الهاتف\""
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "analyze: no other element overlaps this step's Continue button"
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "assert: this step's Continue button is fully visible and no other element overlaps it"
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "click: Clicking Shipping step Continue button (متابعة)"
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "type: Typing preferred delivery date 25-11-2026"
+        },
+        {
+          "step": 19,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, \"this step's Continue button label is written in Arabic "
+        },
+        {
+          "step": 20,
+          "status": "done",
+          "remark": "assert: this step's Continue button is fully visible, no other element overlaps it, and "
+        },
+        {
+          "step": 21,
+          "status": "done",
+          "remark": "click: Clicking the Delivery step Continue button to proceed to payment"
+        },
+        {
+          "step": 22,
+          "status": "done",
+          "remark": "analyze: no other element overlaps the Place order button"
+        },
+        {
+          "step": 23,
+          "status": "done",
+          "remark": "assert: the Place order button is fully visible, not cut off by its card, and no other e"
+        },
+        {
+          "step": 24,
+          "status": "done",
+          "remark": "click: Clicking the Place order button confirming your order"
+        },
+        {
+          "step": 25,
+          "status": "done",
+          "remark": "wait: PRIMARY: wait for the order confirmation heading to appear"
+        },
+        {
+          "step": 26,
+          "status": "done",
+          "remark": "analyze: the order confirmation with an order number appears"
+        },
+        {
+          "step": 27,
+          "status": "done",
+          "remark": "assert: the order confirmation with an order number appears"
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 260,
+      "ndjson": "runs/2026-11-18T00-19-02-392/ar.ndjson",
+      "screenshot": "runs/2026-11-18T00-19-02-392/ar.jpg",
+      "runAt": "2026-11-18T00:23:23.194Z",
+      "round": 2,
+      "history": [
+        {
+          "round": 1,
+          "status": "failed",
+          "oneLiner": "The Shipping checkout form does not present a fully visible Continue button, so the customer cannot proceed to delivery.",
+          "bugTitle": "Shipping Continue button is absent from the checkout form",
+          "rootCause": "After the shipping details were entered, the checkout form ended without showing the Continue button required to move to the next step. The screen had available space below the form, and the button was not visible there.",
+          "suggestion": "Restore the Shipping-step Continue button in the visible checkout form and add a viewport regression test confirming it remains visible and clickable above the fixed cart bar.",
+          "screenshot": "runs/2026-11-18T00-07-48-472/ar.jpg",
+          "ndjson": "runs/2026-11-18T00-07-48-472/ar.ndjson",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7NZQRKFHWVXK8J5G9473YY2/dashboard/share/US_IO346FHSVQEKVGG8NCJOJ5O9ET542BO0AWXBHINV2RPE0YQJIZOWNUFQZO8H7CHT?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 27.1,
+          "duration": 111
+        }
+      ]
+    },
+    "en": {
+      "locale": "en",
+      "language": "English",
+      "nativeLanguage": "English",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=en",
+      "status": "passed",
+      "oneLiner": "placed an order on the demo shop",
+      "summary": "Completed checkout by adding a product to the cart and proceeding to checkout.\nEntered realistic shipping details for a customer in an English-speaking country and continued.\nEntered a delivery date about one week ahead in the format requested, then continued to review.\nKept the default payment method and placed the order.\nThe order was confirmed with order number HK-471562.",
+      "reason": "Objective completed",
+      "reasonCode": "success.complete",
+      "bugTitle": null,
+      "rootCause": null,
+      "suggestion": null,
+      "severity": null,
+      "category": null,
+      "confirmedBug": null,
+      "family": null,
+      "credits": 57.7,
+      "duration": 179,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7NZPCXHJC7412K6888TB3S8/dashboard/share/US_AYCJ8E8AWEVLVAFENUF5PXAX6XZGY1MMS9MC0NW5Q3M6LFWZ4TH4MIBXIFKBWW9T?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=en"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "analyze: Any verification fails."
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Clicking the Speckled mug Oat glaze product link"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking Add to cart button"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "click: Clicking Cart 1 in the header navigation"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "click: Clicking the Checkout button in the order summary"
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"Full name\"; type \"Street address\"; type \"City\"; typ"
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"Alex Morgan\" into \"Full name\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"123 Maple Street\" into \"Street address\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"Toronto\" into \"City\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "type: Type \"M5V 2T6\" into \"Postal code\""
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "type: Type \"+1 416 555 0142\" into \"Phone number\""
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "analyze: No other element overlaps the Shipping step's Continue button."
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "assert: This step's Continue button is fully visible and no other element overlaps it."
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "click: Clicking Continue on the Shipping step"
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "type: Typing 11/25/2026 into preferred delivery date field"
+        },
+        {
+          "step": 19,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, \"No other element overlaps the Delivery step's Continue "
+        },
+        {
+          "step": 20,
+          "status": "done",
+          "remark": "assert: This step's Continue button is fully visible, no other element overlaps it, and "
+        },
+        {
+          "step": 21,
+          "status": "done",
+          "remark": "click: Clicking Continue to payment on the Delivery step"
+        },
+        {
+          "step": 22,
+          "status": "done",
+          "remark": "analyze: No other element overlaps the Place order button."
+        },
+        {
+          "step": 23,
+          "status": "done",
+          "remark": "assert: The Place order button is fully visible, not cut off by its card, and no other e"
+        },
+        {
+          "step": 24,
+          "status": "done",
+          "remark": "click: Clicking the Place order button"
+        },
+        {
+          "step": 25,
+          "status": "done",
+          "remark": "analyze: The order confirmation with an order number appears."
+        },
+        {
+          "step": 26,
+          "status": "done",
+          "remark": "assert: The order confirmation with an order number appears."
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 238,
+      "ndjson": "runs/2026-11-18T00-07-48-472/en.ndjson",
+      "screenshot": "runs/2026-11-18T00-07-48-472/en.jpg",
+      "runAt": "2026-11-18T00:11:46.229Z",
+      "round": 1
+    },
+    "de": {
+      "locale": "de",
+      "language": "German",
+      "nativeLanguage": "Deutsch",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=de",
+      "status": "passed",
+      "oneLiner": "placed an order on the German-language demo shop",
+      "summary": "Added a product to the cart and proceeded to checkout on the German-language demo shop.\nFilled in shipping details for a customer in a German-speaking country and continued through shipping.\nEntered a delivery date in the format shown on the delivery page and continued to payment.\nKept the default payment method, placed the order, and received a confirmation.\nThe order was confirmed with order number HK-103692.",
+      "reason": "Objective completed",
+      "reasonCode": "success.complete",
+      "bugTitle": null,
+      "rootCause": null,
+      "suggestion": null,
+      "severity": null,
+      "category": null,
+      "confirmedBug": null,
+      "family": null,
+      "credits": 54.1,
+      "duration": 180.4,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P0B23A8426MG43PE2952VX/dashboard/share/US_YLEHS5HS7KOWEC096O4BFDKZ5WORTHE3Z15BO789S3KEEQNLWLSWCZUNB267P3M1?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=de"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "analyze: Any verification in the objective fails."
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Clicking the first product link in the product list"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking add it to the cart button"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "click: Clicking Warenkorb ansehen to open the cart"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "click: Clicking the checkout button in the order summary"
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"Vor- und Nachname\"; type \"Straße und Hausnummer\"; t"
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"Anna Keller\" into \"Vor- und Nachname\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"Bahnhofstrasse 12\" into \"Straße und Hausnummer\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"Zürich\" into \"Ort\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "type: Type \"8001\" into \"Postleitzahl\""
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "type: Type \"+41 44 123 45 67\" into \"Telefonnummer\""
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "wait: PRIMARY: confirm the Shipping step is filled"
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, \"No other element overlaps the Shipping step's Continue "
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "assert: This step's Continue button is fully visible and no other element overlaps it."
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "click: Clicking the Continue button on the Shipping step"
+        },
+        {
+          "step": 19,
+          "status": "done",
+          "remark": "type: Entering the delivery date on the Delivery step"
+        },
+        {
+          "step": 20,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, \"The Delivery step's Continue button label is written in"
+        },
+        {
+          "step": 21,
+          "status": "done",
+          "remark": "assert: This step's Continue button is fully visible, no other element overlaps it, and "
+        },
+        {
+          "step": 22,
+          "status": "done",
+          "remark": "click: Clicking the Weiter zur Zahlung Continue button"
+        },
+        {
+          "step": 23,
+          "status": "done",
+          "remark": "wait: PRIMARY: Keep the default payment method on the Review step; role=radio; text=\"N"
+        },
+        {
+          "step": 24,
+          "status": "done",
+          "remark": "analyze: No other element overlaps the Place order button."
+        },
+        {
+          "step": 25,
+          "status": "done",
+          "remark": "assert: The Place order button is fully visible, not cut off by its card, and no other e"
+        },
+        {
+          "step": 26,
+          "status": "done",
+          "remark": "click: Clicking the Place order button on the Review step"
+        },
+        {
+          "step": 27,
+          "status": "done",
+          "remark": "analyze: The order confirmation with an order number appears."
+        },
+        {
+          "step": 28,
+          "status": "done",
+          "remark": "assert: The order confirmation with an order number appears."
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 223,
+      "ndjson": "runs/2026-11-18T00-19-02-392/de.ndjson",
+      "screenshot": "runs/2026-11-18T00-19-02-392/de.jpg",
+      "runAt": "2026-11-18T00:22:45.652Z",
+      "round": 2,
+      "history": [
+        {
+          "round": 1,
+          "status": "failed",
+          "oneLiner": "The final checkout button is cut off on the review step, so it cannot be safely used as required.",
+          "bugTitle": "Place order button is clipped by the payment card",
+          "rootCause": "The payment section does not leave enough visible space for the Place order button. Its lower portion is clipped by the card instead of being fully shown.",
+          "suggestion": "Adjust the review-step layout so the complete Place order button remains inside the payment card and is not obscured or clipped at this viewport size.",
+          "screenshot": "runs/2026-11-18T00-07-48-472/de.jpg",
+          "ndjson": "runs/2026-11-18T00-07-48-472/de.ndjson",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7NZQJ9AEP1515SQGFCENFDY/dashboard/share/US_N15E0YW17FG1LLMS2Y4GCB1AIX0EXQS51ISWSQ516GZCQ21E46FK27UQIPU5WSCX?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 52.1,
+          "duration": 186.6
+        }
+      ]
+    },
+    "ja": {
+      "locale": "ja",
+      "language": "Japanese",
+      "nativeLanguage": "日本語",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=ja",
+      "status": "passed",
+      "oneLiner": "placed an order on the demo shop",
+      "summary": "Added a product to the cart and proceeded to checkout on the Japanese-language demo shop.\nEntered realistic shipping details for a customer in a Japanese-speaking country and continued through shipping.\nEntered a delivery date about one week ahead using the page’s required format, then continued to payment.\nKept the default payment method and placed the order.\nThe order was confirmed successfully with order number HK-480037.",
+      "reason": "Objective completed",
+      "reasonCode": "success.complete",
+      "bugTitle": null,
+      "rootCause": null,
+      "suggestion": null,
+      "severity": null,
+      "category": null,
+      "confirmedBug": null,
+      "family": null,
+      "credits": 54.2,
+      "duration": 181.3,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P0CH0673CEW5DDT3C9ACAK/dashboard/share/US_V4MAW4LWDBN77PQQG7CK7MVWLHPCVTNZLWIFIKWHLBW0Q4UF34AER1PZMTDYMXLZ?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=ja"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "click: Clicking the leftmost product card in the grid"
+        },
+        {
+          "step": 4,
+          "status": "done",
+          "remark": "click: Clicking カートに入れる to add it to the cart"
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Clicking カート 1 to open the cart"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: クリックしてレジに進む"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"氏名\"; type \"番地・建物名\"; type \"市区町村\"; type \"郵便番号\"; type "
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "type: Type \"山田 花子\" into \"氏名\""
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "type: Type \"神宮前 1-2-3\" into \"番地・建物名\""
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"東京都渋谷区\" into \"市区町村\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"150-0001\" into \"郵便番号\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"090-1234-5678\" into \"電話番号\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "wait: PRIMARY: Shipping step: fill in realistic test details for a customer in a Japan"
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "analyze: No other element overlaps the Shipping step's Continue button."
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "assert: this step's Continue button is fully visible and no other element overlaps it"
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "click: Clicking the Shipping step Continue button（次へ進む）"
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "type: Entering delivery date 2026/11/25 in YYYY/MM/DD format"
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, \"The Delivery step's Continue button label is written in"
+        },
+        {
+          "step": 19,
+          "status": "done",
+          "remark": "assert: this step's Continue button is fully visible, no other element overlaps it, and "
+        },
+        {
+          "step": 20,
+          "status": "done",
+          "remark": "click: Clicking お支払いへ進む continue button"
+        },
+        {
+          "step": 21,
+          "status": "done",
+          "remark": "wait: PRIMARY: Review step: keep the default payment method"
+        },
+        {
+          "step": 22,
+          "status": "done",
+          "remark": "analyze: No other element overlaps the Place order button."
+        },
+        {
+          "step": 23,
+          "status": "done",
+          "remark": "assert: the Place order button is fully visible, not cut off by its card, and no other e"
+        },
+        {
+          "step": 24,
+          "status": "done",
+          "remark": "click: Clicking the Place order button to confirm the order"
+        },
+        {
+          "step": 25,
+          "status": "done",
+          "remark": "analyze: Any verification fails."
+        },
+        {
+          "step": 26,
+          "status": "done",
+          "remark": "assert: the order confirmation with an order number appears"
+        },
+        {
+          "step": 28,
+          "status": "done",
+          "remark": "wait: Waiting after order confirmation verification"
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 269,
+      "ndjson": "runs/2026-11-18T00-19-02-392/ja.ndjson",
+      "screenshot": "runs/2026-11-18T00-19-02-392/ja.jpg",
+      "runAt": "2026-11-18T00:23:32.248Z",
+      "round": 2,
+      "history": [
+        {
+          "round": 1,
+          "status": "failed",
+          "oneLiner": "The delivery-date form rejects 2026/11/25 even though the page shows that exact date as a valid example in the required format.",
+          "bugTitle": "Delivery date rejects its own displayed YYYY/MM/DD example",
+          "rootCause": "The date check does not accept a date written in the same YYYY/MM/DD format that the page tells the customer to use. This blocks checkout before the delivery step can continue.",
+          "suggestion": "Fix the delivery-date validation so it accepts YYYY/MM/DD dates, including the example shown beside the field. Add a checkout test that enters 2026/11/25 and confirms the customer can continue.",
+          "screenshot": "runs/2026-11-18T00-07-48-472/ja.jpg",
+          "ndjson": "runs/2026-11-18T00-07-48-472/ja.ndjson",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7NZVMNMD33TB1X0CMFCN8YH/dashboard/share/US_VDYZDQRNF6E59S9FUYK3HI1HJIB8SB3F0IY74CRSJV0VJP1C25U7YFWQZGZ2WTIL?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 47.3,
+          "duration": 208.7
+        }
+      ]
+    },
+    "id": {
+      "locale": "id",
+      "language": "Indonesian",
+      "nativeLanguage": "Indonesia",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=id",
+      "status": "passed",
+      "oneLiner": "placed an order on the demo shop",
+      "summary": "Opened a product, added it to the cart, and proceeded to checkout.\nEntered realistic Indonesian customer shipping details and continued after confirming the button was visible and unobstructed.\nEntered a delivery date about one week ahead in the page’s required format and continued using the Indonesian-labeled button.\nKept the default payment method, reviewed the order, and placed it successfully.\nThe confirmation page showed that the order was received with order number HK-789624.",
+      "reason": "AP(text) failed: All connection attempts failed",
+      "reasonCode": "success.complete",
+      "bugTitle": null,
+      "rootCause": null,
+      "suggestion": null,
+      "severity": null,
+      "category": null,
+      "confirmedBug": null,
+      "family": null,
+      "credits": 51.6,
+      "duration": 213.5,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P0J0W9VXFTJ8M0JQJ1ZR7M/dashboard/share/US_DBOUIM7RZMDA4S5UA27XV971PDUGPUFPXZ4O0SG1UM4OSWU4YC5IAQEF01PUOKNL?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=id"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "click: Clicking the leftmost product link in the product grid"
+        },
+        {
+          "step": 4,
+          "status": "done",
+          "remark": "click: Klik sedang menambahkan ke keranjang"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking Lihat keranjang in Mug Bintik product detail"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "click: Clicking the Checkout button in the order summary card"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"Nama lengkap\"; type \"Alamat jalan\"; type \"Kota\"; ty"
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "type: Type \"Siti Rahmawati\" into \"Nama lengkap\""
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"Jl. Melati No. 18\" into \"Alamat jalan\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"Jakarta Selatan\" into \"Kota\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"12190\" into \"Kode pos\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "type: Type \"+6281234567890\" into \"Nomor telepon\""
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "analyze: no other element overlaps the Shipping step Continue button"
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "assert: this step's Continue button is fully visible and no other element overlaps it"
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "click: Clicking the Continue (Lanjutkan) button in the Shipping step"
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "type: Typing delivery date 25-11-2026 in the date field"
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, 'the Delivery step Continue button label is written in I"
+        },
+        {
+          "step": 19,
+          "status": "done",
+          "remark": "assert: this step's Continue button is fully visible, no other element overlaps it, and "
+        },
+        {
+          "step": 20,
+          "status": "done",
+          "remark": "click: Klik tombol Lanjut ke pembayaran di halaman pengiriman"
+        },
+        {
+          "step": 21,
+          "status": "done",
+          "remark": "analyze: no other element overlaps the Place order button"
+        },
+        {
+          "step": 22,
+          "status": "done",
+          "remark": "assert: the Place order button is fully visible, not cut off by its card, and no other e"
+        },
+        {
+          "step": 23,
+          "status": "done",
+          "remark": "click: Klik tombol Buat pesanan untuk memesan"
+        },
+        {
+          "step": 24,
+          "status": "done",
+          "remark": "analyze: any verification fails"
+        },
+        {
+          "step": 25,
+          "status": "done",
+          "remark": "assert: the order confirmation with an order number appears"
+        },
+        {
+          "step": 27,
+          "status": "done",
+          "remark": "wait: Waiting after verifying the order confirmation and order number"
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 259,
+      "ndjson": "runs/2026-11-18T00-19-02-392/id.ndjson",
+      "screenshot": "runs/2026-11-18T00-19-02-392/id.jpg",
+      "runAt": "2026-11-18T00:27:04.474Z",
+      "round": 2,
+      "history": [
+        {
+          "round": 1,
+          "status": "failed",
+          "oneLiner": "The Delivery-step Continue button shows a code-like translation key instead of an Indonesian label.",
+          "bugTitle": "Delivery continue button displays untranslated localization key",
+          "rootCause": "The Indonesian translation for the Delivery Continue button was not displayed. The page shows the raw key \"checkout.continue_to_payment\" instead of Indonesian words.",
+          "suggestion": "Restore or load the Indonesian translation for the Delivery Continue button so it displays an Indonesian action label, such as \"Lanjutkan\", then rerun the checkout flow.",
+          "screenshot": "runs/2026-11-18T00-07-48-472/id.jpg",
+          "ndjson": "runs/2026-11-18T00-07-48-472/id.ndjson",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7NZY4EXVB427C8XVZA4HY2T/dashboard/share/US_G4AF6CBAYHL0DNT1M0FZ86IZGJZTS4RHR752BYLLM5EU33ENU2WAC66T3T47RB5M?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 39.7,
+          "duration": 162.2
+        }
+      ]
+    },
+    "zh": {
+      "locale": "zh",
+      "language": "Chinese",
+      "nativeLanguage": "中文",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=zh",
+      "status": "passed",
+      "oneLiner": "placed an order on the demo shop",
+      "summary": "Completed the requested checkout in the Chinese-language demo shop by adding a product to the cart and proceeding to checkout.\nEntered realistic test shipping details for a customer in a Chinese-speaking region, then continued through shipping and delivery with a delivery date about one week ahead in the displayed format.\nKept the default payment method, placed the order, and received the confirmation with order number HK-891953.",
+      "reason": "Objective completed",
+      "reasonCode": "success.complete",
+      "bugTitle": null,
+      "rootCause": null,
+      "suggestion": null,
+      "severity": null,
+      "category": null,
+      "confirmedBug": null,
+      "family": null,
+      "credits": 70.4,
+      "duration": 168.3,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P0360RQGA26X7Q5MG5H6XV/dashboard/share/US_QVDPOTVFCZ630273ES6C3GAXDA0N0YRTUG4UPWOKH7GPWG4OXTWRNI7NUCHJJV5X?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=zh"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "click: Clicking the leftmost product link to open the product page"
+        },
+        {
+          "step": 4,
+          "status": "done",
+          "remark": "click: Clicking 加入购物车 to add it to the cart"
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Clicking View Cart link to open the cart"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking the checkout button in the order summary section"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"姓名\"; type \"详细地址\"; type \"城市\"; type \"邮政编码\"; type \"手机号"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "type: Type \"王小明\" into \"姓名\""
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "type: Type \"静安区南京西路 123 号 8 楼 801 室\" into \"详细地址\""
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"上海市\" into \"城市\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"200040\" into \"邮政编码\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"13800138000\" into \"手机号码\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "analyze: No other element overlaps this step's Continue button."
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "assert: This step's Continue button is fully visible and no other element overlaps it."
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "click: Clicking the Shipping step Continue button继续"
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "type: Entering delivery date in YYYY-MM-DD format"
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, \"This step's Continue button label is written in Chinese"
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "assert: This step's Continue button is fully visible, no other element overlaps it, and "
+        },
+        {
+          "step": 19,
+          "status": "done",
+          "remark": "click: Clicking the Delivery step Continue button"
+        },
+        {
+          "step": 20,
+          "status": "done",
+          "remark": "analyze: No other element overlaps the Place order button."
+        },
+        {
+          "step": 21,
+          "status": "done",
+          "remark": "assert: The Place order button is fully visible, not cut off by its card, and no other e"
+        },
+        {
+          "step": 22,
+          "status": "done",
+          "remark": "click: Clicking the Place order button"
+        },
+        {
+          "step": 23,
+          "status": "done",
+          "remark": "analyze: Any verification fails."
+        },
+        {
+          "step": 24,
+          "status": "done",
+          "remark": "assert: The order confirmation with an order number appears."
+        },
+        {
+          "step": 26,
+          "status": "done",
+          "remark": "wait: Waiting after confirming the order confirmation and order number"
+        }
+      ],
+      "earlierAttempts": [
+        {
+          "status": "inconclusive",
+          "note": "The run stopped on the storefront before any product was added or any checkout verification was performed.",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7NZZ9BS3FAWM3V8NEBQ91WQ/dashboard/share/US_X21KOQL9KPS085RPSNQ3Y5W4PC9IEL0170U035KE9RFK9O938CKE9MZ5C5IS8080?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 19,
+          "ndjson": "runs/2026-11-18T00-07-48-472/zh.ndjson"
+        }
+      ],
+      "wallSeconds": 349,
+      "ndjson": "runs/2026-11-18T00-07-48-472/zh.attempt2.ndjson",
+      "screenshot": "runs/2026-11-18T00-07-48-472/zh.jpg",
+      "runAt": "2026-11-18T00:18:07.287Z",
+      "round": 1
+    }
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "startedAt": "2026-11-18T00:07:48.474Z",
+      "finishedAt": "2026-11-18T00:18:07.599Z",
+      "ran": [
+        "en",
+        "de",
+        "ar",
+        "ja",
+        "id",
+        "zh"
+      ],
+      "statuses": {
+        "en": "passed",
+        "de": "failed",
+        "ar": "failed",
+        "ja": "failed",
+        "id": "failed",
+        "zh": "passed"
+      },
+      "credits": 294.3,
+      "fix": {
+        "agent": "claude",
+        "for": [
+          "de",
+          "ar",
+          "ja",
+          "id"
+        ],
+        "ok": true,
+        "summary": "de: let the payment card grow with its content (`min-height` instead of fixed `height` with `overflow: hidden`) so the Place order button is never clipped (examples/demo-shop/styles.css)\nar: anchored the floating help pill and panel with `inset-inline-start` instead of `left`, so in RTL they no longer cover the Continue button in the step footer (examples/demo-shop/styles.css)\nja: date parsing now treats a four-digit first part as the year and otherwise follows the locale's own `date_format`, so YYYY/MM/DD is accepted (examples/demo-shop/dates.js, examples/demo-shop/app.js)\nid: added the missing `checkout.continue_to_payment` translation \"Lanjut ke pembayaran\" (examples/demo-shop/locales/id.json)",
+        "files": [
+          "examples/demo-shop/dates.js",
+          "examples/demo-shop/app.js",
+          "examples/demo-shop/locales/id.json",
+          "examples/demo-shop/styles.css"
+        ],
+        "seconds": 54
+      }
+    },
+    {
+      "round": 2,
+      "startedAt": "2026-11-18T00:19:02.393Z",
+      "finishedAt": "2026-11-18T00:27:04.645Z",
+      "ran": [
+        "de",
+        "ar",
+        "ja",
+        "id"
+      ],
+      "statuses": {
+        "de": "passed",
+        "ar": "passed",
+        "ja": "passed",
+        "id": "passed"
+      },
+      "credits": 216.2
+    }
+  ],
+  "order": [
+    "en",
+    "de",
+    "ar",
+    "ja",
+    "id",
+    "zh"
+  ],
+  "updatedAt": "2026-11-18T00:27:04.649Z",
+  "recorded": "Recorded run, 2026-11-18 08:07–08:27 +0800, Kane CLI 0.10.4: round 1 found the four planted bugs, Claude Code fixed them, round 2 re-checked those four. Every verdict, screenshot and replay link is from that real run; nothing here re-runs."
+}

@@ -11,6 +11,7 @@ import { closedLoop } from '../src/loop.mjs';
 import { buildBrief } from '../src/brief.mjs';
 import { failing, loadResults, tally } from '../src/results.mjs';
 import { writeReport } from '../src/grid.mjs';
+import { snapshot } from '../src/snapshot.mjs';
 import { kaneAvailable, kaneBalance } from '../src/kane.mjs';
 import { c } from '../src/term.mjs';
 
@@ -26,6 +27,8 @@ Usage
                                                 --resume starts from the last results, no new run
   locale-check failures [--agent]               Print the failing locales as a brief (for an agent)
   locale-check report                           Rebuild the HTML report from results.json
+  locale-check snapshot <dir> [--note "..."]    Save the last run as a shareable folder (report,
+                                                results, screenshots, logs; local paths removed)
   locale-check status                           One line per locale from the last results
   locale-check init                             Write a starter ${CONFIG_NAME}
   locale-check install-skill [--global]         Install the Claude Code skill
@@ -97,6 +100,11 @@ async function main() {
   }
   if (cmd === 'report') {
     console.log(`Report: ${writeReport(cfg, loadResults(cfg))}`);
+    return 0;
+  }
+  if (cmd === 'snapshot') {
+    if (!opts._[1]) throw new UsageError('Usage: locale-check snapshot <folder> [--note "..."]');
+    console.log(`Snapshot: ${snapshot(cfg, opts._[1], { note: opts.note })}`);
     return 0;
   }
   if (cmd === 'status') return finish(cfg, loadResults(cfg), opts);

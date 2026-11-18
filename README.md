@@ -4,7 +4,7 @@
 
 <!-- HERO: screenshot of the report, red → green -->
 
-Built for the **Kane CLI Online Hackathon** (TestMu AI, Nov 2026) · **Video:** _TODO_ · **Recorded report (no account needed):** [`examples/recorded/`](examples/recorded/)
+Built for the **Kane CLI Online Hackathon** (TestMu AI, Nov 2026) · **Video:** _TODO_ · **Recorded report (no account needed):** [`examples/recorded/demo-shop/report.html`](examples/recorded/demo-shop/report.html)
 
 ## The problem
 
@@ -25,7 +25,7 @@ locale-check.json ──► Kane CLI × locale (en de ar ja id zh) ──► res
 
 ## Try it
 
-**In 30 seconds, no account:** open [`examples/recorded/report.html`](examples/recorded/report.html). It is a real recorded run on the demo shop (round 1 red, Claude's fix, round 2 green), with links to Kane's replays.
+**In 30 seconds, no account:** open [`examples/recorded/demo-shop/report.html`](examples/recorded/demo-shop/report.html) (download and open it; GitHub shows HTML as source). It is a real recorded run on the demo shop (round 1 red, Claude's fix, round 2 green), with links to Kane's replays.
 
 **Run it yourself** (needs Node 18+, Python for the static server, and a Kane CLI login with credits):
 

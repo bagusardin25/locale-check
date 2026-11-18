@@ -68,7 +68,9 @@ export async function runRound(cfg, { only, failedOnly = false, log = console.lo
       if (earlier.length) r.credits = Math.round((r.credits || 0) * 10 + earlier.reduce((s, a) => s + (a.credits || 0) * 10, 0)) / 10;
       const shot = join(runDir, `${locale}.jpg`);
       const hasShot = extractScreenshot(r.evidencePack, shot);
+      const prev = results.locales[locale];
       results.locales[locale] = {
+        history: prev ? [...(prev.history || []), historyEntry(prev)].slice(-5) : [],
         locale,
         language: languageName(locale),
         nativeLanguage: languageName(locale, locale),
@@ -102,6 +104,13 @@ export async function runRound(cfg, { only, failedOnly = false, log = console.lo
   writeReport(cfg, results);
   return { results, ran: locales };
 }
+
+// What we keep of an earlier verdict, so the report can show "before the fix".
+export const historyEntry = (r) => ({
+  round: r.round, status: r.status, oneLiner: r.oneLiner, bugTitle: r.bugTitle, rootCause: r.rootCause,
+  suggestion: r.suggestion, screenshot: r.screenshot, ndjson: r.ndjson, testUrl: r.testUrl,
+  credits: r.credits, duration: r.duration,
+});
 
 const rel = (cfg, p) => relative(cfg.outDir, p).replaceAll('\\', '/');
 const trim = (s, n) => { s = String(s || '').replace(/\s+/g, ' '); return s.length > n ? s.slice(0, n - 1) + '…' : s; };

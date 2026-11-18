@@ -1,0 +1,111 @@
+diff --git a/examples/demo-shop/app.js b/examples/demo-shop/app.js
+index fbd9ef6..ac4b2c0 100644
+--- a/examples/demo-shop/app.js
++++ b/examples/demo-shop/app.js
+@@ -322,7 +322,7 @@ function viewDelivery() {
+   const form = document.getElementById('delivery-form');
+   const input = form.elements.date;
+   const check = () => {
+-    const result = validateDeliveryDate(input.value);
++    const result = validateDeliveryDate(input.value, pattern);
+     showFieldError(form, 'date', result.error ? t(`errors.${result.error}`, { format: pattern, example }) : '');
+     return result;
+   };
+diff --git a/examples/demo-shop/dates.js b/examples/demo-shop/dates.js
+index 5bdeb13..0c681b8 100644
+--- a/examples/demo-shop/dates.js
++++ b/examples/demo-shop/dates.js
+@@ -18,7 +18,7 @@ function toDate(year, month, day) {
+   return date;
+ }
+ 
+-export function parseDate(input) {
++export function parseDate(input, pattern) {
+   const text = normalizeDigits(input);
+   const match = text.match(/^(\d{1,4})([./-])(\d{1,2})\2(\d{1,4})$/);
+   if (!match) return null;
+@@ -27,6 +27,17 @@ export function parseDate(input) {
+   const middle = Number(b);
+   const last = Number(c);
+ 
++  // A four-digit first part is always the year (YYYY/MM/DD, YYYY-MM-DD, YYYY.MM.DD).
++  if (a.length === 4) {
++    return toDate(first, middle, last);
++  }
++  // Otherwise follow the order of the locale's own pattern when it is known.
++  const order = pattern ? pattern.match(/YYYY|MM|DD/g) : null;
++  if (order && order.length === 3 && new Set(order).size === 3) {
++    const parts = { [order[0]]: first, [order[1]]: middle, [order[2]]: last };
++    return toDate(parts.YYYY, parts.MM, parts.DD);
++  }
++
+   if (sep === '.') {
+     return toDate(last, middle, first);
+   }
+@@ -54,9 +65,9 @@ export function exampleDate(pattern) {
+   return formatPattern(addDays(new Date(), 7), pattern);
+ }
+ 
+-export function validateDeliveryDate(input) {
++export function validateDeliveryDate(input, pattern) {
+   if (!input || !input.trim()) return { error: 'date_required' };
+-  const date = parseDate(input);
++  const date = parseDate(input, pattern);
+   if (!date) return { error: 'date_invalid' };
+   if (date < addDays(new Date(), MIN_LEAD_DAYS)) return { error: 'date_too_soon' };
+   return { date };
+diff --git a/examples/demo-shop/locales/id.json b/examples/demo-shop/locales/id.json
+index 4302b3e..2a58a1a 100644
+--- a/examples/demo-shop/locales/id.json
++++ b/examples/demo-shop/locales/id.json
+@@ -88,6 +88,7 @@
+     "delivery_date": "Tanggal pengiriman",
+     "delivery_hint": "Format {format}, misalnya {example}. Paling cepat 2 hari dari hari ini.",
+     "delivery_note": "Kami mengirim Senin sampai Sabtu. Kurir akan mengirim SMS pada pagi hari pengiriman.",
++    "continue_to_payment": "Lanjut ke pembayaran",
+     "review_title": "Tinjau pesanan Anda",
+     "ship_to": "Dikirim ke",
+     "deliver_on": "Tanggal pengiriman",
+diff --git a/examples/demo-shop/styles.css b/examples/demo-shop/styles.css
+index 5265f2d..28114bd 100644
+--- a/examples/demo-shop/styles.css
++++ b/examples/demo-shop/styles.css
+@@ -815,8 +815,7 @@ html:lang(zh) .home .page-title {
+ .pay-card {
+   display: flex;
+   flex-direction: column;
+-  height: 25.5rem;
+-  overflow: hidden;
++  min-height: 25.5rem;
+ }
+ .pay-card .card-title {
+   margin-bottom: var(--s3);
+@@ -876,6 +875,10 @@ html:lang(zh) .home .page-title {
+ }
+ .pay-card .btn {
+   margin-top: auto;
++  flex: none;
++}
++.pay-card .legal {
++  margin-bottom: var(--s4);
+ }
+ 
+ /* Confirmation */
+@@ -933,7 +936,7 @@ body.has-step-footer .site-footer {
+ 
+ .help-pill {
+   position: fixed;
+-  left: 20px;
++  inset-inline-start: 20px;
+   bottom: 14px;
+   z-index: 60;
+   display: inline-flex;
+@@ -959,7 +962,7 @@ body.has-step-footer .site-footer {
+ }
+ .help-panel {
+   position: fixed;
+-  left: 20px;
++  inset-inline-start: 20px;
+   bottom: 84px;
+   z-index: 61;
+   width: min(320px, calc(100vw - 40px));
