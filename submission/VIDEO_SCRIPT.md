@@ -1,79 +1,27 @@
-# Locale check — demo video plan
+# Locale check — demo video script (draft)
 
-> Guide: The video is usually the single most-judged artifact. Devpost's rules commonly say judges "may choose to judge based solely on the text description, images, and video" and need not watch past the time limit. Script the video before you polish the product, because the script tells you which screens must look great. Delete every "> Guide:" line when done.
+**Limit:** judges stop at 3:00 → **target 2:45.** 16:9, 1920×1080, 30 fps, public YouTube. English narration (~380 words) with English captions burned in, since judges often watch muted.
 
-**Length limit (from RULES.md):** {{e.g. under 3:00}} · **Target length:** {{limit minus 10–15 s}}
-**Hosting:** public YouTube, Vimeo or Youku (some events also accept Facebook Video). Use Public visibility unless the rules explicitly allow Unlisted.
-**Language:** {{English, or the event's language plus English subtitles if required}}
+**Footage rule:** only real material. Kane's own screenshots, the real reports (`examples/recorded/demo-shop/report.html`, the Open Library run), a replay of the real terminal log (`examples/recorded/demo-shop/terminal.log`) labelled as a replay, and Claude's real diff (`claude-fix.diff`). No mock-ups, no AI images.
 
-## The one thing a judge must remember
+**The one thing a judge must remember:** one English sentence tests every language, Kane finds what's broken, Claude fixes it, Kane proves it, and it found a real bug in Open Library.
 
-{{One sentence. Example: "Heatline finds the failure in a city's heat plan before a real heat wave does."}}
+| Time | Beat | On screen | Narration |
+|---|---|---|---|
+| 0:00–0:12 | Hook | The report, round 1: four red tiles (German, Arabic, Japanese, Indonesian) | "Your checkout ships in six languages. This is what Kane CLI found in four of them, with one English sentence and nobody on the team reading Arabic." |
+| 0:12–0:32 | The bugs | Kane's screenshots, one per beat, with Kane's bug title as a caption: German Pay button cut off; Arabic Continue hidden; Japanese date rejected; Indonesian raw key | "A Pay button cut off by longer German text. A Continue button hidden in the right-to-left layout. A Japanese date, typed exactly as the page asks, rejected. A raw translation key on a button. String linters miss all four: the keys exist." |
+| 0:32–0:55 | The run | Terminal replay: `locale-check run`, three locales in parallel, Kane's steps scrolling in Arabic and Japanese labels, PASS/FAIL lines | "locale-check runs the same objective in every locale, three at a time, each in its own Chrome. Kane reads the Arabic and Japanese labels, follows the steps, and checks at each one that the button is visible and labelled in that language." |
+| 0:55–1:20 | The loop | Terminal replay: "Fix 1: handing de, ar, ja, id to claude", `agent ▸ Edit styles.css` lines; then the diff: `min-height`, `inset-inline-start`, the date parser, the missing key | "Only failures Kane confirms as app bugs go to Claude Code, with Kane's root cause and evidence. Claude edits four files: the card height, a physical left that should be a logical property, the date parser, a missing key." |
+| 1:20–1:40 | Green | Round 2: four green; the report header "4 failed in round 1; green after 1 agent fix" | "Then Kane re-runs only the red languages. All six pass. Every tile keeps Kane's before-and-after screenshots and a replay link." |
+| 1:40–1:55 | Trust | One inconclusive tile: "Kane flagged its own misstep" → retry → pass | "Kane also judges its own failures. When it decides it misstepped, locale-check retries instead of sending Claude a bug that isn't there." |
+| 1:55–2:25 | Real app | Open Library home page in Arabic, Kane's screenshot; Kane's verdict quote; the template line `<html lang>` without `dir` | "Planted bugs prove the loop. So we pointed it at Open Library, a real open-source site, with a generic check. Kane: 'Arabic homepage retains left-to-right layout.' It's real: the page never sets dir equals rtl, though their own design guide says it must." |
+| 2:25–2:40 | Install | `npm install -g github:freddy-tama/locale-check`, `locale-check init`, `locale-check install-skill`, the CI example | "It's a CLI, a Claude Code skill and a CI gate. Point it at your app's URL with a locale placeholder and write one objective." |
+| 2:40–2:45 | Close | Repo URL, #KaneCLIHackDay | "Locale check. Every language, checked." |
 
-## Hook (first 10 seconds)
+**Words:** about 330. Read aloud with a timer before recording; cut, don't speed up.
 
-> Guide: Pick one. The first seconds decide whether a tired judge leans in.
-> - **The reveal:** the one moment of real system work the judge will remember. It was the strongest single trait separating winners from typical entries (references/winner-dna.md).
-> - **Result first:** open on the most impressive screen, the transformed output, then "here's how it gets there".
-> - **Pain in one line:** one person, one moment, one sourced number, over a shot of the problem.
-> - **Before → after:** a split screen of the old way and your way.
-> - **Live dare:** "Give it any <input> and watch."
-> Avoid logo intros, team introductions, agenda slides and market-size slides in the opening.
+## Still to decide with the user (video-kit brief)
 
-{{Hook: what is on screen + the exact first sentence}}
-
-## Beat sheet
-
-> Guide: Keep the 3:00 layout unless the limit differs. Narration runs at about 130–160 spoken words per minute, so a 3-minute video holds roughly 350–420 words with pauses. Write the narration, read it aloud with a timer, then cut 15%.
-
-| Time | Beat | On screen | Narration (draft) | Criterion it serves |
-|---|---|---|---|---|
-| 0:00–0:10 | Hook | {{payoff screen or problem shot}} | {{line}} | Idea / impact |
-| 0:10–0:30 | Problem: one user, one moment | {{the before-state, real artifact}} | {{who, what goes wrong, cost}} | Impact |
-| 0:30–1:50 | Core loop, live | {{real input → product working → result → user's next action}} | {{narrate decisions, not clicks}} | Technical + design |
-| 1:50–2:25 | How it works | {{architecture diagram, the step where AI/sponsor tech is essential}} | {{why it needs AI / the required tech; one hard problem you solved}} | Technical / required tech |
-| 2:25–2:50 | Proof and impact | {{measured result, test run, real data source, user quote if real}} | {{the number that matters + one honest limit}} | Impact |
-| 2:50–3:00 | Close | {{name, tagline, URL}} | {{"<Name>: <tagline>. Try it at <url>."}} | Memorability |
-
-**2-minute version:** hook 0:00–0:08 · problem to 0:20 · loop to 1:25 · how it works to 1:45 · proof and close to 2:00.
-**5-minute version:** keep the same story. Spend the extra time on a second real scenario, deeper technical proof (evaluation, edge case, failure recovery), and impact evidence. Do not add a feature tour.
-
-## Shot list
-
-| # | Clip | Setup / data needed | Duration | Retake notes |
-|---|---|---|---|---|
-| 1 | {{payoff screen}} | {{seeded state}} | {{s}} | |
-| 2 | {{...}} | | | |
-
-## Recording checklist
-
-- **Data:** realistic seeded data that exercises the interesting path. Label sample data on screen if a judge could mistake it for real users.
-- **Screen:** 1920×1080; browser zoom 125–150% so text survives compression; clean browser profile (no bookmarks bar, personal tabs or extensions); dark/light theme chosen deliberately.
-- **Silence the machine:** notifications off (Windows Focus / macOS Do Not Disturb), chat apps closed, auto-updates paused.
-- **Cursor:** make it visible. Windows: PowerToys Mouse Highlighter (Win+Shift+H). macOS: enlarge the cursor in Accessibility settings.
-- **Tools.**
-  - Recording: OBS Studio (free; Windows/macOS/Linux) for full control. Windows: Xbox Game Bar (Win+Alt+R, one app window) or Snipping Tool's screen recorder. macOS: Cmd+Shift+5.
-  - Editing: Clipchamp (bundled with Windows 11), iMovie (macOS), DaVinci Resolve (free, all platforms) or CapCut (auto-captions).
-  - Loom and Screen Studio are quick options, but check their free-plan limits before you depend on them.
-- **Audio:** quiet room, mic close, one test recording played back on headphones. Recording narration separately (voice-over) gives cleaner audio than talking while clicking. Your own voice reads as most authentic. If you use text-to-speech, check the rules and say so in the description.
-- **Takes:** record each beat as its own clip so a mistake costs one clip, not the whole video. Keep the raw takes.
-
-## Editing rules
-
-- Cut dead air and loading waits. If you speed up a wait, label it ("sped up 4×") so viewers aren't misled about latency.
-- Zoom or crop into the important UI moment; judges watch on laptops.
-- Add captions (YouTube auto-captions → fix errors, or burn them in). Many judges watch muted.
-- Use royalty-free music at low volume, or none. Copyrighted music or third-party trademarks can get a video rejected.
-- Never show behavior the product cannot do now. Rules usually require that the project "function as depicted in the video".
-- Export 1080p MP4 (H.264), 30 fps.
-
-## Upload and verify
-
-- Upload early. Devpost warns processing can take from minutes to several hours. Aim to finish uploading at least 2–3 hours before the deadline.
-- Title: "{{Name}} — {{tagline}} | {{Hackathon name}}". Put the live and repo links in the description.
-- Check HD processing has finished, open the link in a private window while logged out, and confirm it plays and is under the limit.
-- Paste the link into the submission form's video field.
-
-## Final narration (paste the timed script here)
-
-{{0:00 — ...}}
+- Narration voice: ElevenLabs (English), or captions only.
+- Music bed: the kit's library, very low.
+- Whether to show the blind fifth-bug result (if Kane catches it, it replaces the "Trust" beat or shares it).

@@ -1,26 +1,39 @@
-# Locale check — social post (optional)
+# Locale check — launch posts (drafts)
 
-> Guide: Use this when a prize or bonus requires a public post, a blog, or "build in public" updates, or when the user wants visibility. Posting publishes content in the user's name: draft it here and let the user post it, unless they explicitly ask you to and have given you access. Check the rules for required hashtags, mentions, and deadlines. Delete "> Guide:" lines when done.
+The rules need at least 2 public posts (HN, X, Reddit or LinkedIn) with #KaneCLIHackDay. **The user posts these.** Attach the report screenshot (`docs/report-hero.png`) or a 10–20 s clip from the video. Fill in the video link first.
 
-## Short post (X / Threads / Bluesky, ≤ 280 characters)
+## Post 1 — X (fits 280 characters with the links)
 
-{{Hook: the outcome in one line}}
-{{What it does, one line}}
-{{Link}} {{#RequiredHashtag}} {{@Sponsor}}
+Your app ships in 6 languages. Who checks the Arabic one?
 
-Attach a 10–20 s GIF or clip of the core loop.
+Locale check runs one plain-English Kane CLI test in every language; Claude Code fixes what breaks, Kane re-checks.
 
-## Long post (LinkedIn / blog)
+It found Open Library's Arabic UI served left-to-right.
 
-1. **Hook:** the moment that inspired it (1–2 lines).
-2. **What we built:** the loop in one sentence + a GIF.
-3. **How:** 2–3 bullets on the interesting tech, tagging the sponsor tools used.
-4. **What we learned:** one honest lesson.
-5. **Links:** demo, video, repo, submission page.
-6. **Thanks:** organizers, mentors, teammates (tag them).
+github.com/freddy-tama/locale-check
+#KaneCLIHackDay
 
-## Rules check
+## Post 2 — LinkedIn (or Reddit r/webdev, with the same text minus hashtags but the footer)
 
-- Required tags / mentions: {{...}}
-- Post deadline: {{...}}
-- Does the post count only if public? {{...}}
+Translations ship in batches, and nobody on the team reads all of them. String linters check that every key exists. They don't notice that the German label pushes the Pay button out of its card, that an Arabic layout puts a help bubble on top of Continue, or that the date format the page asks for is then rejected.
+
+For the Kane CLI hackathon I built Locale check:
+
+- You write one plain-English objective ("add a product, check out, verify each button is visible and labelled in {language}").
+- Kane CLI runs it in a real browser in every language your app ships, three at a time, and a one-file report shows red or green per language with Kane's screenshot, its root cause and a replay.
+- The failures Kane confirms as app bugs go to Claude Code with Kane's evidence. Claude fixes the code, and Kane re-runs only the red languages.
+
+On a six-language demo shop it caught four locale bugs and Claude fixed them in one round. On a live open-source site, Open Library, it found that the Arabic interface is served left-to-right: the page never sets dir="rtl".
+
+What I learned: write checks positively and put them at the step where they apply. And trust Kane's own triage. It labels its own missteps, so a flaky run never reaches the agent as a "bug".
+
+Repo (MIT): https://github.com/freddy-tama/locale-check
+Video: _link_
+
+#KaneCLIHackDay
+
+## Optional — Show HN
+
+**Title:** Show HN: Locale check – one Kane CLI test in every language, Claude Code fixes the red ones
+
+**Text:** Post 2, first three paragraphs, plus the repo link. HN strips hashtags in titles; put #KaneCLIHackDay at the end of the text.

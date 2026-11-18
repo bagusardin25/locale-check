@@ -1,90 +1,41 @@
-# Locale check — submission story
+# Locale check — submission text
 
-> Guide: Fill every `{{...}}` and delete every "> Guide:" line before submitting. This mirrors Devpost's default form (Project Overview → Project Details → Additional Details). Other platforms (Luma, Taikai, DoraHacks, Google Forms) ask for the same content under different names, so reuse it.
+Draft for the form at kaneclihack.sh/o/submit. Numbers checked against `hackathon/LOG.md` on 2026-11-18; re-check before submitting.
 
-## Project overview fields
+## Project name
 
-**Project name:** {{Name: short, sayable, not "AI-something". Two or three syllables beat a long acronym.}}
+Locale check
 
-**Tagline / elevator pitch** (Devpost limits this to about 140 characters; trust the form's live counter):
-{{<Product> helps <specific user> <do outcome> <how/when>. Example: "Heatline turns a city's heat-emergency plan into a turn-based rehearsal that finds the gaps before summer does."}}
+## Tagline
 
-**Thumbnail:** {{file name}}. Use a 3:2 JPG/PNG/GIF up to 5 MB (e.g. 1500×1000) showing the product's best screen and the name, readable at postage-stamp size. No stock photos or logo-only images.
+One plain-English Kane test in every language your app ships; Claude Code fixes what breaks, Kane re-checks until green.
 
-## Inspiration
+## About your app
 
-> Guide: 2–4 sentences about a real moment: who struggled, with what, and why it stuck with you. Specific and personal beats market statistics. Only the human knows their true inspiration: draft from facts they told you, or ask them for one sentence. Never invent a backstory.
+Locale check runs one plain-English Kane CLI objective in every language a web app ships and shows a red/green grid, with Kane's screenshot, root cause and step-by-step replay for each language. It is for developers who ship translations they can't read: string linters check that keys exist, but not that the German label pushes the Pay button out of its card, that an Arabic layout hides Continue, or that the date format the page asks for is then rejected. The agent is Claude Code: locale-check hands it only the failures Kane confirmed as app bugs, with Kane's evidence; Claude edits the code, and Kane re-runs only the red languages until everything passes. Kane does the browsing and the judging: it drives a real Chrome through the flow in Arabic, Japanese or German, checks at each step that buttons are visible and labels are translated, and triages its own failures, so its own missteps and a site's bot checks are never reported as app bugs. On our six-language demo shop it caught four planted locale bugs and Claude fixed them in one round; on Open Library (Internet Archive) it found that the Arabic interface is served left-to-right.
 
-{{Inspiration}}
+## Links
 
-## What it does
+- Repo: https://github.com/freddy-tama/locale-check
+- Video: _YouTube link after upload_
+- Live / no-account view: _GitHub Pages link if enabled_, otherwise `examples/recorded/demo-shop/report.html` in the repo
+- One-command run: `node bin/locale-check.mjs run` (needs a Kane CLI login and credits; the recorded run needs nothing)
 
-> Guide: Open with the core loop in one sentence: "<User> gives <input>; <product> <does what>; they get <visible outcome>." Then 3–5 bullets, each a user benefit backed by a working feature. Say plainly what is live and what is sample data.
+## How we built it (if the form asks)
 
-{{One-sentence loop}}
+- Node 18+, no npm dependencies. `kane-cli run --agent` per locale, NDJSON parsed live; Kane's evidence pack (a zip) read for the screenshot.
+- Three locales in parallel, each with a throwaway Chrome profile and a launch gate, because kane-cli picks a free debugging port before its Chrome binds it.
+- Kane's own triage (`verdict.family`: application_issue vs automation_bug) decides what reaches the agent.
+- Claude Code runs as `claude -p` with file tools only and project settings only; locale-check records the files it changed.
+- Ships as a CLI, a Claude Code skill (`locale-check install-skill`) and a CI workflow example.
 
-- {{Benefit 1 — the feature that delivers it}}
-- {{Benefit 2}}
-- {{Benefit 3}}
+## Challenges
 
-## How we built it
+- Parallel Kane runs drove each other's browser until each got its own profile and a launch gate.
+- Chrome refused a Windows 8.3 short temp path as its profile folder (exit code 21).
+- Objective wording: global or negatively worded checks gave false failures; numbered steps with a positive check at the step where it applies worked.
+- A live public site started showing a human-verification page after about ten runs; we cut the check to its home page, one language at a time, and never bypass such checks.
 
-> Guide: 3–6 bullets plus the architecture diagram image. Cover the frontend, backend, the AI and *why it is necessary* (what breaks without it), data sources, the required sponsor technology and where it sits in the loop, and hosting. Say what was built during the event and name any template or open-source code you started from.
+## What's next
 
-- {{Frontend}}
-- {{Backend / data}}
-- {{AI: model, what it decides or generates, how output is validated}}
-- {{Required/sponsor tech: the step that depends on it}}
-- {{Built during the event vs. reused: templates, libraries, prior work}}
-
-## Challenges we ran into
-
-> Guide: 2–3 real problems with the fix and a number where possible ("first approach took 40 s; streaming partial results cut it to 6 s"). Judges read this as evidence of technical depth.
-
-- {{Challenge → what you did → result}}
-
-## Accomplishments that we're proud of
-
-> Guide: 2–4 concrete wins: something that works end to end, a measured result, a design or accessibility win. No adjectives without a fact.
-
-- {{Accomplishment}}
-
-## What we learned
-
-> Guide: 2–3 honest lessons about the domain, the tech, or building fast with AI tools.
-
-- {{Lesson}}
-
-## What's next for Locale check
-
-> Guide: 2–4 concrete next steps tied to real use (pilot with X, add data source Y, validate Z with N users). Skip grand roadmaps.
-
-- {{Next step}}
-
-## Built with
-
-{{Up to 25 tags. Put the required/sponsor tools first, then languages, frameworks, APIs, cloud.}}
-
-## Try it out
-
-- Live demo: {{URL — test it in a private window while logged out}}
-- Source code: {{repo URL — public, or shared with the emails the rules list}}
-- Demo video: {{public YouTube / Vimeo / Youku link}}
-
-## Testing instructions for judges
-
-> Guide: Judges may never run your project; when they do, they spend minutes. Give a 60-second path. Put credentials here or in the form's testing field, never in a public README if they unlock anything real.
-
-1. Open {{URL}} ({{no login needed / log in as ...}}).
-2. {{Click / type ...}} → you should see {{result}} in about {{n}} seconds.
-3. {{Second thing worth trying}}.
-
-Known limits: {{sample data, rate limits, supported browsers}}.
-
-## Additional questions the event may ask
-
-> Guide: Answer every custom question in the form. Common ones: category/track, how you used the required API, what you built during the submission period (for projects that existed before), country, submitter type, repo URL, license confirmation, feedback on the sponsor's tools.
-
-- Category / track: {{...}}
-- How we used {{required technology}}: {{2–4 sentences pointing at the exact step}}
-- What changed during the hackathon (if the project existed before): {{...}}
+Run the CI gate on real pull requests, a pseudo-locale mode for apps that have not been translated yet, and mobile viewports per locale.
