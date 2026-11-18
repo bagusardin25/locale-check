@@ -1,0 +1,20 @@
+{
+  "app": "Open Library (openlibrary.org, live site)",
+  "url": "https://openlibrary.org/?lang={locale}",
+  "locales": [
+    "en",
+    "de",
+    "ar",
+    "ja",
+    "zh"
+  ],
+  "objective": "1. On this page, verify that the site's own interface (menus, buttons, headings and labels; not book titles or covers) is shown in {language} and contains no raw translation keys such as section.some_label.\n2. Verify that the page layout direction suits {language}: for a right-to-left language such as Arabic, Hebrew or Persian, the page must be laid out right-to-left, with interface text aligned to the right and navigation and rows starting from the right side; for a left-to-right language it must be laid out left-to-right.\nDo not search or open other pages. If a verification fails, fail the test at that step.",
+  "outDir": ".locale-check",
+  "report": ".locale-check/report.html",
+  "concurrency": 1,
+  "kane": {
+    "retries": 0,
+    "maxSteps": 15
+  },
+  "_note": "Live public site: keep traffic low (home page only, one language at a time, no retries). The first run on 2026-11-18 also searched and opened a book page, which triggered the site's human-verification check after about ten runs."
+}

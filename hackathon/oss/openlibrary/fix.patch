@@ -1,0 +1,38 @@
+Proposed patch for internetarchive/openlibrary (draft; not applied or run against their test suite).
+Line numbers are approximate, from master on 2026-11-18.
+
+--- a/openlibrary/core/shell/context.py
++++ b/openlibrary/core/shell/context.py
+@@
++# Scripts written right to left. The UI languages Open Library ships include ar, fa and he.
++RTL_LANGS = frozenset({"ar", "fa", "he", "ur"})
++
++
+ class LayoutContext:
+@@
+     @property
+     def active_ui_lang(self) -> dict[str, str]:
+@@
+         return {"code": "en", "localized": "English", "native": "English"}
++
++    @property
++    def dir(self) -> str:
++        """Text direction for <html dir>: "rtl" for right-to-left UI languages."""
++        return "rtl" if self.lang.split("-")[0].lower() in RTL_LANGS else "ltr"
+
+--- a/openlibrary/templates/shell/base.html.jinja
++++ b/openlibrary/templates/shell/base.html.jinja
+@@
+ <!DOCTYPE html>
+-<html lang="{{ layout.lang }}">
++<html lang="{{ layout.lang }}" dir="{{ layout.dir }}">
+
+--- a/openlibrary/tests/core/test_layout.py
++++ b/openlibrary/tests/core/test_layout.py
+@@
++@pytest.mark.parametrize(("lang", "expected"), [("ar", "rtl"), ("he", "rtl"), ("fa", "rtl"), ("en", "ltr"), ("ja", "ltr")])
++def test_layout_dir_follows_ui_language(request_context_fixture, lang, expected):
++    """<html dir> should be rtl for right-to-left UI languages."""
++    request_context_fixture(lang=lang)
++    layout = _build_layout()  # same helper the neighbouring tests use
++    assert layout.dir == expected
