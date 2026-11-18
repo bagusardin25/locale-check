@@ -1,0 +1,423 @@
+{
+  "tool": "locale-check",
+  "app": "Hearth & Kiln demo shop (agent adds Hebrew)",
+  "url": "http://127.0.0.1:8765/examples/demo-shop/?lang={locale}",
+  "objective": "1. Open any product, add it to the cart, open the cart and click the checkout button.\n2. Shipping step: fill in realistic test details for a customer in a {language}-speaking country. Verify that this step's Continue button is fully visible and that no other element overlaps it, then click it.\n3. Delivery step: type a delivery date about one week from today, in exactly the format the hint on the page shows. Verify that this step's Continue button is fully visible, that no other element overlaps it, and that its label is written in {language} words rather than a code-like key with dots (such as section.some_label). Then click it.\n4. Review step: keep the default payment method. Verify that the Place order button is fully visible, not cut off by its card, and that no other element overlaps it, then click it.\n5. Verify that the order confirmation with an order number appears.\nIf any verification fails, fail the test at that step. Do not work around a hidden or covered button with the keyboard.",
+  "checks": [],
+  "locales": {
+    "he": {
+      "history": [
+        {
+          "round": 1,
+          "status": "failed",
+          "oneLiner": "The shipping form was filled in, but its Continue button was not available to continue checkout.",
+          "bugTitle": "Shipping Continue button missing after completed address form",
+          "rootCause": "The checkout page did not show the shipping Continue button after the required customer and Israeli address details were entered. The card ended directly below the phone field, leaving no button to verify or click.",
+          "suggestion": "Restore the shipping Continue button after valid shipping details are entered, and add a checkout test that confirms the button renders above the persistent cart bar.",
+          "screenshot": "runs/2026-11-18T01-23-33-907/he.jpg",
+          "ndjson": "runs/2026-11-18T01-23-33-907/he.ndjson",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P4140WYFEK3744XVNXAFA6/dashboard/share/US_3OZYJNLP9IS2V9731PLKLTDCLFY4JWC7B5WP4INXIECAFXC8S6AY65FDOH1YL52U?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 25.6,
+          "duration": 101.7
+        }
+      ],
+      "locale": "he",
+      "language": "Hebrew",
+      "nativeLanguage": "עברית",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=he",
+      "status": "passed",
+      "oneLiner": "placed an order on the Hebrew demo shop",
+      "summary": "Completed the requested purchase flow in the Hebrew-language demo shop.\nAdded a product to the cart, opened checkout, and entered realistic shipping details for a customer in a Hebrew-speaking country.\nContinued through shipping and delivery after entering a delivery date in the format requested on the page.\nKept the default payment method and placed the order.\nThe order was confirmed successfully with order number HK-168583.",
+      "reason": "Objective completed",
+      "reasonCode": "success.complete",
+      "bugTitle": null,
+      "rootCause": null,
+      "suggestion": null,
+      "severity": null,
+      "category": null,
+      "confirmedBug": null,
+      "family": null,
+      "credits": 85.2,
+      "duration": 171.9,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P49Z1K477TW1E4YQQXPE0H/dashboard/share/US_X6WW8VC611WHEJOOFGHHFL66NU680OFOEWN16YTY9LYS3TM61VJKHDJFOB8H6ET7?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=he"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "click: Clicking a product link in the product list"
+        },
+        {
+          "step": 4,
+          "status": "done",
+          "remark": "click: Clicking adding it to the cart button labeled הוספה לסל"
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Clicking to open the cart to view it"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking the checkout button to proceed to payment"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"שם מלא\"; type \"רחוב ומספר בית\"; type \"עיר\"; type \"מ"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "type: Type \"נועה כהן\" into \"שם מלא\""
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "type: Type \"רחוב דיזנגוף 100\" into \"רחוב ומספר בית\""
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"תל אביב\" into \"עיר\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"6433222\" into \"מיקוד\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"0501234567\" into \"מספר טלפון\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "wait: PRIMARY: Shipping step: fill in realistic test details for a customer in a Hebre"
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "analyze: no other element overlaps this step's Continue button"
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "assert: this step's Continue button is fully visible and no other element overlaps it"
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "click: Clicking the Shipping step Continue button"
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "type: Typing the preferred delivery date into the date field"
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "analyze: no other element overlaps this step's Continue button"
+        },
+        {
+          "step": 19,
+          "status": "done",
+          "remark": "assert: this step's Continue button is fully visible, no other element overlaps it, and "
+        },
+        {
+          "step": 20,
+          "status": "done",
+          "remark": "click: Clicking the Delivery step Continue button in the bottom checkout bar"
+        },
+        {
+          "step": 21,
+          "status": "done",
+          "remark": "wait: PRIMARY: Review step: keep the default payment method"
+        },
+        {
+          "step": 22,
+          "status": "done",
+          "remark": "analyze: no other element overlaps the Place order button"
+        },
+        {
+          "step": 23,
+          "status": "done",
+          "remark": "assert: the Place order button is fully visible, not cut off by its card, and no other e"
+        },
+        {
+          "step": 24,
+          "status": "done",
+          "remark": "click: Clicking the Place order button"
+        },
+        {
+          "step": 25,
+          "status": "done",
+          "remark": "analyze: any verification failure"
+        },
+        {
+          "step": 26,
+          "status": "done",
+          "remark": "assert: the order confirmation with an order number appears"
+        },
+        {
+          "step": 28,
+          "status": "done",
+          "remark": "wait: Waiting order confirmation with an order number is displayed"
+        }
+      ],
+      "earlierAttempts": [
+        {
+          "status": "inconclusive",
+          "note": "The test stopped even though the shipping Continue button was fully on screen and unobstructed.",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P45ZA61WS30SZ0BVW284PR/dashboard/share/US_VGKYD6KEE4AIWK90X5KZ4IPDXMXUENQAWWMAY48GP0EGOB0TCXIPTTX23YSLOBZ5?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 27.8,
+          "ndjson": "runs/2026-11-18T01-26-11-483/he.ndjson"
+        }
+      ],
+      "wallSeconds": 330,
+      "ndjson": "runs/2026-11-18T01-26-11-483/he.attempt2.ndjson",
+      "screenshot": "runs/2026-11-18T01-26-11-483/he.jpg",
+      "runAt": "2026-11-18T01:31:41.209Z",
+      "round": 2
+    },
+    "ar": {
+      "history": [
+        {
+          "round": 1,
+          "status": "failed",
+          "oneLiner": "The shipping form has no visible Continue button, so the customer cannot proceed to delivery.",
+          "bugTitle": "Shipping checkout omits Continue button",
+          "rootCause": "After the shipping details are filled in, the checkout screen does not show the button needed to move to the next step.",
+          "suggestion": "Restore the shipping-step Continue button after valid details are entered, and add a UI test that confirms it is rendered within the card and above any persistent page controls.",
+          "screenshot": "runs/2026-11-18T01-23-33-907/ar.jpg",
+          "ndjson": "runs/2026-11-18T01-23-33-907/ar.ndjson",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P41GZRTDYGJ5NQQDRAGNYY/dashboard/share/US_NOE7E0K34C0GD0UYTYH855T5EUG4JK1GBR2FTHFQ6VZ9B6GW3DMI8A3U4B53SK3Y?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 25.2,
+          "duration": 89.1
+        }
+      ],
+      "locale": "ar",
+      "language": "Arabic",
+      "nativeLanguage": "العربية",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=ar",
+      "status": "passed",
+      "oneLiner": "placed an order on the demo shop",
+      "summary": "Added a product to the cart and proceeded to checkout in the Arabic-language shop.\nEntered realistic shipping details for a customer in an Arabic-speaking country and continued after confirming the button was clearly available.\nEntered a delivery date in the page’s requested format, continued to review, and kept the default payment method.\nPlaced the order successfully; the confirmation page displayed order number HK-697245.",
+      "reason": "Objective completed",
+      "reasonCode": "success.complete",
+      "bugTitle": null,
+      "rootCause": null,
+      "suggestion": null,
+      "severity": null,
+      "category": null,
+      "confirmedBug": null,
+      "family": null,
+      "credits": 56.6,
+      "duration": 193.2,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P46HYJMQX2D7SJ56Z47X8Z/dashboard/share/US_4F15789JMO13ZGJNFNQGL8R4D4C4S0OYN291NN7S01D626SGKREQC4W1MBK1YJ42?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=ar"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "analyze: Any verification in this objective fails."
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Clicking the selected product link in the product list"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking أضف إلى السلة to add it to the cart"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "click: Clicking the cart link in the header navigation"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "click: Clicking the checkout button to complete the purchase"
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"الاسم الكامل\"; type \"عنوان الشارع\"; type \"المدينة\";"
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"سارة أحمد\" into \"الاسم الكامل\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"شارع الشيخ زايد 12\" into \"عنوان الشارع\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"دبي\" into \"المدينة\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "type: Type \"00000\" into \"الرمز البريدي\""
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "type: Type \"+971501234567\" into \"رقم الهاتف\""
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "analyze: No other element overlaps the Shipping step Continue button."
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "assert: This step's Continue button is fully visible and no other element overlaps it."
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "click: Clicking Continue on the Shipping step"
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "type: Entering preferred delivery date 25-11-2026"
+        },
+        {
+          "step": 19,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, 'No other element overlaps the Delivery step Continue bu"
+        },
+        {
+          "step": 20,
+          "status": "done",
+          "remark": "assert: This step's Continue button is fully visible, no other element overlaps it, and "
+        },
+        {
+          "step": 21,
+          "status": "done",
+          "remark": "click: Clicking Continue to payment step"
+        },
+        {
+          "step": 22,
+          "status": "done",
+          "remark": "analyze: No other element overlaps the Place order button."
+        },
+        {
+          "step": 23,
+          "status": "done",
+          "remark": "assert: The Place order button is fully visible, not cut off by its card, and no other e"
+        },
+        {
+          "step": 24,
+          "status": "done",
+          "remark": "click: Clicking the Place order button"
+        },
+        {
+          "step": 25,
+          "status": "done",
+          "remark": "wait: PRIMARY: wait for the order confirmation page to settle"
+        },
+        {
+          "step": 26,
+          "status": "done",
+          "remark": "analyze: The order confirmation with an order number appears."
+        },
+        {
+          "step": 27,
+          "status": "done",
+          "remark": "assert: The order confirmation with an order number appears."
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 241,
+      "ndjson": "runs/2026-11-18T01-26-11-483/ar.ndjson",
+      "screenshot": "runs/2026-11-18T01-26-11-483/ar.jpg",
+      "runAt": "2026-11-18T01:30:12.027Z",
+      "round": 2
+    }
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "startedAt": "2026-11-18T01:23:33.909Z",
+      "finishedAt": "2026-11-18T01:25:38.328Z",
+      "ran": [
+        "he",
+        "ar"
+      ],
+      "statuses": {
+        "he": "failed",
+        "ar": "failed"
+      },
+      "credits": 50.8,
+      "build": {
+        "agent": "claude",
+        "task": "Add Hebrew (he) as a seventh language of the shop. This is a translation change only: add locales/he.json with complete, natural Hebrew translations of every string, an Israeli date format and ILS prices, register Hebrew wherever the other languages are registered (language switcher, the right text direction), and change nothing else. Do not edit styles.css, other languages' files, or any existing behaviour.",
+        "ok": true,
+        "summary": "Hebrew is added as the seventh language; nothing was run here, so Kane's pass is the first check.\n\n- `examples/demo-shop/locales/he.json`: new file with every string translated into Hebrew, `dir: rtl`, `he-IL` number formatting, ILS currency and the Israeli `DD.MM.YYYY` date format. I chose dots rather than slashes because the existing date parser reads slash dates as month-first.\n- `examples/demo-shop/i18n.js`: added `'he'` to `SUPPORTED`; text direction comes from the locale file's `meta.dir`, as for Arabic.\n- `examples/demo-shop/index.html`: added the `עברית` option to the language switcher.\n- `examples/demo-shop/products.js`: added ILS prices (mug 99, dripper 119, bowl 165) and ILS shipping (20), since prices are keyed by currency.\n\nI did not touch `styles.css`, the other locale files or any existing behaviour, as instructed. `styles.css` sets a font for `html:lang(ar)` but there is no matching rule for `he`, so Hebrew uses the default font stack.",
+        "files": [
+          "examples/demo-shop/locales/he.json",
+          "examples/demo-shop/i18n.js",
+          "examples/demo-shop/index.html",
+          "examples/demo-shop/products.js"
+        ],
+        "seconds": 62,
+        "at": "2026-11-18T01:23:33.905Z"
+      },
+      "fix": {
+        "agent": "claude",
+        "for": [
+          "he",
+          "ar"
+        ],
+        "ok": true,
+        "summary": "he: anchored the fixed Help/chat pill and its panel with `inset-inline-start` instead of physical `left`, so in right-to-left layouts it no longer sits on top of the Continue button in the checkout step footer (examples/demo-shop/styles.css)\nar: same fix — the Help/chat pill and panel now follow the text direction and no longer cover the shipping Continue button in the step footer (examples/demo-shop/styles.css)",
+        "files": [
+          "examples/demo-shop/styles.css"
+        ],
+        "seconds": 33
+      }
+    },
+    {
+      "round": 2,
+      "startedAt": "2026-11-18T01:26:11.484Z",
+      "finishedAt": "2026-11-18T01:31:41.360Z",
+      "ran": [
+        "he",
+        "ar"
+      ],
+      "statuses": {
+        "he": "passed",
+        "ar": "passed"
+      },
+      "credits": 141.8
+    }
+  ],
+  "order": [
+    "he",
+    "ar"
+  ],
+  "updatedAt": "2026-11-18T01:31:41.360Z",
+  "recorded": "Recorded run, 2026-11-18 09:24–09:40 +0800: Claude Code was asked to add Hebrew as a translation-only change; Kane rejected Hebrew (and Arabic): the shipping Continue button was covered; Claude read Kane's screenshot and fixed the help pill with a logical property; Kane re-ran both and passed them. Every verdict, screenshot and replay link is from that real run."
+}

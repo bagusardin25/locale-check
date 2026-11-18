@@ -103,7 +103,7 @@ It is real and, as far as we can find, unreported: the page has `lang="ar"` but 
 - Kane's screenshot and log: [`hackathon/oss/openlibrary/`](hackathon/oss/openlibrary/)
 - Draft issue and a small patch (a `dir` property on the layout context): [`ISSUE.md`](hackathon/oss/openlibrary/ISSUE.md), [`fix.patch`](hackathon/oss/openlibrary/fix.patch). _Not filed yet._
 
-One more honest detail: our first Open Library run also searched for a book in every language, and after about ten runs the site started showing a human-verification page. Kane marked every one of those runs as "not an app bug", which is exactly what the inconclusive status is for. We cut the check down to the home page, one language at a time.
+One more honest detail: our first Open Library run also searched for a book in every language, and after about ten runs the site started showing a human-verification page. Kane marked every one of those runs as "not an app bug", which is exactly what the inconclusive status is for. We cut the check down to the home page, one language at a time. When we re-ran it 40 minutes later, this machine could not reach openlibrary.org at all (the TLS connection was reset; archive.org itself loaded fine), and Kane marked all five languages inconclusive again, correctly. So the side-by-side "English passes, Arabic fails" comparison is still missing; the Arabic finding rests on the first run's screenshot and log, and on the page source.
 
 ## How it works
 

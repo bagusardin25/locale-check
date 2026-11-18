@@ -1,0 +1,205 @@
+diff --git a/examples/demo-shop/i18n.js b/examples/demo-shop/i18n.js
+index 8b3949c..b645247 100644
+--- a/examples/demo-shop/i18n.js
++++ b/examples/demo-shop/i18n.js
+@@ -1,4 +1,4 @@
+-export const SUPPORTED = ['en', 'de', 'ar', 'ja', 'id', 'zh'];
++export const SUPPORTED = ['en', 'de', 'ar', 'ja', 'id', 'zh', 'he'];
+ 
+ let messages = {};
+ let current = 'en';
+diff --git a/examples/demo-shop/index.html b/examples/demo-shop/index.html
+index e35ddb6..e28c24a 100644
+--- a/examples/demo-shop/index.html
++++ b/examples/demo-shop/index.html
+@@ -45,6 +45,7 @@
+         <option value="ja">日本語</option>
+         <option value="id">Bahasa Indonesia</option>
+         <option value="zh">中文（简体）</option>
++        <option value="he">עברית</option>
+       </select>
+     </label>
+   </div>
+diff --git a/examples/demo-shop/products.js b/examples/demo-shop/products.js
+index 7a7e3a5..3b5081b 100644
+--- a/examples/demo-shop/products.js
++++ b/examples/demo-shop/products.js
+@@ -2,21 +2,21 @@ export const PRODUCTS = [
+   {
+     id: 'mug',
+     tile: 'var(--tile-oat)',
+-    prices: { USD: 28, EUR: 26, AED: 105, JPY: 4200, IDR: 450000, CNY: 198 },
++    prices: { USD: 28, EUR: 26, AED: 105, JPY: 4200, IDR: 450000, CNY: 198, ILS: 99 },
+   },
+   {
+     id: 'dripper',
+     tile: 'var(--tile-celadon)',
+-    prices: { USD: 34, EUR: 32, AED: 125, JPY: 5200, IDR: 540000, CNY: 238 },
++    prices: { USD: 34, EUR: 32, AED: 125, JPY: 5200, IDR: 540000, CNY: 238, ILS: 119 },
+   },
+   {
+     id: 'bowl',
+     tile: 'var(--tile-iron)',
+-    prices: { USD: 46, EUR: 44, AED: 170, JPY: 6900, IDR: 730000, CNY: 328 },
++    prices: { USD: 46, EUR: 44, AED: 170, JPY: 6900, IDR: 730000, CNY: 328, ILS: 165 },
+   },
+ ];
+ 
+-export const SHIPPING = { USD: 6, EUR: 5.5, AED: 25, JPY: 800, IDR: 40000, CNY: 2000 };
++export const SHIPPING = { USD: 6, EUR: 5.5, AED: 25, JPY: 800, IDR: 40000, CNY: 2000, ILS: 20 };
+ 
+ export function findProduct(id) {
+   return PRODUCTS.find((p) => p.id === id);
+diff --git a/examples/demo-shop/styles.css b/examples/demo-shop/styles.css
+index 5265f2d..6bd9744 100644
+--- a/examples/demo-shop/styles.css
++++ b/examples/demo-shop/styles.css
+@@ -933,7 +933,7 @@ body.has-step-footer .site-footer {
+ 
+ .help-pill {
+   position: fixed;
+-  left: 20px;
++  inset-inline-start: 20px;
+   bottom: 14px;
+   z-index: 60;
+   display: inline-flex;
+@@ -959,7 +959,7 @@ body.has-step-footer .site-footer {
+ }
+ .help-panel {
+   position: fixed;
+-  left: 20px;
++  inset-inline-start: 20px;
+   bottom: 84px;
+   z-index: 61;
+   width: min(320px, calc(100vw - 40px));
+
+=== new file: examples/demo-shop/locales/he.json
+{
+  "meta": {
+    "title": "Hearth & Kiln · כלי קרמיקה בעבודת יד",
+    "dir": "rtl"
+  },
+  "format": {
+    "number_locale": "he-IL",
+    "currency": "ILS",
+    "date_format": "DD.MM.YYYY"
+  },
+  "nav": {
+    "shop": "חנות",
+    "cart": "סל קניות",
+    "language": "שפה",
+    "skip": "דילוג לתוכן"
+  },
+  "footer": {
+    "demo": "חנות הדגמה. לא מתבצעות הזמנות אמיתיות."
+  },
+  "home": {
+    "eyebrow": "כלי קרמיקה בסדרות קטנות",
+    "title": "כלים ליום־יום, מעוצבים ומזוגגים בעבודת יד.",
+    "lead": "כל כלי נוצר בסטודיו שלנו ונשרף פעמיים. אין שתי זיגוגיות שיוצאות זהות לגמרי."
+  },
+  "products": {
+    "mug": {
+      "name": "ספל מנוקד",
+      "short": "זיגוג בגוון שיבולת שועל, 350 מ״ל",
+      "description": "ספל יציב ומאוזן בזיגוג בגוון שיבולת שועל עם נקודות ברזל עדינות. הידית הרחבה מתאימה לשלוש אצבעות.",
+      "details": ["קיבולת 350 מ״ל", "מתאים למדיח ולמיקרוגל", "קרמיקת סטונוור שעוצבה על אובניים"]
+    },
+    "dripper": {
+      "name": "דריפר סלדון",
+      "short": "זיגוג סלדון, לכוס אחת או שתיים",
+      "description": "דריפר להכנת קפה פילטר, מתאים לפילטרים מנייר במידה 2, עם צלעות פנימיות לזרימה אחידה. מזוגג בירוק סלדון בהיר.",
+      "details": ["מתאים לפילטרים במידה 2", "לכוס אחת או שתיים", "מתאים למדיח"]
+    },
+    "bowl": {
+      "name": "קערת הגשה באדום ברזל",
+      "short": "זיגוג אדום ברזל, 22 ס״מ",
+      "description": "קערה רחבה ורדודה לסלטים, לפסטה או לפירות. בשוליים הזיגוג מתכהה לחום עמוק.",
+      "details": ["קוטר 22 ס״מ", "מתאימה למדיח", "לא מתאימה לשימוש בתנור"]
+    }
+  },
+  "product": {
+    "add_to_cart": "הוספה לסל",
+    "added": "המוצר נוסף לסל.",
+    "view_cart": "לצפייה בסל",
+    "back": "חזרה לחנות",
+    "details": "פרטים",
+    "in_stock": "במלאי, נשלח בתוך 1–2 ימי עסקים"
+  },
+  "cart": {
+    "title": "סל הקניות שלך",
+    "empty_title": "סל הקניות שלך ריק",
+    "empty_body": "אפשר לעיין בכלים שלנו ולהוסיף את מה שמוצא חן בעיניך.",
+    "browse": "לחנות",
+    "quantity": "כמות",
+    "decrease": "הפחתת כמות",
+    "increase": "הגדלת כמות",
+    "remove": "הסרה",
+    "subtotal": "סכום ביניים",
+    "shipping": "משלוח",
+    "total": "סה״כ",
+    "checkout": "לתשלום",
+    "summary": "סיכום הזמנה"
+  },
+  "checkout": {
+    "title": "השלמת הזמנה",
+    "step_of": "שלב {n} מתוך 3",
+    "steps": {
+      "shipping": "כתובת",
+      "delivery": "משלוח",
+      "review": "סיכום ותשלום"
+    },
+    "back_to_cart": "חזרה לסל",
+    "back": "חזרה",
+    "shipping_title": "לאן לשלוח את ההזמנה?",
+    "full_name": "שם מלא",
+    "street": "רחוב ומספר בית",
+    "city": "עיר",
+    "postal_code": "מיקוד",
+    "phone": "מספר טלפון",
+    "phone_hint": "לשימוש השליח בלבד.",
+    "continue": "המשך",
+    "delivery_title": "מתי נוח לך לקבל את ההזמנה?",
+    "delivery_date": "תאריך משלוח מועדף",
+    "delivery_hint": "בתבנית {format}, לדוגמה {example}. המשלוח המוקדם ביותר הוא בעוד יומיים.",
+    "delivery_note": "אנחנו שולחים בימים שני עד שבת. השליח ישלח לך הודעה בבוקר יום המשלוח.",
+    "continue_to_payment": "המשך לתשלום",
+    "review_title": "בדיקת ההזמנה",
+    "ship_to": "כתובת למשלוח",
+    "deliver_on": "תאריך משלוח",
+    "edit": "עריכה",
+    "payment_title": "אמצעי תשלום",
+    "cod": "תשלום לשליח",
+    "cod_hint": "משלמים לשליח במזומן או בכרטיס אשראי.",
+    "bank": "העברה בנקאית",
+    "bank_hint": "נשלח את פרטי חשבון הבנק שלנו באימייל לאחר ההזמנה.",
+    "total_label": "סה״כ",
+    "legal": "ביצוע ההזמנה מהווה הסכמה לתנאי המכירה ולמדיניות הפרטיות שלנו.",
+    "place_order": "ביצוע הזמנה"
+  },
+  "errors": {
+    "name_required": "יש להזין שם מלא.",
+    "street_required": "יש להזין רחוב ומספר בית.",
+    "city_required": "יש להזין עיר.",
+    "postal_required": "יש להזין מיקוד.",
+    "postal_invalid": "נראה שהמיקוד אינו תקין. אפשר להשתמש באותיות לטיניות, בספרות וברווחים בלבד.",
+    "phone_required": "יש להזין מספר טלפון.",
+    "phone_invalid": "יש להזין מספר טלפון עם 6 ספרות לפחות.",
+    "date_required": "יש להזין תאריך משלוח.",
+    "date_invalid": "יש להזין את התאריך בתבנית {format}, לדוגמה {example}.",
+    "date_too_soon": "יש לבחור תאריך שחל לפחות יומיים מהיום."
+  },
+  "confirmation": {
+    "title": "תודה, ההזמנה שלך התקבלה.",
+    "order_number": "מספר הזמנה",
+    "body": "נארוז אותה בקפידה ונשלח אותה אליך ב־{date}.",
+    "payment": "אמצעי תשלום: {method}",
+    "continue": "להמשך הקנייה"
+  },
+  "help": {
+    "pill": "עזרה / צ׳אט",
+    "title": "דברו עם הסטודיו",
+    "body": "אנחנו עונים בתוך כמה שעות, בימים שני עד שבת.",
+    "close": "סגירה"
+  }
+}
