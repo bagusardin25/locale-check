@@ -85,7 +85,7 @@
     "continue": "Weiter",
     "delivery_title": "Wann soll Ihre Bestellung ankommen?",
     "delivery_date": "Wunschliefertermin",
-    "delivery_hint": "Format {format}, zum Beispiel {example}. Frühestens in 2 Tagen lieferbar.",
+    "delivery_hint": "Format {Format}, zum Beispiel {Beispiel}. Frühestens in 2 Tagen lieferbar.",
     "delivery_note": "Wir liefern von Montag bis Samstag. Am Liefertag erhalten Sie morgens eine SMS vom Zusteller.",
     "continue_to_payment": "Weiter zur Zahlung",
     "review_title": "Bestellung prüfen",
