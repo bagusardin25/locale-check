@@ -10,9 +10,23 @@ import { failing, loadResults, saveResults } from './results.mjs';
 import { writeReport } from './grid.mjs';
 import { c } from './term.mjs';
 
-export async function closedLoop(cfg, { maxRounds = cfg.agent.maxRounds, failedOnly = false, resume = false, only, log = console.log } = {}) {
+export async function closedLoop(cfg, { maxRounds = cfg.agent.maxRounds, failedOnly = false, resume = false, task, only, log = console.log } = {}) {
+  // --task: the agent first builds something (e.g. "add Hebrew"), then Kane verifies it.
+  let build = null;
+  if (task) {
+    log(c.bold(c.magenta(`Build: handing the task to ${cfg.agent.command}`)));
+    log(c.dim(task));
+    const before = snapshot(cfg.root);
+    const t0 = Date.now();
+    const agent = await runAgent(cfg, buildTaskPrompt(cfg, task), log, BUILD_NOTE);
+    const files = agent.files?.length ? agent.files : diffSnapshot(cfg, before);
+    build = { agent: cfg.agent.command, task, ok: agent.ok, summary: agent.summary, files, seconds: Math.round((Date.now() - t0) / 1000), at: new Date().toISOString() };
+    if (!agent.ok) { log(c.red(`Agent did not finish the task: ${agent.summary || 'no output'}`)); }
+    log(c.dim(`Agent changed: ${files.join(', ') || 'nothing'}`));
+    log('');
+  }
   // --resume: start from the failures already in results.json instead of paying for a fresh Kane round.
-  let results = resume && loadResults(cfg).rounds.length ? loadResults(cfg) : (await runRound(cfg, { only, failedOnly, log })).results;
+  let results = resume && loadResults(cfg).rounds.length ? loadResults(cfg) : (await runRound(cfg, { only, failedOnly, log, build })).results;
   if (resume) log(c.dim(`Resuming from round ${results.rounds.length} in results.json`));
   for (let fix = 1; fix <= maxRounds; fix++) {
     const notPassing = failing(cfg, results);
@@ -28,7 +42,7 @@ export async function closedLoop(cfg, { maxRounds = cfg.agent.maxRounds, failedO
     const brief = buildBrief(cfg, results, { forAgent: true });
     const before = snapshot(cfg.root);
     const t0 = Date.now();
-    const agent = await runAgent(cfg, brief, log);
+    const agent = await runAgent(cfg, brief, log, AGENT_NOTE);
     // Claude reports its own Edit/Write calls; for other agents, fall back to what git sees changed.
     const files = agent.files?.length ? agent.files : diffSnapshot(cfg, before);
     const last = results.rounds[results.rounds.length - 1];
@@ -56,15 +70,33 @@ const AGENT_NOTE = 'You are the fixer inside locale-check, a loop where Kane CLI
   + 'You cannot run commands; Kane re-checks your work right after you finish. '
   + 'End with exactly one line per language you fixed, in the form `<locale>: <what you changed> (<file>)`, and nothing else.';
 
+const BUILD_NOTE = 'You are the builder inside locale-check, a loop where Kane CLI then tests your work in a real browser in every language. '
+  + 'You run without a human. Do the task in the app source, following the existing structure and conventions. '
+  + 'You cannot run commands; Kane checks your work right after you finish, and you will get its failures back. '
+  + 'End with one short line per file you changed, saying what you did.';
+
+function buildTaskPrompt(cfg, task) {
+  return [
+    `# Task\n\n${task}`,
+    '',
+    `App: ${cfg.app || '(unnamed)'} · URL pattern: ${cfg.url}`,
+    cfg.source?.length ? `The app source is in: ${cfg.source.join(', ')} (relative to ${cfg.root}).` : '',
+    `After you finish, Kane CLI will run this objective in these locales: ${cfg.locales.join(', ')}.`,
+    `Objective: ${cfg.objective}`,
+    '',
+    'Do not edit locale-check config files. Write complete, natural translations where the task needs them.',
+  ].filter((l) => l !== undefined).join('\n');
+}
+
 /** Run the agent with the brief on stdin. Claude Code gets stream-json so we can show its edits live. */
-function runAgent(cfg, brief, log) {
+function runAgent(cfg, brief, log, note = AGENT_NOTE) {
   const isClaude = /(^|[\\/])claude(\.exe)?$/i.test(cfg.agent.command);
   // Claude runs focused: project settings only (no user-level hooks), file tools only, and a
   // system note that pins the job and the reply format.
   const args = isClaude
     ? ['-p', '--output-format', 'stream-json', '--verbose', '--permission-mode', 'acceptEdits',
        '--allowedTools', 'Read,Edit,Write,Glob,Grep', '--setting-sources', 'project,local',
-       '--append-system-prompt', AGENT_NOTE, ...(cfg.agent.args || [])]
+       '--append-system-prompt', note, ...(cfg.agent.args || [])]
     : [...(cfg.agent.args || [])];
   return new Promise((resolve) => {
     const child = spawn(cfg.agent.command, args, { cwd: cfg.root, stdio: ['pipe', 'pipe', 'pipe'], windowsHide: true });

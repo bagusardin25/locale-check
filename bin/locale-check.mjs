@@ -25,6 +25,8 @@ Usage
   locale-check loop [--max-rounds 3] [--resume] Run, hand failures to a coding agent (Claude Code
                                                 by default), re-run only red locales until green.
                                                 --resume starts from the last results, no new run
+  locale-check loop --task "Add Hebrew"         The agent builds the task first, then Kane verifies
+                                                it and failures go back to the agent
   locale-check failures [--agent]               Print the failing locales as a brief (for an agent)
   locale-check report                           Rebuild the HTML report from results.json
   locale-check snapshot <dir> [--note "..."]    Save the last run as a shareable folder (report,
@@ -91,7 +93,7 @@ async function main() {
     if (!kaneAvailable()) throw new UsageError('kane-cli not found. Install it: npm install -g @testmuai/kane-cli, then kane-cli login');
     const results = cmd === 'run'
       ? (await runRound(cfg, { only, failedOnly: !!opts.failed })).results
-      : await closedLoop(cfg, { only, failedOnly: !!opts.failed, resume: !!opts.resume, maxRounds: opts['max-rounds'] ? Number(opts['max-rounds']) : undefined });
+      : await closedLoop(cfg, { only, failedOnly: !!opts.failed, resume: !!opts.resume, task: opts.task, maxRounds: opts['max-rounds'] ? Number(opts['max-rounds']) : undefined });
     return finish(cfg, results, opts);
   }
   if (cmd === 'failures') {

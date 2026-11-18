@@ -130,7 +130,7 @@ function loopSection(order, rounds, counts, total, credits) {
   const story = `Round 1: ${firstPass} of ${(first.ran || []).length} passed. Now: ${counts.passed} of ${total}`
     + (fixes.length ? `, after ${fixes.length} fix${fixes.length > 1 ? 'es' : ''} by ${agents.map(esc).join(' and ')}` : '') + '.';
   const totals = [`${rounds.length} round${rounds.length > 1 ? 's' : ''}`, fmtDur(wall), `${fmtNum(credits)} Kane credits`].filter(Boolean).join(' · ');
-  const body = rounds.map((r) => roundRow(order, r) + (r.fix ? fixRow(order, r.fix) : '')).join('\n');
+  const body = rounds.map((r) => (r.build ? buildRow(order, r.build) : '') + roundRow(order, r) + (r.fix ? fixRow(order, r.fix) : '')).join('\n');
   return `<section class="panel loop" aria-labelledby="loop-h">
   <h2 id="loop-h">The loop, round by round</h2>
   <p class="lede"><strong>${story}</strong><br><span class="quiet">${totals}</span></p>
@@ -158,6 +158,18 @@ function roundRow(order, r) {
     return `<td><span class="cell t-${STATUS[s].tone}" title="${esc(l)}, round ${esc(r.round)}: ${STATUS[s].word}">${icon(STATUS[s].icon)}<span class="sr">${STATUS[s].word}</span></span></td>`;
   }).join('');
   return `<tr class="round"><th scope="row"><span class="rn">Round ${esc(r.round)}</span><span class="rs">Kane ran ${ran.length}: ${pass} pass</span>${meta ? `<span class="rs">${meta}</span>` : ''}</th>${cells}</tr>`;
+}
+
+// The agent's build step (locale-check loop --task), shown before the round that verified it.
+function buildRow(order, build) {
+  const agent = agentName(build.agent);
+  const files = build.files || [];
+  const lines = String(build.summary || '').split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
+  return `<tr class="fix"><td colspan="${order.length + 1}"><div class="fixbox">
+  <p class="fix-head">${icon('pencil')}<span><b class="agent">${esc(agent)}</b> built: ${esc(build.task)} · ${files.length} file${files.length === 1 ? '' : 's'} changed${Number.isFinite(build.seconds) ? ` <span class="quiet">· ${fmtDur(build.seconds)}</span>` : ''}</span></p>
+  ${files.length ? `<ul class="files" aria-label="Files the agent created or changed">${files.map((f) => `<li><code dir="ltr">${esc(f)}</code></li>`).join('')}</ul>` : ''}
+  ${lines.length ? `<details class="more"><summary>${esc(agent)}'s summary</summary><div class="pre" dir="auto">${esc(String(build.summary).trim())}</div></details>` : ''}
+</div></td></tr>`;
 }
 
 function fixRow(order, fix) {

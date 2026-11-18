@@ -1,0 +1,16 @@
+{
+  "app": "Hearth & Kiln demo shop (agent adds Hebrew)",
+  "url": "http://127.0.0.1:8765/examples/demo-shop/?lang={locale}",
+  "locales": [
+    "he",
+    "ar"
+  ],
+  "source": [
+    "examples/demo-shop"
+  ],
+  "objective": "1. Open any product, add it to the cart, open the cart and click the checkout button.\n2. Shipping step: fill in realistic test details for a customer in a {language}-speaking country. Verify that this step's Continue button is fully visible and that no other element overlaps it, then click it.\n3. Delivery step: type a delivery date about one week from today, in exactly the format the hint on the page shows. Verify that this step's Continue button is fully visible, that no other element overlaps it, and that its label is written in {language} words rather than a code-like key with dots (such as section.some_label). Then click it.\n4. Review step: keep the default payment method. Verify that the Place order button is fully visible, not cut off by its card, and that no other element overlaps it, then click it.\n5. Verify that the order confirmation with an order number appears.\nIf any verification fails, fail the test at that step. Do not work around a hidden or covered button with the keyboard.",
+  "concurrency": 2,
+  "outDir": ".locale-check-hebrew",
+  "report": ".locale-check-hebrew/report.html",
+  "_note": "Used with: locale-check loop --config locale-check.hebrew.json --task \"Add Hebrew (he) to the shop...\". The agent builds Hebrew first; Kane then verifies he and ar; failures go back to the agent."
+}

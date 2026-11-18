@@ -8,7 +8,7 @@ import { failing, loadResults, saveResults } from './results.mjs';
 import { writeReport } from './grid.mjs';
 import { c, pad } from './term.mjs';
 
-export async function runRound(cfg, { only, failedOnly = false, log = console.log } = {}) {
+export async function runRound(cfg, { only, failedOnly = false, build = null, log = console.log } = {}) {
   const results = loadResults(cfg);
   let locales = only?.length ? cfg.locales.filter((l) => only.includes(l)) : [...cfg.locales];
   if (only?.length) {
@@ -106,6 +106,7 @@ export async function runRound(cfg, { only, failedOnly = false, log = console.lo
     statuses,
     credits: Math.round(locales.reduce((s, l) => s + (results.locales[l].credits || 0), 0) * 10) / 10,
     runDir: rel(cfg, runDir),
+    ...(build ? { build } : {}),
   });
   saveResults(cfg, results);
   writeReport(cfg, results);
