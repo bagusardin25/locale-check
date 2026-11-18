@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Locale check</title>
+<meta name="description" content="One plain-English Kane CLI test in every language your web app ships. Claude Code fixes what breaks; Kane re-checks until green.">
+<style>
+  /* Direction: a quiet index for judges. Same voice as the report: plain type, green/red only where they mean pass/fail. */
+  :root {
+    --bg: #f6f6f3; --surface: #ffffff; --ink: #1b1d1f; --ink-2: #4c5258; --line: #dcdcd6;
+    --accent: #0b6e4f; --fail: #b3261e; --agent: #8a2c7a;
+    --sans: "Segoe UI", system-ui, -apple-system, "Noto Sans", "Noto Sans Arabic", "Noto Sans JP", "Microsoft YaHei", sans-serif;
+    --mono: ui-monospace, "Cascadia Mono", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #121416; --surface: #1b1e21; --ink: #ecedee; --ink-2: #b2b8be; --line: #33383d; --accent: #4cc39a; --fail: #f2847b; --agent: #e08bd3; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.55 var(--sans); }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 16px 64px; }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.1; margin: 0 0 12px; letter-spacing: -0.01em; }
+  .lead { font-size: 1.15rem; color: var(--ink-2); max-width: 60ch; margin: 0 0 8px; }
+  .note { font-size: .9rem; color: var(--ink-2); margin: 0 0 32px; }
+  h2 { font-size: 1.05rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); margin: 40px 0 12px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  a.card { display: block; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; color: inherit; text-decoration: none; }
+  a.card:hover, a.card:focus-visible { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+  .card b { display: block; font-size: 1.1rem; margin-bottom: 6px; }
+  .card span { color: var(--ink-2); font-size: .95rem; }
+  .story { font-family: var(--mono); font-size: .85rem; color: var(--ink-2); display: block; margin-top: 10px; }
+  .story .r { color: var(--fail); } .story .g { color: var(--accent); } .story .a { color: var(--agent); }
+  .langs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .langs a { display: inline-block; min-width: 44px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); text-decoration: none; text-align: center; }
+  .langs a:hover, .langs a:focus-visible { border-color: var(--accent); outline: none; }
+  pre { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; overflow-x: auto; font: .9rem/1.6 var(--mono); }
+  footer { margin-top: 48px; color: var(--ink-2); font-size: .9rem; }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Locale check</h1>
+  <p class="lead">One plain-English Kane CLI test, run in every language your web app ships. Claude Code fixes what breaks, and Kane re-checks only the red languages until everything passes.</p>
+  <p class="note">Everything below is a recorded run: real Kane verdicts, screenshots and replay links. Nothing on these pages calls Kane or needs an account.</p>
+
+  <h2>See it work</h2>
+  <div class="cards">
+    <a class="card" href="examples/recorded/demo-shop/report.html">
+      <b>The loop on a six-language shop</b>
+      <span>Kane finds four locale bugs, Claude Code fixes them in one round, and Kane re-checks.</span>
+      <span class="story"><span class="r">round 1: 4 of 6 fail</span> → <span class="a">claude: 4 files</span> → <span class="g">round 2: 6/6 pass</span></span>
+    </a>
+    <a class="card" href="examples/recorded/hebrew-build-loop/report.html">
+      <b>The agent adds Hebrew; Kane rejects it</b>
+      <span>A translation-only change hides Continue in right-to-left. Kane fails it, and Claude fixes it from Kane's screenshot.</span>
+      <span class="story"><span class="a">claude builds he</span> → <span class="r">he, ar fail</span> → <span class="a">fix</span> → <span class="g">pass</span></span>
+    </a>
+    <a class="card" href="hackathon/oss/openlibrary/kane-ar-homepage.jpg">
+      <b>A real bug: Open Library in Arabic</b>
+      <span>Kane: "Arabic homepage retains left-to-right layout." The page sets <code>lang="ar"</code> but never <code>dir="rtl"</code>.</span>
+    </a>
+    <a class="card" href="examples/recorded/blind-test-v2/report.html">
+      <b>Blind tests, reported as they came out</b>
+      <span>A generic objective against bugs planted by another agent: one of two hidden bugs caught, one missed. (<a href="examples/recorded/blind-test-v1/report.html">round 1</a>)</span>
+    </a>
+  </div>
+
+  <h2>Try the demo shop (it has the bugs in it)</h2>
+  <ul class="langs" aria-label="Demo shop languages">
+    <li><a href="examples/demo-shop/?lang=en" hreflang="en">English</a></li>
+    <li><a href="examples/demo-shop/?lang=de" hreflang="de" lang="de">Deutsch</a></li>
+    <li><a href="examples/demo-shop/?lang=ar" hreflang="ar" lang="ar" dir="rtl">العربية</a></li>
+    <li><a href="examples/demo-shop/?lang=ja" hreflang="ja" lang="ja">日本語</a></li>
+    <li><a href="examples/demo-shop/?lang=id" hreflang="id" lang="id">Indonesia</a></li>
+    <li><a href="examples/demo-shop/?lang=zh" hreflang="zh" lang="zh">中文</a></li>
+  </ul>
+
+  <h2>Run it on your app</h2>
+  <pre>npm install -g @testmuai/kane-cli github:freddy-tama/locale-check
+kane-cli login
+locale-check init            # url with {locale}, your locales, one objective
+locale-check run             # Kane in every locale → locale-check-report.html
+locale-check loop            # Claude Code fixes the red ones, Kane re-checks
+locale-check install-skill   # or let Claude Code drive it as a skill</pre>
+
+  <footer>
+    <a href="https://github.com/freddy-tama/locale-check">Source on GitHub</a> · MIT · Built for the Kane CLI Online Hackathon (TestMu AI), November 2026 · #KaneCLIHackDay
+  </footer>
+</main>
+</body>
+</html>
