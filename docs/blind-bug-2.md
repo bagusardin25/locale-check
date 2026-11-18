@@ -1,6 +1,6 @@
 # Blind bug 2 (sixth planted bug)
 
-Planted after the generic objective v2 was committed (73e9c41), so the objective's author did not know it.
+Planted after the generic objective v2 was committed (73e9c41, 08:56:09), so the objective's author did not know it. Committed unread in 9d6be15 (08:58:29); read only after the v2 run finished.
 
 | Locale | Step | What the user sees |
 |---|---|---|

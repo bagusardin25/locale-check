@@ -1,0 +1,756 @@
+{
+  "tool": "locale-check",
+  "app": "Hearth & Kiln demo shop (generic objective v2)",
+  "url": "http://127.0.0.1:8765/examples/demo-shop/?lang={locale}",
+  "objective": "1. Open any product, add it to the cart, open the cart and start checkout.\n2. Go through every checkout step until the order is placed. On each step, fill in realistic details for a customer in a {language}-speaking country. Where a field shows an expected format or an example, follow it exactly.\n3. On each page, before you click its main button, verify that the page is fully usable in {language}: the whole button is visible, with no part of it cut off by the edge of its box or of the screen, and nothing covers it; the button and the page's labels and messages are written in {language} (no code-like keys, no leftover placeholder text); every value you typed in the format the page asked for was accepted; and every price, shipping cost and total shown looks plausible for this shop and adds up. Then click it.\n4. Verify that an order confirmation appears.\nIf a verification fails, fail the test at that point.",
+  "checks": [],
+  "locales": {
+    "ar": {
+      "history": [],
+      "locale": "ar",
+      "language": "Arabic",
+      "nativeLanguage": "العربية",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=ar",
+      "status": "failed",
+      "oneLiner": "The checkout Continue button is covered by the fixed bottom bar, so the Arabic checkout page is not usable.",
+      "summary": "The page places its fixed bar on top of the main checkout button instead of leaving enough space for the button to remain fully visible and usable.\nAdjust the checkout layout so fixed bottom content reserves space for the primary button, then verify at supported viewport sizes that the entire Arabic “متابعة” button remains visible and unobstructed.\nevidence: objective_contradiction: The Arabic “متابعة” button is covered by the fixed bottom bar, so the required usability verification fails.",
+      "reason": "The Arabic “متابعة” button is covered by the fixed bottom bar, so the required usability verification fails.",
+      "reasonCode": "assertion_error.confirmed_product_bug",
+      "bugTitle": "Fixed bottom bar obscures Arabic checkout Continue button",
+      "rootCause": "The page places its fixed bar on top of the main checkout button instead of leaving enough space for the button to remain fully visible and usable.",
+      "suggestion": "Adjust the checkout layout so fixed bottom content reserves space for the primary button, then verify at supported viewport sizes that the entire Arabic “متابعة” button remains visible and unobstructed.",
+      "severity": "major",
+      "category": "layout_overlap_defect",
+      "confirmedBug": true,
+      "family": "application_issue",
+      "credits": 27.8,
+      "duration": 98.8,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P2MTRPWS82QP09XJ5SQQVY/dashboard/share/US_ENM30VYSU1MD5DU45B90OLICZ6LG2PLLEFPPJ44KVTTB9TF4IMCLWO5IEB4YTT0Q?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=ar"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "analyze: a verification fails"
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: إجراء النقر على أول بطاقة منتج لفتح صفحة المنتج"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking Add to cart in the product details"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "click: Clicking عرض السلة to open the cart"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "click: clicking إتمام الشراء to start checkout"
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"الاسم الكامل\"; type \"عنوان الشارع\"; type \"المدينة\";"
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"فاطمة أحمد\" into \"الاسم الكامل\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"شارع الشيخ زايد 123\" into \"عنوان الشارع\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"دبي\" into \"المدينة\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "type: Type \"00000\" into \"الرمز البريدي\""
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "type: Type \"+971501234567\" into \"رقم الهاتف\""
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "scroll: Scrolling to bring the Continue button into view"
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "press_key: PRIMARY: press the Tab key to reach the unobstructed checkout main button"
+        },
+        {
+          "step": 17,
+          "status": "failed",
+          "remark": "wait: Waiting after detecting the checkout main button is covered"
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 164,
+      "ndjson": "runs/2026-11-18T00-58-41-249/ar.ndjson",
+      "screenshot": "runs/2026-11-18T00-58-41-249/ar.jpg",
+      "runAt": "2026-11-18T01:01:25.463Z",
+      "round": 1
+    },
+    "de": {
+      "history": [],
+      "locale": "de",
+      "language": "German",
+      "nativeLanguage": "Deutsch",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=de",
+      "status": "failed",
+      "oneLiner": "The German delivery-date guidance displays template keys instead of completed customer-facing text.",
+      "summary": "The delivery-date help text was shown with unfinished placeholders, so the German checkout page was not fully translated or ready for customers.\nReplace {Format} and {Beispiel} with the intended German guidance and example, then recheck the delivery step in the German locale.\nevidence: error_ui_text: The delivery-date guidance visibly contains unresolved code-like keys {Format} and {Beispiel}.",
+      "reason": "The delivery-date guidance visibly contains unresolved code-like keys {Format} and {Beispiel}.",
+      "reasonCode": "assertion_error.confirmed_product_bug",
+      "bugTitle": "Delivery-date guidance exposes unresolved German template keys",
+      "rootCause": "The delivery-date help text was shown with unfinished placeholders, so the German checkout page was not fully translated or ready for customers.",
+      "suggestion": "Replace {Format} and {Beispiel} with the intended German guidance and example, then recheck the delivery step in the German locale.",
+      "severity": "minor",
+      "category": "ui_data_defect",
+      "confirmedBug": true,
+      "family": "application_issue",
+      "credits": 45.3,
+      "duration": 135.3,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P2MCGZVEB1X6PTK9PZDQKW/dashboard/share/US_50ZWWM6QEDSFFCKW9SNUAYWQNW1DH0JKBSR6BCSVJSDK1XWAQSYZXMP6X5GMA749?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=de"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "click: Clicking the leftmost product link in the product list"
+        },
+        {
+          "step": 4,
+          "status": "done",
+          "remark": "click: Clicking In den Warenkorb to add it to the cart"
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Clicking Warenkorb ansehen in the cart section below the add-to-cart button"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking Zur Kasse in the order summary bottom panel"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"Vor- und Nachname\"; type \"Straße und Hausnummer\"; t"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "type: Type \"Anna Weber\" into \"Vor- und Nachname\""
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "type: Type \"Musterstraße 12\" into \"Straße und Hausnummer\""
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"Berlin\" into \"Ort\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"10115\" into \"Postleitzahl\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"+49 30 1234567\" into \"Telefonnummer\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, \"The checkout page main button and the page's labels and"
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "assert: Before clicking each checkout page's main button, verify that the page is fully "
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "analyze: A checkout page verification fails."
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "click: Clicking Weiter to continue through checkout steps"
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "type: Entering delivery date 20.11.2026"
+        },
+        {
+          "step": 19,
+          "status": "failed",
+          "remark": "wait: Waiting because the current checkout delivery page cannot meet the required German localization verification"
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 194,
+      "ndjson": "runs/2026-11-18T00-58-41-249/de.ndjson",
+      "screenshot": "runs/2026-11-18T00-58-41-249/de.jpg",
+      "runAt": "2026-11-18T01:01:55.016Z",
+      "round": 1
+    },
+    "id": {
+      "history": [],
+      "locale": "id",
+      "language": "Indonesian",
+      "nativeLanguage": "Indonesia",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=id",
+      "status": "failed",
+      "oneLiner": "The delivery-step button shows a technical key instead of Indonesian text, so checkout is not fully usable in Indonesian.",
+      "summary": "The Indonesian wording for the delivery button is missing or was not loaded, and the page displays its internal label instead.\nAdd the Indonesian translation for this button and verify every checkout step in Bahasa Indonesia before release.\nevidence: error_ui_text: checkout.continue_to_payment",
+      "reason": "The delivery main button displays checkout.continue_to_payment, a code-like untranslated key, so checkout cannot meet the required Indonesian usability.",
+      "reasonCode": "assertion_error.confirmed_product_bug",
+      "bugTitle": "Indonesian delivery button renders untranslated checkout key",
+      "rootCause": "The Indonesian wording for the delivery button is missing or was not loaded, and the page displays its internal label instead.",
+      "suggestion": "Add the Indonesian translation for this button and verify every checkout step in Bahasa Indonesia before release.",
+      "severity": "major",
+      "category": "ui_data_defect",
+      "confirmedBug": true,
+      "family": "application_issue",
+      "credits": 22.8,
+      "duration": 76,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P2T19N7JXMZSR7MAF4JTZH/dashboard/share/US_Z79FRW94HX3ZPUDOPLQ53103SPXS4O5SGMSVR0TWAFOES5QZ0PQBPL50K3BWROAT?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=id"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "click: Clicking the first product link in the product grid"
+        },
+        {
+          "step": 4,
+          "status": "done",
+          "remark": "click: Clicking Add to Cart button"
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Clicking Keranjang 1 to open the cart"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking Checkout link in order summary panel bottom"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"Nama lengkap\"; type \"Alamat jalan\"; type \"Kota\"; ty"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "type: Type \"Siti Rahmawati\" into \"Nama lengkap\""
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "type: Type \"Jl. Melati No. 12\" into \"Alamat jalan\""
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"Jakarta Selatan\" into \"Kota\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"12190\" into \"Kode pos\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"081234567890\" into \"Nomor telepon\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "click: Clicking Lanjutkan to continue through checkout"
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "type: Memasukkan tanggal pengiriman 20-11-2026"
+        },
+        {
+          "step": 15,
+          "status": "failed",
+          "remark": "wait: Waiting because the checkout main button localization is invalid"
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 120,
+      "ndjson": "runs/2026-11-18T00-58-41-249/id.ndjson",
+      "screenshot": "runs/2026-11-18T00-58-41-249/id.jpg",
+      "runAt": "2026-11-18T01:03:55.240Z",
+      "round": 1
+    },
+    "en": {
+      "history": [],
+      "locale": "en",
+      "language": "English",
+      "nativeLanguage": "English",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=en",
+      "status": "passed",
+      "oneLiner": "placed an order on the demo shop",
+      "summary": "Completed the requested purchase flow: selected a product, added it to the cart, opened the cart, and started checkout.\nFinished the checkout steps using customer details in the required formats; the checkout pages and buttons were usable and displayed in English.\nPlaced the order successfully and reached the confirmation page, which says, “Thank you, your order is placed.”",
+      "reason": "Objective completed",
+      "reasonCode": "success.complete",
+      "bugTitle": null,
+      "rootCause": null,
+      "suggestion": null,
+      "severity": null,
+      "category": null,
+      "confirmedBug": null,
+      "family": null,
+      "credits": 76.1,
+      "duration": 112.8,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P2SK5DQ1H0QTA0CXZEH9GC/dashboard/share/US_U4EFEAXN45GUX88Z5TJYLDPZWMMYCKXHTLIKE1ZEVNYKVR01U501ANAFAFKOCA2E?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=en"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "click: Clicking the speckled mug product link in the leftmost card"
+        },
+        {
+          "step": 4,
+          "status": "done",
+          "remark": "click: Clicking Add to cart button"
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Clicking View cart link to open your cart"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: Clicking Checkout in the order summary panel"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "wait: queued plan (6 steps): type \"Full name\"; type \"Street address\"; type \"City\"; typ"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "type: Type \"Emily Carter\" into \"Full name\""
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "type: Type \"14 Maple Street\" into \"Street address\""
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"London\" into \"City\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"SW1A 1AA\" into \"Postal code\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"+44 20 7946 0958\" into \"Phone number\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "click: Click \"Continue\""
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "wait: queued plan (2 steps): type \"Preferred delivery date\"; click \"Continue to paymen"
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "type: Type \"11/25/2026\" into \"Preferred delivery date\""
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "click: Click \"Continue to payment\""
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "click: Clicking Place order in the checkout review panel"
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "analyze: A verification fails."
+        },
+        {
+          "step": 19,
+          "status": "done",
+          "remark": "assert: On each page, before you click its main button, verify that the page is fully us"
+        },
+        {
+          "step": 21,
+          "status": "done",
+          "remark": "analyze: An order confirmation appears."
+        },
+        {
+          "step": 22,
+          "status": "done",
+          "remark": "assert: an order confirmation appears"
+        }
+      ],
+      "earlierAttempts": [
+        {
+          "status": "inconclusive",
+          "note": "The order was placed successfully, but the test incorrectly required the confirmation page to show price and shipping details.",
+          "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P2KM5CR0RYGG6N43RF7RBA/dashboard/share/US_D1JNIEK6CA4T6MJKVDYG1POLI8TRUY8ZULU9DPQA46YGA6O0DQ3TB226DSFN4673?type=summary&agentView=true&fqdn=summary-page",
+          "credits": 43.7,
+          "ndjson": "runs/2026-11-18T00-58-41-249/en.ndjson"
+        }
+      ],
+      "wallSeconds": 338,
+      "ndjson": "runs/2026-11-18T00-58-41-249/en.attempt2.ndjson",
+      "screenshot": "runs/2026-11-18T00-58-41-249/en.jpg",
+      "runAt": "2026-11-18T01:04:19.450Z",
+      "round": 1
+    },
+    "ja": {
+      "history": [],
+      "locale": "ja",
+      "language": "Japanese",
+      "nativeLanguage": "日本語",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=ja",
+      "status": "failed",
+      "oneLiner": "The delivery-date field rejects 2026/11/25 even though the page presents that exact value as its required format and example.",
+      "summary": "The checkout date check does not accept a date written in the same YYYY/MM/DD format shown to the customer.\nFix the delivery-date validation so valid dates in the displayed YYYY/MM/DD format, including the shown example 2026/11/25, are accepted after the field loses focus.\nevidence: objective_contradiction: The exact displayed YYYY/MM/DD example value remains rejected, so this Japanese checkout page is not fully usable.",
+      "reason": "The exact displayed YYYY/MM/DD example value remains rejected, so this Japanese checkout page is not fully usable.",
+      "reasonCode": "assertion_error.confirmed_product_bug",
+      "bugTitle": "Delivery-date field rejects its displayed YYYY/MM/DD example",
+      "rootCause": "The checkout date check does not accept a date written in the same YYYY/MM/DD format shown to the customer.",
+      "suggestion": "Fix the delivery-date validation so valid dates in the displayed YYYY/MM/DD format, including the shown example 2026/11/25, are accepted after the field loses focus.",
+      "severity": "major",
+      "category": "validation_defect",
+      "confirmedBug": true,
+      "family": "application_issue",
+      "credits": 39.8,
+      "duration": 160.8,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P2RJFQYV4XMMCBR076MKJK/dashboard/share/US_AF13ELWRNE13SDKO51LAAJO3OVPDWI5GDDYAILAC00FIMOR44M1K8L4PRBKP51XO?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=ja"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "click: Clicking the first product link in the product list"
+        },
+        {
+          "step": 4,
+          "status": "done",
+          "remark": "click: Clicking カートに入れる to add the item to the cart"
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: クリックしてカートを見るを開いている"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: clicking レジに進む to start checkout"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"氏名\"; type \"番地・建物名\"; type \"市区町村\"; type \"郵便番号\"; type "
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "type: Type \"山田 花子\" into \"氏名\""
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "type: Type \"神宮前1-2-3 コート青山101\" into \"番地・建物名\""
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"渋谷区\" into \"市区町村\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"150-0001\" into \"郵便番号\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"090-1234-5678\" into \"電話番号\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "click: Clicking 次へ進む in the sticky checkout bar after checking Japanese usability"
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "type: typing 2026/11/25 into お届け希望日 field"
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "click: Clicking お支払いへ進む to proceed to checkout"
+        },
+        {
+          "step": 16,
+          "status": "done",
+          "remark": "type: 入力欄に 2026/11/25 を入力している"
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "press_key: PRIMARY: press the Tab key to commit the delivery-date input"
+        },
+        {
+          "step": 18,
+          "status": "failed",
+          "remark": "wait: Waiting after delivery-date validation failure"
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 186,
+      "ndjson": "runs/2026-11-18T00-58-41-249/ja.ndjson",
+      "screenshot": "runs/2026-11-18T00-58-41-249/ja.jpg",
+      "runAt": "2026-11-18T01:04:31.629Z",
+      "round": 1
+    },
+    "zh": {
+      "history": [],
+      "locale": "zh",
+      "language": "Chinese",
+      "nativeLanguage": "中文",
+      "url": "http://127.0.0.1:8765/examples/demo-shop/?lang=zh",
+      "status": "passed",
+      "oneLiner": "placed an order on the demo shop",
+      "summary": "Added a product to the cart and started checkout.\nEntered Chinese-language customer details for Wang Xiaoming in Taipei, Taiwan, including the address, phone number, and delivery date.\nConfirmed that the checkout pages and main action button were fully usable in Chinese, and that the entered details were accepted.\nReviewed the order totals: item ¥198.00, shipping ¥2,000.00, and total ¥2,198.00; the amounts added up correctly.\nSubmitted the order and reached the Chinese order-confirmation page.",
+      "reason": "Objective completed",
+      "reasonCode": "success.complete",
+      "bugTitle": null,
+      "rootCause": null,
+      "suggestion": null,
+      "severity": null,
+      "category": null,
+      "confirmedBug": null,
+      "family": null,
+      "credits": 69.8,
+      "duration": 205.7,
+      "testUrl": "https://test-manager.lambdatest.com/projects/01M7MXT114ETBEWDKT956JWJCG/test-cases/01M7P2X4FX9K1YREEZNVN4988X/dashboard/share/US_G5ER0LSDCLITS9RUQ8ABQJQJS24Y2MXCQF9MPOFIEXZQSAE4RXB41UU14CX46OHY?type=summary&agentView=true&fqdn=summary-page",
+      "steps": [
+        {
+          "step": 2,
+          "status": "done",
+          "remark": "navigate: Navigate to http://127.0.0.1:8765/examples/demo-shop/?lang=zh"
+        },
+        {
+          "step": 3,
+          "status": "done",
+          "remark": "click: Clicking the product link for the spotted mug in the shop grid"
+        },
+        {
+          "step": 4,
+          "status": "done",
+          "remark": "click: Clicking 加入购物车 to add it to the cart"
+        },
+        {
+          "step": 5,
+          "status": "done",
+          "remark": "click: Opening the cart"
+        },
+        {
+          "step": 6,
+          "status": "done",
+          "remark": "click: 正在点击去结算"
+        },
+        {
+          "step": 7,
+          "status": "done",
+          "remark": "wait: queued plan (5 steps): type \"姓名\"; type \"详细地址\"; type \"城市\"; type \"邮政编码\"; type \"手机号"
+        },
+        {
+          "step": 8,
+          "status": "done",
+          "remark": "type: Type \"王小明\" into \"姓名\""
+        },
+        {
+          "step": 9,
+          "status": "done",
+          "remark": "type: Type \"信義區松仁路100號\" into \"详细地址\""
+        },
+        {
+          "step": 10,
+          "status": "done",
+          "remark": "type: Type \"台北市\" into \"城市\""
+        },
+        {
+          "step": 11,
+          "status": "done",
+          "remark": "type: Type \"110\" into \"邮政编码\""
+        },
+        {
+          "step": 12,
+          "status": "done",
+          "remark": "type: Type \"+886912345678\" into \"手机号码\""
+        },
+        {
+          "step": 13,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, 'Every price, shipping cost and total shown looks plausi"
+        },
+        {
+          "step": 14,
+          "status": "done",
+          "remark": "assert: Before clicking each checkout page's main button, verify that the page is fully "
+        },
+        {
+          "step": 15,
+          "status": "done",
+          "remark": "analyze: A verification fails."
+        },
+        {
+          "step": 17,
+          "status": "done",
+          "remark": "click: Clicking the 続き continue button on the checkout page"
+        },
+        {
+          "step": 18,
+          "status": "done",
+          "remark": "type: Entering the expected delivery date"
+        },
+        {
+          "step": 19,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, 'PRIMARY: every item price, shipping cost, and total sho"
+        },
+        {
+          "step": 20,
+          "status": "done",
+          "remark": "click: Clicking Continue to Pay button on the checkout page"
+        },
+        {
+          "step": 21,
+          "status": "done",
+          "remark": "analyze: ANALYZE(textual_visual, 'PRIMARY: every item price, shipping cost, and total sho"
+        },
+        {
+          "step": 22,
+          "status": "done",
+          "remark": "click: Clicking 提交订单 to submit the order"
+        },
+        {
+          "step": 23,
+          "status": "done",
+          "remark": "analyze: An order confirmation appears."
+        },
+        {
+          "step": 24,
+          "status": "done",
+          "remark": "assert: An order confirmation appears."
+        }
+      ],
+      "earlierAttempts": [],
+      "wallSeconds": 230,
+      "ndjson": "runs/2026-11-18T00-58-41-249/zh.ndjson",
+      "screenshot": "runs/2026-11-18T00-58-41-249/zh.jpg",
+      "runAt": "2026-11-18T01:07:45.108Z",
+      "round": 1
+    }
+  },
+  "rounds": [
+    {
+      "round": 1,
+      "startedAt": "2026-11-18T00:58:41.252Z",
+      "finishedAt": "2026-11-18T01:07:45.215Z",
+      "ran": [
+        "en",
+        "de",
+        "ar",
+        "ja",
+        "id",
+        "zh"
+      ],
+      "statuses": {
+        "en": "passed",
+        "de": "failed",
+        "ar": "failed",
+        "ja": "failed",
+        "id": "failed",
+        "zh": "passed"
+      },
+      "credits": 281.6
+    }
+  ],
+  "order": [
+    "en",
+    "de",
+    "ar",
+    "ja",
+    "id",
+    "zh"
+  ],
+  "updatedAt": "2026-11-18T01:07:45.216Z",
+  "recorded": "Recorded blind test v2, 2026-11-18 08:58–09:10 +0800: generic objective v2 (committed 08:56) run after a separate agent planted a sixth bug the objective's author was not told about (de: date hint shows raw {Format}/{Beispiel} placeholders). Result: caught the blind bug and ar, ja, id; still missed the zh shipping-price bug; de failed on the blind bug before reaching the clipped Pay button."
+}

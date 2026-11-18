@@ -79,7 +79,16 @@ A fair question: the demo objective was written by someone who knew the four pla
 
 Three of five. Kane checks what the objective asks: nothing asked whether prices make sense, and "fully visible" without "not cut off at any edge" let the clipped button through. Recorded: [`examples/recorded/blind-test-v1/`](examples/recorded/blind-test-v1/).
 
-_v2 (generic checks for cut-off edges and plausible totals, written after v1 and committed before a sixth blind bug): result pending._
+Then a second round. We wrote **v2** ([`locale-check.generic-v2.json`](locale-check.generic-v2.json)), still generic, adding "no part of the button cut off by the edge of its box or the screen" and "every price, shipping cost and total looks plausible and adds up", and committed it (08:56:09). The agent planted a **sixth bug** blind (08:58:29; [`docs/blind-bug-2.md`](docs/blind-bug-2.md)).
+
+| Bug | v1 | v2 |
+|---|---|---|
+| ar, ja, id (known) | caught | caught |
+| de: Pay button half cut off (known) | missed | not reached: German failed one step earlier, on the blind bug |
+| zh: shipping ¥2,000 on a ¥198 mug (blind in v1) | **missed** | **missed**, even when asked whether prices are plausible |
+| de: date hint shows raw `{Format}` / `{Beispiel}` (**blind** in v2) | – | **caught**: "Delivery-date guidance exposes unresolved German template keys" |
+
+**Blind bugs: one of two caught.** Layout, text and validation bugs are where Kane is strong. It took ¥2,000 shipping on a ¥198 mug as plausible because the total adds up; a check like that needs to be concrete ("shipping costs less than the item"), and writing it after the fact would be tuning, so we stopped at v2. Recorded: [`examples/recorded/blind-test-v2/`](examples/recorded/blind-test-v2/).
 
 ## A real bug in a real app
 

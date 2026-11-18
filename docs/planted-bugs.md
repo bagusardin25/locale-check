@@ -1,5 +1,7 @@
 # Planted bugs in the demo shop
 
+> Two more bugs were planted later, blind, by a separate agent, to test a generic objective: zh shipping in the wrong currency unit ([`blind-bug.md`](blind-bug.md)) and de date-hint placeholders ([`blind-bug-2.md`](blind-bug-2.md)). The shop now has six bugs.
+
 The demo shop (`examples/demo-shop/`, served at `http://127.0.0.1:8765/examples/demo-shop/?lang=<code>`) is a small ceramics store in six languages: en, de, ar, ja, id, zh. It contains four planted locale bugs. Each one breaks the checkout in exactly one language, at 1920x1080 and at 1280x800. English and Chinese complete the whole flow, and so does every other locale apart from its own bug. The code has no comments pointing at the bugs. They are the kind of mistake a real team ships.
 
 | Locale | Step | What the user sees |
