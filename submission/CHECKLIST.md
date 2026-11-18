@@ -1,6 +1,6 @@
 # Locale check: submission checklist
 
-**Official deadline:** Thu 19 Nov 2026, 11:59 PM IST. **Local deadline:** Fri 20 Nov 2026, 02:29 (+0800).
+**Official deadline:** Thu 26 Nov 2026, 11:59 PM IST (extended from 19 Nov). **Local deadline:** Fri 27 Nov 2026, 02:29 (+0800). No pushes after the deadline.
 **Form:** kaneclihack.sh/o/submit. **Team:** solo (with Claude Code).
 
 `[x]` done and checked · `[ ]` open · **(you)** = only the entrant can do it.
@@ -10,11 +10,14 @@
 | Checkpoint | Local time | Done |
 |---|---|---|
 | Judge check 2 (80/100), biggest point losses fixed | Thu 19 Nov 09:03 | [x] 01:20 |
-| Feature freeze (bug fixes only after this) | Thu 19 Nov 15:35 | [ ] |
-| Video rendered and uploaded to YouTube | Thu 19 Nov 19:56 | [ ] |
-| Complete draft submitted (editable until the deadline) | Thu 19 Nov 22:07 | [ ] |
-| Every link checked in a private window | Fri 20 Nov 00:44 | [ ] |
-| Final submit, confirmation captured | Fri 20 Nov 01:59 | [ ] |
+| Video cut approved (silent draft 2) | Thu 19 Nov 20:00 | [ ] |
+| Narration, final render, uploaded to YouTube **(you upload)** | Sat 21 Nov 20:00 | [ ] |
+| Complete draft submitted (editable until the deadline) **(you)** | Sun 22 Nov 22:00 | [ ] |
+| Judge check 3 on the submitted version | Tue 24 Nov 12:00 | [ ] |
+| Feature freeze (bug fixes only after this) | Wed 25 Nov 20:00 | [ ] |
+| Every link checked in a private window | Fri 27 Nov 00:44 | [ ] |
+| Final submit, confirmation captured **(you)** | Fri 27 Nov 01:59 | [ ] |
+| Deadline: no pushes after this | Fri 27 Nov 02:29 | [ ] |
 
 ## Registration and posts (you)
 

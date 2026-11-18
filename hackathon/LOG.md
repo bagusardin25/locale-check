@@ -4,7 +4,7 @@ Newest entry on top. Evidence first: no evidence, the cycle didn't count.
 
 ## Status
 
-- **Time left:** deadline Fri 2026-11-20 02:29 +0800.
+- **Time left:** deadline Fri 2026-11-27 02:29 +0800 (extended from 20 Nov; no pushes after it).
 - **Core loop working end to end:** yes. Evidence: `examples/recorded/demo-shop/` (round 1: 4 red → Claude fix → round 2: 6/6 green).
 - **Real OSS bug:** Open Library serves its Arabic UI left-to-right (no `dir="rtl"`); Kane confirmed it. Issue drafted, not filed.
 - **Latest judge check:** 2 (2026-11-18 evening), 80/100, all gates pass. The biggest loss is that there is no video yet. Its top fixes are done: see Cycle 4.

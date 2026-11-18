@@ -1,7 +1,7 @@
 # Kane CLI Online Hackathon — rules and scoring function
 
-- **Event:** Kane CLI Online Hackathon by TestMu AI, 12–19 Nov 2026 · kaneclihack.sh · rules taken from the planning session's reading of the event pages (HANDOFF §1), 2026-11-18.
-- **Deadline:** 19 Nov 2026 11:59 PM IST → local **Fri 2026-11-20 02:29 +0800**.
+- **Event:** Kane CLI Online Hackathon by TestMu AI, 12–26 Nov 2026 (extended from 19 Nov) · kaneclihack.sh · rules taken from the planning session's reading of the event pages (HANDOFF §1), 2026-11-18.
+- **Deadline:** Thu 26 Nov 2026 11:59 PM IST (10:29 AM PT) → local **Fri 2026-11-27 02:29 +0800**. Extended from 19 Nov, per kaneclihack.sh, checked 2026-11-19 00:58 +0800. The page says "No pushes after this".
 - **Format:** online · **Team:** solo (the user, with Claude Code).
 - **Theme:** build something where a coding agent and Kane CLI work together.
 
