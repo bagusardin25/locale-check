@@ -1,0 +1,141 @@
+diff --git a/examples/demo-shop/app.js b/examples/demo-shop/app.js
+index fbd9ef6..ac4b2c0 100644
+--- a/examples/demo-shop/app.js
++++ b/examples/demo-shop/app.js
+@@ -322,7 +322,7 @@ function viewDelivery() {
+   const form = document.getElementById('delivery-form');
+   const input = form.elements.date;
+   const check = () => {
+-    const result = validateDeliveryDate(input.value);
++    const result = validateDeliveryDate(input.value, pattern);
+     showFieldError(form, 'date', result.error ? t(`errors.${result.error}`, { format: pattern, example }) : '');
+     return result;
+   };
+diff --git a/examples/demo-shop/dates.js b/examples/demo-shop/dates.js
+index 5bdeb13..cd12512 100644
+--- a/examples/demo-shop/dates.js
++++ b/examples/demo-shop/dates.js
+@@ -18,22 +18,23 @@ function toDate(year, month, day) {
+   return date;
+ }
+ 
+-export function parseDate(input) {
++// Field order comes from the locale's date pattern (the one shown in the hint),
++// not from the separator: "/" is month-first in en-US but year-first in ja-JP.
++export function parseDate(input, pattern = 'YYYY-MM-DD') {
+   const text = normalizeDigits(input);
+   const match = text.match(/^(\d{1,4})([./-])(\d{1,2})\2(\d{1,4})$/);
+   if (!match) return null;
+-  const [, a, sep, b, c] = match;
++  const [, a, , b, c] = match;
+   const first = Number(a);
+   const middle = Number(b);
+   const last = Number(c);
+ 
+-  if (sep === '.') {
+-    return toDate(last, middle, first);
+-  }
+-  if (sep === '-') {
+-    return a.length === 4 ? toDate(first, middle, last) : toDate(last, middle, first);
+-  }
+-  return toDate(last, first, middle);
++  // A four-digit first part can only be a year (ISO-style input).
++  if (a.length === 4) return toDate(first, middle, last);
++  if (c.length !== 4) return null;
++
++  const order = (pattern.match(/YYYY|MM|DD/g) || []).filter((part) => part !== 'YYYY');
++  return order[0] === 'MM' ? toDate(last, first, middle) : toDate(last, middle, first);
+ }
+ 
+ export function formatPattern(date, pattern) {
+@@ -54,9 +55,9 @@ export function exampleDate(pattern) {
+   return formatPattern(addDays(new Date(), 7), pattern);
+ }
+ 
+-export function validateDeliveryDate(input) {
++export function validateDeliveryDate(input, pattern) {
+   if (!input || !input.trim()) return { error: 'date_required' };
+-  const date = parseDate(input);
++  const date = parseDate(input, pattern);
+   if (!date) return { error: 'date_invalid' };
+   if (date < addDays(new Date(), MIN_LEAD_DAYS)) return { error: 'date_too_soon' };
+   return { date };
+diff --git a/examples/demo-shop/locales/id.json b/examples/demo-shop/locales/id.json
+index 4302b3e..2a58a1a 100644
+--- a/examples/demo-shop/locales/id.json
++++ b/examples/demo-shop/locales/id.json
+@@ -88,6 +88,7 @@
+     "delivery_date": "Tanggal pengiriman",
+     "delivery_hint": "Format {format}, misalnya {example}. Paling cepat 2 hari dari hari ini.",
+     "delivery_note": "Kami mengirim Senin sampai Sabtu. Kurir akan mengirim SMS pada pagi hari pengiriman.",
++    "continue_to_payment": "Lanjut ke pembayaran",
+     "review_title": "Tinjau pesanan Anda",
+     "ship_to": "Dikirim ke",
+     "deliver_on": "Tanggal pengiriman",
+diff --git a/examples/demo-shop/styles.css b/examples/demo-shop/styles.css
+index 5265f2d..142a7cf 100644
+--- a/examples/demo-shop/styles.css
++++ b/examples/demo-shop/styles.css
+@@ -80,7 +80,7 @@ main:focus {
+   outline: none;
+ }
+ body.has-step-footer main {
+-  padding-bottom: 120px;
++  padding-bottom: 176px;
+ }
+ 
+ h1, h2, h3, p, ul, ol, dl, dd, fieldset {
+@@ -815,8 +815,7 @@ html:lang(zh) .home .page-title {
+ .pay-card {
+   display: flex;
+   flex-direction: column;
+-  height: 25.5rem;
+-  overflow: hidden;
++  min-height: 25.5rem;
+ }
+ .pay-card .card-title {
+   margin-bottom: var(--s3);
+@@ -876,6 +875,10 @@ html:lang(zh) .home .page-title {
+ }
+ .pay-card .btn {
+   margin-top: auto;
++  flex: none;
++}
++.pay-card .legal {
++  margin-bottom: var(--s4);
+ }
+ 
+ /* Confirmation */
+@@ -933,7 +936,7 @@ body.has-step-footer .site-footer {
+ 
+ .help-pill {
+   position: fixed;
+-  left: 20px;
++  inset-inline-start: 20px;
+   bottom: 14px;
+   z-index: 60;
+   display: inline-flex;
+@@ -959,7 +962,7 @@ body.has-step-footer .site-footer {
+ }
+ .help-panel {
+   position: fixed;
+-  left: 20px;
++  inset-inline-start: 20px;
+   bottom: 84px;
+   z-index: 61;
+   width: min(320px, calc(100vw - 40px));
+@@ -970,6 +973,14 @@ body.has-step-footer .site-footer {
+   display: grid;
+   gap: var(--s2);
+ }
++/* The checkout step bar is fixed to the bottom edge and holds the Continue
++   button. Keep the help pill above it in every direction and width. */
++body.has-step-footer .help-pill {
++  bottom: 92px;
++}
++body.has-step-footer .help-panel {
++  bottom: 162px;
++}
+ .help-panel[hidden] {
+   display: none;
+ }

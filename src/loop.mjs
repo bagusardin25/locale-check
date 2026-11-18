@@ -6,12 +6,14 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { buildBrief } from './brief.mjs';
 import { runRound } from './runner.mjs';
-import { failing, saveResults } from './results.mjs';
+import { failing, loadResults, saveResults } from './results.mjs';
 import { writeReport } from './grid.mjs';
 import { c } from './term.mjs';
 
-export async function closedLoop(cfg, { maxRounds = cfg.agent.maxRounds, failedOnly = false, only, log = console.log } = {}) {
-  let { results } = await runRound(cfg, { only, failedOnly, log });
+export async function closedLoop(cfg, { maxRounds = cfg.agent.maxRounds, failedOnly = false, resume = false, only, log = console.log } = {}) {
+  // --resume: start from the failures already in results.json instead of paying for a fresh Kane round.
+  let results = resume && loadResults(cfg).rounds.length ? loadResults(cfg) : (await runRound(cfg, { only, failedOnly, log })).results;
+  if (resume) log(c.dim(`Resuming from round ${results.rounds.length} in results.json`));
   for (let fix = 1; fix <= maxRounds; fix++) {
     const notPassing = failing(cfg, results);
     if (!notPassing.length) break;
@@ -27,8 +29,8 @@ export async function closedLoop(cfg, { maxRounds = cfg.agent.maxRounds, failedO
     const before = snapshot(cfg.root);
     const t0 = Date.now();
     const agent = await runAgent(cfg, brief, log);
-    const changed = diffSnapshot(cfg, before);
-    const files = [...new Set([...(agent.files || []), ...changed])];
+    // Claude reports its own Edit/Write calls; for other agents, fall back to what git sees changed.
+    const files = agent.files?.length ? agent.files : diffSnapshot(cfg, before);
     const last = results.rounds[results.rounds.length - 1];
     last.fix = {
       agent: cfg.agent.command,
@@ -49,12 +51,20 @@ export async function closedLoop(cfg, { maxRounds = cfg.agent.maxRounds, failedO
   return results;
 }
 
+const AGENT_NOTE = 'You are the fixer inside locale-check, a loop where Kane CLI tests a web app in several languages. '
+  + 'You run without a human. Fix only the locale bugs in the brief, in the app source, with small, careful edits. '
+  + 'You cannot run commands; Kane re-checks your work right after you finish. '
+  + 'End with exactly one line per language you fixed, in the form `<locale>: <what you changed> (<file>)`, and nothing else.';
+
 /** Run the agent with the brief on stdin. Claude Code gets stream-json so we can show its edits live. */
 function runAgent(cfg, brief, log) {
   const isClaude = /(^|[\\/])claude(\.exe)?$/i.test(cfg.agent.command);
+  // Claude runs focused: project settings only (no user-level hooks), file tools only, and a
+  // system note that pins the job and the reply format.
   const args = isClaude
     ? ['-p', '--output-format', 'stream-json', '--verbose', '--permission-mode', 'acceptEdits',
-       '--allowedTools', 'Read,Edit,Write,Glob,Grep', ...(cfg.agent.args || [])]
+       '--allowedTools', 'Read,Edit,Write,Glob,Grep', '--setting-sources', 'project,local',
+       '--append-system-prompt', AGENT_NOTE, ...(cfg.agent.args || [])]
     : [...(cfg.agent.args || [])];
   return new Promise((resolve) => {
     const child = spawn(cfg.agent.command, args, { cwd: cfg.root, stdio: ['pipe', 'pipe', 'pipe'], windowsHide: true });

@@ -1,0 +1,54 @@
+# CI gate: a pull request that touches translations or UI can't merge while any locale is red.
+# Copy to .github/workflows/locale-check.yml and adjust the "Start the app" step.
+#
+# Secrets (repo Settings → Secrets → Actions): LT_USERNAME, LT_ACCESS_KEY (your TestMu AI /
+# LambdaTest username and access key), KANE_PROJECT_ID, KANE_FOLDER_ID (from `kane-cli config show`).
+#
+# Status: written for this project; not yet run in GitHub Actions.
+name: locale-check
+
+on:
+  pull_request:
+    paths:
+      - "locales/**"
+      - "src/**"
+      - "**/*.css"
+      - "locale-check.json"
+
+jobs:
+  locales:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Kane CLI and locale-check
+        run: |
+          npm install -g @testmuai/kane-cli github:freddy-tama/locale-check
+          kane-cli login --username "$LT_USERNAME" --access-key "$LT_ACCESS_KEY" \
+            --project-id "$KANE_PROJECT_ID" --folder-id "$KANE_FOLDER_ID"
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+          KANE_PROJECT_ID: ${{ secrets.KANE_PROJECT_ID }}
+          KANE_FOLDER_ID: ${{ secrets.KANE_FOLDER_ID }}
+      - name: Start the app
+        run: |
+          npm ci
+          npm run build --if-present
+          (npm start &) && npx --yes wait-on http://localhost:3000
+      - name: Run Kane in every locale
+        run: locale-check run
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+      - name: Upload the report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: locale-check-report
+          path: |
+            locale-check-report.html
+            .locale-check/results.json

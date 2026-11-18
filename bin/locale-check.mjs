@@ -21,8 +21,9 @@ const HELP = `locale-check ${VERSION}: one Kane CLI objective, every language, r
 
 Usage
   locale-check run [--only de,ar] [--failed]   Run Kane in each locale; write results + report
-  locale-check loop [--max-rounds 3]            Run, hand failures to a coding agent (Claude Code
-                                                by default), re-run only red locales until green
+  locale-check loop [--max-rounds 3] [--resume] Run, hand failures to a coding agent (Claude Code
+                                                by default), re-run only red locales until green.
+                                                --resume starts from the last results, no new run
   locale-check failures [--agent]               Print the failing locales as a brief (for an agent)
   locale-check report                           Rebuild the HTML report from results.json
   locale-check status                           One line per locale from the last results
@@ -43,7 +44,7 @@ function parseArgs(argv) {
     const a = argv[i];
     if (!a.startsWith('--')) { opts._.push(a); continue; }
     const [k, inline] = a.slice(2).split('=');
-    const flag = ['failed', 'json', 'global', 'agent', 'help', 'version'].includes(k);
+    const flag = ['failed', 'json', 'global', 'agent', 'help', 'version', 'resume'].includes(k);
     opts[k] = flag ? true : inline ?? argv[++i];
   }
   return opts;
@@ -87,7 +88,7 @@ async function main() {
     if (!kaneAvailable()) throw new UsageError('kane-cli not found. Install it: npm install -g @testmuai/kane-cli, then kane-cli login');
     const results = cmd === 'run'
       ? (await runRound(cfg, { only, failedOnly: !!opts.failed })).results
-      : await closedLoop(cfg, { only, failedOnly: !!opts.failed, maxRounds: opts['max-rounds'] ? Number(opts['max-rounds']) : undefined });
+      : await closedLoop(cfg, { only, failedOnly: !!opts.failed, resume: !!opts.resume, maxRounds: opts['max-rounds'] ? Number(opts['max-rounds']) : undefined });
     return finish(cfg, results, opts);
   }
   if (cmd === 'failures') {
