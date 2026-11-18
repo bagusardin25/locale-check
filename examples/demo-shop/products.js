@@ -16,7 +16,7 @@ export const PRODUCTS = [
   },
 ];
 
-export const SHIPPING = { USD: 6, EUR: 5.5, AED: 25, JPY: 800, IDR: 40000, CNY: 20 };
+export const SHIPPING = { USD: 6, EUR: 5.5, AED: 25, JPY: 800, IDR: 40000, CNY: 2000 };
 
 export function findProduct(id) {
   return PRODUCTS.find((p) => p.id === id);
