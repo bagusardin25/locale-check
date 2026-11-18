@@ -61,6 +61,26 @@ locale-check install-skill   # Claude Code skill: "check the locales" → run, f
 
 Kane reports symptoms, not always causes: for Arabic it saw that Continue was not usable ("absent"), not *why*. Claude found the help pill and its physical `left:` in the code. That split is the point of the loop. Claude's whole diff is in [`examples/recorded/demo-shop/claude-fix.diff`](examples/recorded/demo-shop/claude-fix.diff).
 
+## Isn't the objective tailored to the bugs?
+
+A fair question: the demo objective was written by someone who knew the four planted bugs, and it shows ("not cut off by its card"). So we ran a blind test:
+
+1. We wrote a **generic** checkout objective ([`locale-check.generic.json`](locale-check.generic.json)) that names no bug, element or CSS property, and committed it (08:46:16).
+2. A separate agent then planted a **fifth bug** in one language and committed it without telling us what or where (08:48:09; [`docs/blind-bug.md`](docs/blind-bug.md) was read only after the run).
+3. Kane ran the generic objective in all six languages.
+
+| Bug | Generic objective v1 |
+|---|---|
+| ar: help pill covers Continue (known) | caught |
+| ja: date in the page's own format rejected (known) | caught |
+| id: raw translation key (known) | caught |
+| de: Pay button half cut off (known) | **missed** |
+| zh: shipping ¥2,000 on a ¥198 mug (**blind**) | **missed** |
+
+Three of five. Kane checks what the objective asks: nothing asked whether prices make sense, and "fully visible" without "not cut off at any edge" let the clipped button through. Recorded: [`examples/recorded/blind-test-v1/`](examples/recorded/blind-test-v1/).
+
+_v2 (generic checks for cut-off edges and plausible totals, written after v1 and committed before a sixth blind bug): result pending._
+
 ## A real bug in a real app
 
 Planted bugs prove the loop; they don't prove the tool finds anything on its own. So we went looking in real multilingual open-source apps. A research agent shortlisted eight; on Open Library we noticed by hand that the Arabic page has no `dir` attribute. Then we gave Kane a generic check that names no element and no attribute (interface in the right language, no raw keys, layout direction right for the language) and ran it in five languages.
