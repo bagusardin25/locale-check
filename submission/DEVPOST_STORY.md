@@ -18,7 +18,7 @@ Locale check runs one plain-English Kane CLI objective in every language a web a
 
 - Repo: https://github.com/freddy-tama/locale-check
 - Video: _YouTube link after upload_
-- Live / no-account view: _GitHub Pages link if enabled_, otherwise `examples/recorded/demo-shop/report.html` in the repo
+- Live / no-account view: https://freddy-tama.github.io/locale-check/ (recorded report: https://freddy-tama.github.io/locale-check/examples/recorded/demo-shop/report.html)
 - One-command run: `node bin/locale-check.mjs run` (needs a Kane CLI login and credits; the recorded run needs nothing)
 
 ## How we built it (if the form asks)

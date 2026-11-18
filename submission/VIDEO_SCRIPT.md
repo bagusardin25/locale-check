@@ -22,6 +22,6 @@
 
 ## Still to decide with the user (video-kit brief)
 
-- Narration voice: ElevenLabs (English), or captions only.
+- Narration voice: ElevenLabs (English), decided 2026-11-18, added as a late step once the cut is settled ("use elevenlabs later").
 - Music bed: the kit's library, very low.
 - Whether to show the blind fifth-bug result (if Kane catches it, it replaces the "Trust" beat or shares it).

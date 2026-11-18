@@ -4,7 +4,7 @@
 
 ![The Locale check report for the demo shop: round 1 had 4 of 6 languages failing, Claude Code fixed 4 files, round 2 passed all 6](docs/report-hero.png)
 
-Built for the **Kane CLI Online Hackathon** (TestMu AI, Nov 2026) · **Video:** _TODO_ · **Recorded report (no account needed):** [`examples/recorded/demo-shop/report.html`](examples/recorded/demo-shop/report.html)
+Built for the **Kane CLI Online Hackathon** (TestMu AI, Nov 2026) · **Video:** _TODO_ · **Live page:** [freddy-tama.github.io/locale-check](https://freddy-tama.github.io/locale-check/) · **Recorded report (no account needed):** [open it in the browser](https://freddy-tama.github.io/locale-check/examples/recorded/demo-shop/report.html)
 
 ## The problem
 
@@ -25,7 +25,7 @@ locale-check.json ──► Kane CLI × locale (en de ar ja id zh) ──► res
 
 ## Try it
 
-**In 30 seconds, no account:** open [`examples/recorded/demo-shop/report.html`](examples/recorded/demo-shop/report.html) (download and open it; GitHub shows HTML as source). It is a real recorded run on the demo shop (round 1 red, Claude's fix, round 2 green), with links to Kane's replays.
+**In 30 seconds, no account:** open [the recorded report](https://freddy-tama.github.io/locale-check/examples/recorded/demo-shop/report.html) (the same file is [`examples/recorded/demo-shop/report.html`](examples/recorded/demo-shop/report.html) in the repo). It is a real recorded run on the demo shop (round 1 red, Claude's fix, round 2 green), with links to Kane's replays.
 
 **Run it yourself** (needs Node 18+, Python for the static server, and a Kane CLI login with credits):
 
