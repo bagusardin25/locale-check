@@ -7,8 +7,26 @@ Newest entry on top. Evidence first: no evidence, the cycle didn't count.
 - **Time left:** deadline Fri 2026-11-20 02:29 +0800.
 - **Core loop working end to end:** yes. Evidence: `examples/recorded/demo-shop/` (round 1: 4 red → Claude fix → round 2: 6/6 green).
 - **Real OSS bug:** Open Library serves its Arabic UI left-to-right (no `dir="rtl"`); Kane confirmed it. Issue drafted, not filed.
-- **Latest judge check:** 2026-11-18 ~08:50, about 75/100, all gates pass; weakest: 30-second path, objective reads like an answer key, one-shot loop.
-- **Human-only tasks waiting:** register at kaneclihack.sh/o/register (same email as the Kane login) and on Luma, if not done.
+- **Latest judge check:** 2 (2026-11-18 evening), 80/100, all gates pass. The biggest loss is that there is no video yet. Its top fixes are done: see Cycle 4.
+- **Human-only tasks waiting:**
+  - Register at kaneclihack.sh/o/register (same email as the Kane login) and on Luma, if not done.
+  - Post 2+ launch posts with #KaneCLIHackDay.
+  - Upload the video to YouTube.
+  - Submit the form.
+
+## Cycle 4 — 2026-11-18 18:30 to 2026-11-19 01:30 +0800 · submission files, link check, judge check 2
+
+- **Submission files:**
+  - `submission/CHECKLIST.md` and `submission/JUDGE_QA.md` are filled with facts from this build.
+  - The deck template is deleted: the rules ask for no deck.
+- **Links:** all 27 Kane replay links opened without a login in a fresh, logged-out Edge profile. Every other link returned 200.
+- **Judge check 2:** 80/100, with each criterion at 4. The fixes:
+  - Round 3 (19 Nov 00:50–00:55): Claude's fix touched shared files, so Kane re-checked en and zh on the fixed code. Both passed. Kane reported 113.9 credits; the balance went from 7554.9 to 7426.2. The run is recorded in `examples/recorded/demo-shop/`, and `git restore examples/demo-shop` was run afterwards.
+  - The README now has a Hebrew build-loop section.
+  - Open Library is called "confirmed", not "found", in the story, the posts, the page and the video.
+  - The report's total time now counts running time only, and its language chips no longer break names mid-word.
+  - The stale map lines and the blind-test link labels are fixed.
+- **Video:** the script was rewritten from filmmaker research (v2). The storyboard was approved and silent draft 1 was made. Draft 2 adds the Hebrew beat and round 3.
 
 ## Cycle 3 — 2026-11-18 08:00–08:45 · closed loop, recorded run, real OSS bug
 

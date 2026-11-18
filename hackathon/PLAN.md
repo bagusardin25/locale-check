@@ -9,7 +9,7 @@
 | 1 | Rules read, idea locked (PITCH.md) | Wed 11-18 09:55 | [x] 07:05 |
 | 2 | Runnable skeleton | Wed 11-18 13:27 | [x] 07:20 |
 | 3 | Core loop end to end + judge check 1 | Thu 11-19 00:20 | [x] 08:50 |
-| 4 | Judge check 2: biggest point-losses fixed | Thu 11-19 09:03 | [ ] |
+| 4 | Judge check 2: biggest point-losses fixed | Thu 11-19 09:03 | [x] 01:20 |
 | 5 | Feature freeze | Thu 11-19 15:35 | [ ] |
 | 6 | Video recorded | Thu 11-19 19:56 | [ ] |
 | 7 | Complete draft submitted | Thu 11-19 22:07 | [ ] |

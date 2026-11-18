@@ -9,7 +9,7 @@
 
 | Checkpoint | Local time | Done |
 |---|---|---|
-| Judge check 2, biggest point losses fixed | Thu 19 Nov 09:03 | [ ] |
+| Judge check 2 (80/100), biggest point losses fixed | Thu 19 Nov 09:03 | [x] 01:20 |
 | Feature freeze (bug fixes only after this) | Thu 19 Nov 15:35 | [ ] |
 | Video rendered and uploaded to YouTube | Thu 19 Nov 19:56 | [ ] |
 | Complete draft submitted (editable until the deadline) | Thu 19 Nov 22:07 | [ ] |
