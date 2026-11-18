@@ -2,7 +2,7 @@
 
 **One plain-English test, every language your app ships. Kane CLI finds what breaks in German, Arabic or Japanese; Claude Code fixes it; Kane re-checks until the grid is green.**
 
-<!-- HERO: screenshot of the report, red → green -->
+![The Locale check report for the demo shop: round 1 had 4 of 6 languages failing, Claude Code fixed 4 files, round 2 passed all 6](docs/report-hero.png)
 
 Built for the **Kane CLI Online Hackathon** (TestMu AI, Nov 2026) · **Video:** _TODO_ · **Recorded report (no account needed):** [`examples/recorded/demo-shop/report.html`](examples/recorded/demo-shop/report.html)
 
@@ -51,17 +51,19 @@ locale-check install-skill   # Claude Code skill: "check the locales" → run, f
 
 `examples/demo-shop/` is a small ceramics store in six languages with **four planted bugs**, each in one language, each the kind of thing a real team ships. They are documented in [`docs/planted-bugs.md`](docs/planted-bugs.md) and are not marked in the code.
 
-| Locale | Planted bug | What Kane reported (its own words, round 3) |
-|---|---|---|
-| de | Pay card has a fixed height sized for English | "The Place order button … is cut off by its card" |
-| ar | Help pill uses `left:` instead of a logical property; in RTL it covers Continue | "The shipping form's Continue button is not available in the visible, unobstructed area" |
-| ja | Date parser reads every `a/b/c` as US MM/DD/YYYY | "The delivery form rejected a date written in the exact YYYY/MM/DD format it tells customers to use" |
-| id | One missing translation key | "The delivery checkout button shows a code-like label instead of Indonesian text" |
-| en, zh | none | pass |
+| Locale | Planted bug | Kane's bug title in the recorded run (round 1) | Claude's fix (round 1 → 2) |
+|---|---|---|---|
+| de | Pay card has a fixed height sized for English | "Place order button is clipped by the payment card" | `min-height` instead of `height` + `overflow: hidden` |
+| ar | Help pill uses `left:` instead of a logical property; in RTL it covers Continue | "Shipping Continue button is absent from the checkout form" | `inset-inline-start` instead of `left` |
+| ja | Date parser reads every `a/b/c` as US MM/DD/YYYY | "Delivery date rejects its own displayed YYYY/MM/DD example" | parse by the locale's own date pattern |
+| id | One missing translation key | "Delivery continue button displays untranslated localization key" | add the missing key |
+| en, zh | none | pass | |
+
+Kane reports symptoms, not always causes: for Arabic it saw that Continue was not usable ("absent"), not *why*. Claude found the help pill and its physical `left:` in the code. That split is the point of the loop. Claude's whole diff is in [`examples/recorded/demo-shop/claude-fix.diff`](examples/recorded/demo-shop/claude-fix.diff).
 
 ## A real bug in a real app
 
-Planted bugs prove the loop; they don't prove the tool finds anything on its own. So we pointed it at a live open-source site with an objective that knows nothing about any bug.
+Planted bugs prove the loop; they don't prove the tool finds anything on its own. So we went looking in real multilingual open-source apps. A research agent shortlisted eight; on Open Library we noticed by hand that the Arabic page has no `dir` attribute. Then we gave Kane a generic check that names no element and no attribute (interface in the right language, no raw keys, layout direction right for the language) and ran it in five languages.
 
 **[Open Library](https://openlibrary.org)** (Internet Archive, AGPL) ships an Arabic interface. With `?lang=ar`, Kane reported:
 
@@ -85,8 +87,8 @@ One more honest detail: our first Open Library run also searched for a book in e
 
 ## Honest limits
 
-- Kane needs a TestMu AI login and credits. The 5-step checkout cost about 45–60 credits and 1.5–3.5 minutes per locale; a 6-locale round is about 280 credits and 7 minutes.
-- Kane's verdicts are AI judgements. Two of the first twelve shop runs failed for Kane's own reasons; Kane labelled both as its own misstep, which is why locale-check retries those instead of reporting them as bugs.
+- Kane needs a TestMu AI login and credits. The 5-step checkout cost about 45–60 credits and 1.5–3.5 minutes per locale; a 6-locale round is about 280 credits and 7 minutes. For the recorded loop, Kane's runs reported 510.5 credits in total; the account balance dropped by 589 over the same 19 minutes.
+- Kane's verdicts are AI judgements. Three of the first twelve shop runs failed for Kane's own reasons (it checked a button before reaching it, or clicked before checking); Kane labelled all three as its own misstep, which is why locale-check retries those instead of reporting them as bugs.
 - Local Kane runs record step screenshots and an online replay, not a video file.
 - Wording matters: positive checks placed at the step where they apply ("Verify that the Continue button is fully visible and no other element overlaps it, then click it") worked; global or negative wording produced false failures.
 

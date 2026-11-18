@@ -5,8 +5,9 @@ Newest entry on top. Evidence first: no evidence, the cycle didn't count.
 ## Status
 
 - **Time left:** deadline Fri 2026-11-20 02:29 +0800.
-- **Core loop working end to end:** no (language test done).
-- **Latest judge check:** none yet.
+- **Core loop working end to end:** yes. Evidence: `examples/recorded/demo-shop/` (round 1: 4 red → Claude fix → round 2: 6/6 green).
+- **Real OSS bug:** Open Library serves its Arabic UI left-to-right (no `dir="rtl"`); Kane confirmed it. Issue drafted, not filed.
+- **Latest judge check:** 2026-11-18 ~08:50, about 75/100, all gates pass; weakest: 30-second path, objective reads like an answer key, one-shot loop.
 - **Human-only tasks waiting:** register at kaneclihack.sh/o/register (same email as the Kane login) and on Luma, if not done.
 
 ## Cycle 3 — 2026-11-18 08:00–08:45 · closed loop, recorded run, real OSS bug

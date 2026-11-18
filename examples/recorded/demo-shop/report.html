@@ -103,7 +103,7 @@ h1 .score{font-size:var(--t-5);font-weight:700;line-height:1.04;letter-spacing:-
 .chips{list-style:none;margin:var(--s6) 0 0;padding:0;display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr))}
 .chip{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:var(--s3);align-items:center;height:100%;padding:var(--s3) var(--s4);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--tone);border-radius:var(--r-m);color:var(--ink);text-decoration:none}
 .chip .dot{grid-row:span 2;font-size:var(--t-1)}
-.chip-name{font-size:var(--t-1);font-weight:600;line-height:1.25;overflow-wrap:anywhere}
+.chip-name{font-size:var(--t-1);font-weight:600;line-height:1.25;overflow-wrap:break-word}
 .chip-sub{font-size:var(--t-small);font-weight:600;color:var(--tone-ink);line-height:1.35}
 .chip-sub code{color:var(--ink-2);font-weight:400}
 .chip:hover{background:var(--tint)}
@@ -232,7 +232,7 @@ h1 .score{font-size:var(--t-5);font-weight:700;line-height:1.04;letter-spacing:-
 <main>
 <section class="wrap hero" aria-labelledby="score">
   <h1 id="score"><span class="app" dir="auto">Hearth &amp; Kiln demo shop</span><span class="score">6 of 6 languages pass</span></h1>
-  <p class="state"><span class="count t-pass"><span class="dot t-pass"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>All green</span><span class="lead">Every language completes the objective.</span></p>
+  <p class="state"><span class="count t-pass"><span class="dot t-pass"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span>All green</span><span class="lead">4 failed in round 1; green after 1 agent fix, re-checked by Kane.</span></p>
   <ul class="chips" aria-label="Latest verdict per language"><li><a class="chip t-pass" href="#lang-en"><span class="dot t-pass"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span class="chip-name"><bdi lang="en">English</bdi></span><span class="chip-sub"><code>en</code> · Passes</span></a></li><li><a class="chip t-pass" href="#lang-de"><span class="dot t-pass"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span class="chip-name"><bdi lang="de">Deutsch</bdi></span><span class="chip-sub"><code>de</code> · Passes</span></a></li><li><a class="chip t-pass" href="#lang-ar"><span class="dot t-pass"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span class="chip-name"><bdi lang="ar">العربية</bdi></span><span class="chip-sub"><code>ar</code> · Passes</span></a></li><li><a class="chip t-pass" href="#lang-ja"><span class="dot t-pass"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span class="chip-name"><bdi lang="ja">日本語</bdi></span><span class="chip-sub"><code>ja</code> · Passes</span></a></li><li><a class="chip t-pass" href="#lang-id"><span class="dot t-pass"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span class="chip-name"><bdi lang="id">Indonesia</bdi></span><span class="chip-sub"><code>id</code> · Passes</span></a></li><li><a class="chip t-pass" href="#lang-zh"><span class="dot t-pass"><svg class="i" aria-hidden="true" focusable="false"><use href="#i-check"/></svg></span><span class="chip-name"><bdi lang="zh">中文</bdi></span><span class="chip-sub"><code>zh</code> · Passes</span></a></li></ul>
 </section>
 <div class="wrap story">

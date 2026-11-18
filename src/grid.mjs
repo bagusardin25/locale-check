@@ -54,7 +54,7 @@ ${recordedBanner(results.recorded)}
 <main>
 <section class="wrap hero" aria-labelledby="score">
   <h1 id="score"><span class="app" dir="auto">${esc(app)}</span><span class="score">${counts.passed} of ${total} languages pass</span></h1>
-  ${stateLine(counts, total, allGreen)}
+  ${stateLine(counts, total, allGreen, results)}
   <ul class="chips" aria-label="Latest verdict per language">${order.map((l) => chip(l, now[l], names[l])).join('')}</ul>
 </section>
 <div class="wrap story">
@@ -89,9 +89,18 @@ function recordedBanner(recorded) {
   return `<div class="recorded" role="note"><div class="wrap"><span class="rec-tag">${icon('play')}Recorded run</span><p dir="auto">${esc(text)}</p></div></div>`;
 }
 
-function stateLine(counts, total, allGreen) {
+function stateLine(counts, total, allGreen, results) {
   if (!total) return '<p class="state"><span class="lead">No languages configured.</span></p>';
-  if (allGreen) return `<p class="state"><span class="count t-pass">${dot('passed')}All green</span><span class="lead">Every language completes the objective.</span></p>`;
+  if (allGreen) {
+    // Tell the loop's story when there was one: how many were red at first, and how many agent fixes it took.
+    const rounds = results?.rounds || [];
+    const firstRed = rounds.length ? Object.values(rounds[0].statuses || {}).filter((s) => s === 'failed').length : 0;
+    const fixes = rounds.filter((r) => r.fix).length;
+    const story = firstRed && fixes
+      ? `${firstRed} failed in round 1; green after ${fixes} agent fix${fixes > 1 ? 'es' : ''}, re-checked by Kane.`
+      : 'Every language completes the objective.';
+    return `<p class="state"><span class="count t-pass">${dot('passed')}All green</span><span class="lead">${esc(story)}</span></p>`;
+  }
   const parts = ['failed', 'inconclusive', 'error', 'pending'].filter((s) => counts[s])
     .map((s) => `<span class="count t-${STATUS[s].tone}">${dot(s)}${counts[s]} ${STATUS[s].count}</span>`);
   const notes = [];
@@ -441,7 +450,7 @@ h1 .score{font-size:var(--t-5);font-weight:700;line-height:1.04;letter-spacing:-
 .chips{list-style:none;margin:var(--s6) 0 0;padding:0;display:grid;gap:var(--s3);grid-template-columns:repeat(auto-fit,minmax(min(100%,9rem),1fr))}
 .chip{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:var(--s3);align-items:center;height:100%;padding:var(--s3) var(--s4);background:var(--surface);border:1px solid var(--line);border-top:4px solid var(--tone);border-radius:var(--r-m);color:var(--ink);text-decoration:none}
 .chip .dot{grid-row:span 2;font-size:var(--t-1)}
-.chip-name{font-size:var(--t-1);font-weight:600;line-height:1.25;overflow-wrap:anywhere}
+.chip-name{font-size:var(--t-1);font-weight:600;line-height:1.25;overflow-wrap:break-word}
 .chip-sub{font-size:var(--t-small);font-weight:600;color:var(--tone-ink);line-height:1.35}
 .chip-sub code{color:var(--ink-2);font-weight:400}
 .chip:hover{background:var(--tint)}

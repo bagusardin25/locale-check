@@ -46,5 +46,3 @@ Without Kane you would write six Playwright scripts with locale-specific selecto
 - **Should:** CI gate (GitHub Action), pseudo-locale.
 - **Could:** mobile viewport per locale.
 - **Out of scope:** dashboards, accounts, settings.
-
-**Selection:** won a five-judge panel, 17.2 as proposed and 18.6 best version, out of 20 (next best 16.6).

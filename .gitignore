@@ -10,3 +10,5 @@ kane-runs/
 # locale-check output (results, screenshots, report)
 .locale-check/
 /locale-check-report.html
+# internal judge check (self-critique), kept local
+hackathon/JUDGE_REVIEW.md

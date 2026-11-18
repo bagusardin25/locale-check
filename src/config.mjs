@@ -60,14 +60,14 @@ export function buildObjective(cfg, locale) {
 export class UsageError extends Error {}
 
 export const STARTER = {
-  $schema: 'https://raw.githubusercontent.com/freddy-tama/locale-check/main/locale-check.schema.json',
   app: 'My app',
   url: 'http://localhost:3000/{locale}/',
   locales: ['en', 'de', 'ar', 'ja'],
-  objective: 'Add any product to the cart, check out with realistic test data for a customer in a {language}-speaking country, and place the order. The order confirmation must appear.',
-  checks: [
-    'Every button you click must be fully visible on screen, not cut off by its container and not covered by another element; if one is, the test fails.',
-    'No raw translation keys (text like checkout.pay_now or {{name}}) may appear anywhere on the page; if one does, the test fails.',
-  ],
+  objective: [
+    '1. Open any product, add it to the cart, open the cart and start checkout.',
+    "2. On each checkout step, fill in realistic test details for a customer in a {language}-speaking country. Before you click the step's main button, verify that it is fully visible, that no other element overlaps it, and that its label is written in {language} words rather than a code-like key with dots. Then click it.",
+    '3. Verify that the order confirmation appears.',
+    'If a verification fails, fail the test at that step.',
+  ].join('\n'),
   concurrency: 3,
 };
