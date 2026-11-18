@@ -136,7 +136,7 @@ export async function flushProfiles() {
   }
 }
 
-function normalise(e, steps, evidencePack) {
+export function normalise(e, steps = [], evidencePack = null) {
   const v = e.verdict || {};
   // Kane triages its own failures: family "application_issue" (confirmed) is a bug in the app,
   // "automation_bug" means Kane itself misstepped. The latter is not a verdict on the app.
