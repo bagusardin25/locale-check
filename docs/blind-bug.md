@@ -1,6 +1,6 @@
 # Blind bug (fifth planted bug)
 
-Planted after the generic checkout objective was committed (9da3a80), so the objective's author did not know it. Not committed.
+Planted after the generic checkout objective was committed (9da3a80, 08:46:16), so the objective's author did not know it. Committed unread in 88c0a47 (08:48:09); read only after the generic run finished.
 
 | Locale | Step | What the user sees |
 |---|---|---|
