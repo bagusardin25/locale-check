@@ -9,6 +9,14 @@ Newest entry on top. Evidence first: no evidence, the cycle didn't count.
 - **Latest judge check:** none yet.
 - **Human-only tasks waiting:** register at kaneclihack.sh/o/register (same email as the Kane login) and on Luma, if not done.
 
+## Cycle 3 — 2026-11-18 08:00–08:45 · closed loop, recorded run, real OSS bug
+
+- **Closed loop, clean recorded run** (08:07–08:27, 589 credits): round 1 en ✓, zh ✓ after one retry (Kane flagged its own misstep), de/ar/ja/id ✗ with the planted bugs → `claude -p` fixed `styles.css`, `dates.js`, `app.js`, `id.json` in 54 s → round 2 de/ar/ja/id ✓. Saved with `locale-check snapshot` to `examples/recorded/demo-shop/` (report, results, screenshots, NDJSON, `claude-fix.diff`, `terminal.log`; local paths stripped). The per-locale "before the fix" history for this run was rebuilt from its own round-1 NDJSON and screenshots, because history tracking was added after the run.
+- **Fix agent settings:** `--setting-sources project,local`, file tools only, appended system note fixing the reply format. Before that, the nested `claude -p` loaded this PC's user hooks and wrote a rambling summary.
+- **OSS hunt:** a research agent shortlisted 8 apps (notes in the shared notes folder, `oss-hunt-shortlist.md`). Top lead: Open Library serves `lang="ar"` with no `dir`.
+- **Kane on Open Library** (en, de, ar, ja, zh; objective knows nothing about any bug): ar ✗ confirmed app bug "Arabic homepage retains left-to-right layout". The other four were inconclusive: after ~10 runs that included a search step, the site showed a human-verification page and dropped connections. Kane labelled each one as not an app bug. We do not bypass bot checks: the objective is now home page only, one language at a time, no retries, re-run after a 40-minute pause.
+- **Root cause found upstream:** `openlibrary/templates/shell/base.html.jinja:6` renders `<html lang>` without `dir`, while `docs/frontend/design.md:108-110` says RTL layouts must mirror under `dir="rtl"`. No open issue covers it (searched rtl/arabic/direction). Draft issue + patch in `hackathon/oss/openlibrary/`, **not posted** (needs the user's word).
+
 ## Cycle 2 — 2026-11-18 07:00–08:00 · CLI, demo shop, first red grid
 
 - **Built:** `bin/locale-check.mjs` + `src/` (zero npm deps), demo shop `examples/demo-shop/` (Opus subagent; bugs documented in `docs/planted-bugs.md`), skill `skill/locale-check/SKILL.md`, CI example `examples/ci/locale-check.yml` (not yet run in Actions).

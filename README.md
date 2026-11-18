@@ -61,7 +61,18 @@ locale-check install-skill   # Claude Code skill: "check the locales" → run, f
 
 ## A real bug in a real app
 
-_TODO: the open-source finding._
+Planted bugs prove the loop; they don't prove the tool finds anything on its own. So we pointed it at a live open-source site with an objective that knows nothing about any bug.
+
+**[Open Library](https://openlibrary.org)** (Internet Archive, AGPL) ships an Arabic interface. With `?lang=ar`, Kane reported:
+
+> **Arabic homepage retains left-to-right layout.** The Arabic version of the page was loaded, but its page layout was not switched to right-to-left.
+
+It is real and, as far as we can find, unreported: the page has `lang="ar"` but no `dir="rtl"`, so headings sit on the left, rows start from the left and the "view all ›" arrows point the wrong way. Their own design guide says Arabic, Hebrew and Persian layouts "must mirror under `dir="rtl"`", and their CSS rules already use logical properties for it, but the shell template (`openlibrary/templates/shell/base.html.jinja:6`) never sets `dir`. Kane also showed English shelf names (Thriller, Mystery, Fantasy) on the Arabic home page.
+
+- Kane's screenshot and log: [`hackathon/oss/openlibrary/`](hackathon/oss/openlibrary/)
+- Draft issue and a small patch (a `dir` property on the layout context): [`ISSUE.md`](hackathon/oss/openlibrary/ISSUE.md), [`fix.patch`](hackathon/oss/openlibrary/fix.patch). _Not filed yet._
+
+One more honest detail: our first Open Library run also searched for a book in every language, and after about ten runs the site started showing a human-verification page. Kane marked every one of those runs as "not an app bug", which is exactly what the inconclusive status is for. We cut the check down to the home page, one language at a time.
 
 ## How it works
 
