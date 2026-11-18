@@ -68,7 +68,8 @@
 ## No-account demo
 
 - [x] Pages: https://freddy-tama.github.io/locale-check/ (landing page plus the recorded reports)
-- [ ] Kane replay links (`testUrl` in `examples/recorded/*/results.json`) open without a login in a private window. If they don't, say so in the README.
+- [x] Kane replay links: all 27 (`testUrl` in `examples/recorded/*/results.json`) opened the replay without a login. Checked 18 Nov, about 19:10, in a fresh logged-out Edge profile. Re-check a few at the final link check.
+- [x] Every other link in the README, the Devpost text, the social posts and `index.html` returned 200 (18 Nov), including all relative paths on Pages.
 - [x] Demo data is labelled: the demo shop's bugs are planted on purpose (`docs/planted-bugs.md`), and recorded runs say "Recorded run" with the date.
 
 ## After submitting
