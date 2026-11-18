@@ -42,9 +42,13 @@
   prose capped at 64ch; fluid scale 360-1440 px, ratio 1.2 to 1.333 (scale.mjs), used as two
   bands: a UI band (14, 16-17, 19-23 px) and display steps (23-30, 33-54 px).
   Motion: one story beat, the loop in the hero, because the product's whole claim is a sequence
-  (red, fix, re-check, green) that a still image flattens. It plays once when the panel is in view
+  (red, fix, re-check, green) that a still image flattens. It plays when the panel is in view
   (about 5 s, then still), can be skipped mid-way and replayed, and shows the end state with
-  JavaScript off. Productive, Carbon-style: the expressive entrance curve for things arriving,
+  JavaScript off. At the user's request it replays by itself, but only after 15 s with no input
+  (pointer, keys, scroll, touch) while the panel is mostly on screen and the tab is visible, so it
+  never restarts under someone who is reading or moving; the green result always holds at least
+  15 s. "Skip to result" stops the replays for that visit (WCAG 2.2.2), and reduced motion gets no
+  automatic replays. Productive, Carbon-style: the expressive entrance curve for things arriving,
   durations by area (70 ms press, 120 ms hover, 240 ms a cell or chip, 400 ms the fix box), a small
   overshoot on cell scale only, never on colour or opacity. Reduced motion replaces every move with
   the same steps as crossfades. Elsewhere only feedback: a 1 px press, a tile arrow that nudges.
@@ -582,9 +586,10 @@ locale-check install-skill   <span class="c"># optional: use it as a Claude Code
 </footer>
 
 <script>
-/* Plays the recorded loop once when the panel is in view. The HTML above is the end state, so with
-   JavaScript off (or if anything here fails) the page shows the finished run. Every number shown
-   is in examples/recorded/demo-shop/results.json; only the playback is compressed (about 5 s). */
+/* Plays the recorded loop when the panel is in view, and again after IDLE_MS without input. The HTML
+   above is the end state, so with JavaScript off (or if anything here fails) the page shows the
+   finished run. Every number shown is in examples/recorded/demo-shop/results.json; only the
+   playback is compressed (about 5 s). */
 (function () {
   var loop = document.getElementById('loop');
   if (!loop || !('IntersectionObserver' in window) || !document.documentElement.classList) return;
@@ -607,6 +612,12 @@ locale-check install-skill   <span class="c"># optional: use it as a Claude Code
   ];
   var timers = [];
   var playing = false;
+  var IDLE_MS = 15000;           /* no input for this long, with the result on screen, replays the loop */
+  var SOFT_LEAD = 700;           /* an automatic replay first fades the grid back to waiting */
+  var reduce = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : { matches: false };
+  var autoReplay = true;         /* "Skip to result" turns it off for this visit */
+  var lastInput = Date.now();
+  var idleTimer = null;
 
   function show(p) {
     loop.setAttribute('data-p', p);
@@ -628,13 +639,14 @@ locale-check install-skill   <span class="c"># optional: use it as a Claude Code
     for (var i = 0; i < timers.length; i++) clearTimeout(timers[i]);
     timers = [];
   }
-  function arm() {
-    loop.classList.add('no-t', 'is-playing');
+  /* soft: fade the finished grid back to its waiting frame (an automatic replay) instead of cutting */
+  function arm(soft) {
+    if (!soft) loop.classList.add('no-t');
+    loop.classList.add('is-playing');
     show(0);
     tell(steps[0]);
     label(true);
-    void loop.offsetWidth;
-    loop.classList.remove('no-t');
+    if (!soft) { void loop.offsetWidth; loop.classList.remove('no-t'); }
   }
   function finish() {
     clear();
@@ -645,18 +657,41 @@ locale-check install-skill   <span class="c"># optional: use it as a Claude Code
     loop.removeAttribute('aria-busy');
     playing = false;
     label(false);
+    lastInput = Date.now();      /* the result holds for a full IDLE_MS before any replay */
+    waitForIdle();
   }
-  function play() {
+  function play(soft) {
     clear();
-    arm();
+    clearTimeout(idleTimer);
+    arm(soft);
     playing = true;
     loop.setAttribute('aria-busy', 'true');
-    label(true);
+    var lead = soft ? SOFT_LEAD : 0;
     steps.forEach(function (s) {
-      timers.push(setTimeout(function () { show(s.p); tell(s); }, s.at));
+      timers.push(setTimeout(function () { show(s.p); tell(s); }, s.at + lead));
     });
-    timers.push(setTimeout(finish, steps[steps.length - 1].at + 600));
+    timers.push(setTimeout(finish, steps[steps.length - 1].at + 600 + lead));
   }
+
+  /* Idle replay: only with the result showing, motion welcome, the tab visible and the panel mostly
+     on screen; any pointer, key, wheel, scroll or touch input restarts the wait. */
+  function mostlyInView() {
+    var r = loop.getBoundingClientRect();
+    var visible = Math.min(r.bottom, window.innerHeight) - Math.max(r.top, 0);
+    return visible >= Math.min(r.height, window.innerHeight) * 0.4;
+  }
+  function waitForIdle() {
+    clearTimeout(idleTimer);
+    if (!autoReplay || playing) return;
+    var wait = IDLE_MS - (Date.now() - lastInput);
+    if (wait > 0) { idleTimer = setTimeout(waitForIdle, wait); return; }
+    if (reduce.matches || document.hidden || !mostlyInView()) { idleTimer = setTimeout(waitForIdle, 2000); return; }
+    play(true);
+  }
+  function noteInput() { lastInput = Date.now(); }
+  ['pointermove', 'pointerdown', 'keydown', 'wheel', 'scroll', 'touchstart'].forEach(function (type) {
+    window.addEventListener(type, noteInput, { passive: true, capture: true });
+  });
   function playWhenVisible() {
     if (!document.hidden) { play(); return; }
     document.addEventListener('visibilitychange', function once() {
@@ -680,12 +715,13 @@ locale-check install-skill   <span class="c"># optional: use it as a Claude Code
   }
 
   btn.hidden = false;
-  /* While armed or playing the button skips to the result; once finished it replays. */
+  /* While armed or playing the button skips to the result and stops automatic replays for this
+     visit; once finished it replays on demand. */
   btn.addEventListener('click', function () {
     started = true;
     seen.disconnect();
     near.disconnect();
-    if (loop.classList.contains('is-playing')) finish(); else play();
+    if (loop.classList.contains('is-playing')) { autoReplay = false; finish(); } else play();
   });
 
   /* Arm before the panel is seen (no flash of the end state), and play once it is mostly in view. */
