@@ -10,8 +10,8 @@
 | Checkpoint | Local time | Done |
 |---|---|---|
 | Judge check 2 (80/100), biggest point losses fixed | Thu 19 Nov 09:03 | [x] 01:20 |
-| Video cut approved (silent draft 2) | Thu 19 Nov 20:00 | [ ] |
-| Narration, final render, uploaded to YouTube **(you upload)** | Sat 21 Nov 20:00 | [ ] |
+| Video cut approved (silent draft 3) | Thu 19 Nov 20:00 | [x] 21 Nov |
+| Narration, final render, uploaded to YouTube **(you upload)** | Sat 21 Nov 20:00 | [ ] final rendered 21 Nov 02:22; upload open |
 | Complete draft submitted (editable until the deadline) **(you)** | Sun 22 Nov 22:00 | [ ] |
 | Judge check 3 on the submitted version | Tue 24 Nov 12:00 | [ ] |
 | Feature freeze (bug fixes only after this) | Wed 25 Nov 20:00 | [ ] |
@@ -40,11 +40,12 @@
 
 ## Video
 
-- [ ] Under 3:00 (target 2:45): actual length: ____
+- [x] Under 3:00 (target 2:45): actual length: 2:45.0 (4,950 frames, 1920×1080, 30 fps), −14.0 LUFS, −0.9 dB true peak
 - [ ] Public on YouTube, HD processing finished **(you upload)**
 - [ ] Plays in a private window, logged out
-- [ ] Shows only what the tool really did. Replays are labelled REPLAY, the demo shop is labelled DEMO, and the blind-test miss is shown.
-- [ ] Captions burned in. Music: Kevin MacLeod, "Screen Saver" (CC BY 4.0), with the credit line in the YouTube description. UI sounds: Kenney (CC0).
+- [x] Shows only what the tool really did. Replays are labelled REPLAY, the demo shop is labelled DEMO, and the blind-test miss is shown.
+- [x] Captions burned in, timed from the recorded voice. Narration: ElevenLabs (voice Bill).
+- [ ] YouTube description has both credit lines **(you)**: `"Screen Saver" Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0` and `Narration voice generated with ElevenLabs (elevenlabs.io)`. UI sounds: Kenney (CC0, no credit needed).
 - [ ] The link is in `README.md` (line 7), `submission/DEVPOST_STORY.md` and the landing page's hero button.
 
 ## Form (submission/DEVPOST_STORY.md)

@@ -7,12 +7,22 @@ Newest entry on top. Evidence first: no evidence, the cycle didn't count.
 - **Time left:** deadline Fri 2026-11-27 02:29 +0800 (extended from 20 Nov; no pushes after it).
 - **Core loop working end to end:** yes. Evidence: `examples/recorded/demo-shop/` (round 1: 4 red → Claude fix → round 2: 6/6 green).
 - **Real OSS bug:** Open Library serves its Arabic UI left-to-right (no `dir="rtl"`); Kane confirmed it. Issue drafted, not filed.
-- **Latest judge check:** 2 (2026-11-18 evening), 80/100, all gates pass. The biggest loss is that there is no video yet. Its top fixes are done: see Cycle 4.
+- **Latest judge check:** 2 (2026-11-18 evening), 80/100, all gates pass. Its biggest loss, no video, is now fixed: the final is rendered (Cycle 5) and waiting for upload.
 - **Human-only tasks waiting:**
   - Register at kaneclihack.sh/o/register (same email as the Kane login) and on Luma, if not done.
   - Post 2+ launch posts with #KaneCLIHackDay.
   - Upload the video to YouTube.
   - Submit the form.
+
+## Cycle 5 — 2026-11-19 07:20 to 2026-11-21 02:30 +0800 · video
+
+- **Draft 3:** the ui-ux fixes, rendered silent and approved by the user on 21 Nov.
+- **Narration:** ElevenLabs, premade voice Bill, eleven_v4, 19 clips and 310 spoken words, recorded once. It used 1,180 credits; 7,577 are left until 12 Dec. Each clip comes with word timings, so the captions and the cues tied to spoken words follow the voice. To fit beat 8, beat 7 now ends at 2:02.
+- **Final:** `locale-check-demo.mp4`, 2:45.0, 1920×1080, 30 fps, 18.9 MB, −14.0 LUFS integrated, −0.9 dB true peak.
+  - The frame check flags only the intended camera pull-back at 7.93 s.
+  - The credits file lists MacLeod (CC BY 4.0), ElevenLabs (attribution) and Kenney (CC0).
+  - The video is kept outside the repo, in the video project folder.
+- **Next (you):** upload to YouTube with both credit lines in the description, then send the link so it goes into the README, the story, the page and the posts.
 
 ## Cycle 4 — 2026-11-18 18:30 to 2026-11-19 01:30 +0800 · submission files, link check, judge check 2
 
