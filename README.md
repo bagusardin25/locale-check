@@ -6,6 +6,8 @@
 
 Built for the **Kane CLI Online Hackathon** (TestMu AI, Nov 2026) · **Video (2:45):** [youtu.be/1wF4Xzcs3d4](https://youtu.be/1wF4Xzcs3d4) · **Live page:** [freddy-tama.github.io/locale-check](https://freddy-tama.github.io/locale-check/) · **Recorded report (no account needed):** [open it in the browser](https://freddy-tama.github.io/locale-check/examples/recorded/demo-shop/report.html)
 
+**Launch posts:** [X](https://x.com/ardinprayoga/status/2125632867791421791) · [LinkedIn](https://lnkd.in/p/gr55ZX4H) · [Reddit r/SideProject](https://www.reddit.com/r/SideProject/s/8hQ5Ae689N)
+
 ## The problem
 
 Translations ship in batches, and nobody on the team reads all of them. String linters check that keys exist. They don't notice that the German "Zahlungspflichtig bestellen" pushes the Pay button out of its card, that an Arabic layout puts a help bubble on top of Continue, that the Japanese date format the page asks for is then rejected, or that a raw key like `checkout.continue_to_payment` is on a button. Users find these, usually at checkout.
