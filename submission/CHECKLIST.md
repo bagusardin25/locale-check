@@ -11,7 +11,7 @@
 |---|---|---|
 | Judge check 2 (80/100), biggest point losses fixed | Thu 19 Nov 09:03 | [x] 01:20 |
 | Video cut approved (silent draft 3) | Thu 19 Nov 20:00 | [x] 21 Nov |
-| Narration, final render, uploaded to YouTube **(you upload)** | Sat 21 Nov 20:00 | [ ] final rendered 21 Nov 02:22; upload open |
+| Narration, final render, uploaded to YouTube **(you upload)** | Sat 21 Nov 20:00 | [x] uploaded by 25 Nov |
 | Complete draft submitted (editable until the deadline) **(you)** | Sun 22 Nov 22:00 | [ ] |
 | Judge check 3 on the submitted version | Tue 24 Nov 12:00 | [ ] |
 | Feature freeze (bug fixes only after this) | Wed 25 Nov 20:00 | [ ] |
@@ -41,12 +41,12 @@
 ## Video
 
 - [x] Under 3:00 (target 2:45): actual length: 2:45.0 (4,950 frames, 1920×1080, 30 fps), −14.0 LUFS, −0.9 dB true peak
-- [ ] Public on YouTube, HD processing finished **(you upload)**
+- [x] On YouTube: https://youtu.be/1wF4Xzcs3d4 (public, embeddable; checked 25 Nov with YouTube's oEmbed)
 - [ ] Plays in a private window, logged out
 - [x] Shows only what the tool really did. Replays are labelled REPLAY, the demo shop is labelled DEMO, and the blind-test miss is shown.
 - [x] Captions burned in, timed from the recorded voice. Narration: ElevenLabs (voice Bill).
 - [ ] YouTube description has both credit lines **(you)**: `"Screen Saver" Kevin MacLeod (incompetech.com), Licensed under Creative Commons: By Attribution 4.0` and `Narration voice generated with ElevenLabs (elevenlabs.io)`. UI sounds: Kenney (CC0, no credit needed).
-- [ ] The link is in `README.md` (line 7), `submission/DEVPOST_STORY.md` and the landing page's hero button.
+- [x] The link is in `README.md` (line 7), `submission/DEVPOST_STORY.md`, `submission/SOCIAL_POST.md` and the landing page's hero button.
 
 ## Form (submission/DEVPOST_STORY.md)
 
@@ -54,7 +54,7 @@
 - [x] Tagline (120 characters)
 - [x] "About your app" paragraph: what it is, who it's for, which agent, what Kane does
 - [x] Links: the repo, the Pages site, the recorded report, and the one-command run
-- [ ] Video link added
+- [x] Video link added
 - [x] No pitch deck: the event is online and the rules ask for none. The old deck template was deleted; get it back from git history if the form asks for slides.
 - [ ] Every number re-checked against `hackathon/LOG.md` and `examples/recorded/*/results.json` just before submitting
 - [ ] Submitted, with a screenshot of the confirmation saved **(you)**

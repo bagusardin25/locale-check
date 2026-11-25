@@ -4,7 +4,7 @@
 
 ![The Locale check report for the demo shop: round 1 had 4 of 6 languages failing, Claude Code fixed 4 files, Kane re-checked them in round 2 and the other two in round 3, and all 6 pass](docs/report-hero.png)
 
-Built for the **Kane CLI Online Hackathon** (TestMu AI, Nov 2026) · **Video:** _TODO_ · **Live page:** [freddy-tama.github.io/locale-check](https://freddy-tama.github.io/locale-check/) · **Recorded report (no account needed):** [open it in the browser](https://freddy-tama.github.io/locale-check/examples/recorded/demo-shop/report.html)
+Built for the **Kane CLI Online Hackathon** (TestMu AI, Nov 2026) · **Video (2:45):** [youtu.be/1wF4Xzcs3d4](https://youtu.be/1wF4Xzcs3d4) · **Live page:** [freddy-tama.github.io/locale-check](https://freddy-tama.github.io/locale-check/) · **Recorded report (no account needed):** [open it in the browser](https://freddy-tama.github.io/locale-check/examples/recorded/demo-shop/report.html)
 
 ## The problem
 

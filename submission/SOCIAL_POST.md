@@ -1,16 +1,17 @@
 # Locale check — launch posts (drafts)
 
-The rules need at least 2 public posts (HN, X, Reddit or LinkedIn) with #KaneCLIHackDay. **The user posts these.** Attach the report screenshot (`docs/report-hero.png`) or a 10–20 s clip from the video. Fill in the video link first.
+The rules need at least 2 public posts (HN, X, Reddit or LinkedIn) with #KaneCLIHackDay. **The user posts these.** Attach the report screenshot (`docs/report-hero.png`) or a 10–20 s clip from the video. The video link is filled in.
 
-## Post 1 — X (fits 280 characters with the links)
+## Post 1 — X (fits 280 characters, each link counted as 23)
 
 Your app ships in 6 languages. Who checks the Arabic one?
 
-Locale check runs one plain-English Kane CLI test in every language; Claude Code fixes what breaks, Kane re-checks.
+Locale check: one Kane CLI test, every language. Claude Code fixes what breaks; Kane re-checks.
 
 Kane confirmed Open Library's Arabic UI runs left-to-right.
 
 github.com/freddy-tama/locale-check
+youtu.be/1wF4Xzcs3d4
 #KaneCLIHackDay
 
 ## Post 2 — LinkedIn (or Reddit r/webdev, with the same text minus hashtags but the footer)
@@ -28,7 +29,7 @@ On a six-language demo shop it caught four locale bugs and Claude fixed them in 
 What I learned: write checks positively and put them at the step where they apply. And trust Kane's own triage. It labels its own missteps, so a flaky run never reaches the agent as a "bug".
 
 Repo (MIT): https://github.com/freddy-tama/locale-check
-Video: _link_
+Video: https://youtu.be/1wF4Xzcs3d4
 
 #KaneCLIHackDay
 
